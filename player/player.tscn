@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://bc8gum0yfovaq"]
+
+[ext_resource type="Script" uid="uid://caymdmd4oniai" path="res://scripts/player.gd" id="1_rkbax"]
+[ext_resource type="Script" uid="uid://biw5ss5ejl5gq" path="res://player/fp_cam.gd" id="2_g1dw6"]
+[ext_resource type="Script" uid="uid://messh7v8ei7j" path="res://scripts/player_interact.gd" id="3_g1dw6"]
+[ext_resource type="PackedScene" uid="uid://dnh3sfv3flis8" path="res://level/camera1.tscn" id="4_qjkh3"]
+[ext_resource type="PackedScene" uid="uid://tfkbwj413ywp" path="res://ui/player_ui.tscn" id="4_yw30f"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sh265"]
+radius = 0.3
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_4flbx"]
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("cam", "hand")]
+script = ExtResource("1_rkbax")
+cam = NodePath("head")
+cam_speed = 0.001
+cam_rotation_amount = 0.05
+hand = NodePath("head/eyes/hand")
+hand_sway_amount = 0.01
+hand_rotation_amount = 0.003
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_sh265")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("CapsuleMesh_4flbx")
+
+[node name="head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.659274, 0)
+script = ExtResource("2_g1dw6")
+
+[node name="RayCast3D" type="RayCast3D" parent="head"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.340782)
+target_position = Vector3(0, -1.5, 0)
+collision_mask = 3
+script = ExtResource("3_g1dw6")
+
+[node name="eyes" type="Node3D" parent="head"]
+
+[node name="Camera3D" type="Camera3D" parent="head/eyes"]
+
+[node name="hand" type="Node3D" parent="head/eyes"]
+
+[node name="camera3" parent="head/eyes/hand" instance=ExtResource("4_qjkh3")]
+transform = Transform3D(-0.3, 0, -2.62268e-08, 0, 0.3, 0, 2.62268e-08, 0, -0.3, 0.2, -0.189, -0.249)
+visible = false
+
+[node name="player_ui" parent="." instance=ExtResource("4_yw30f")]

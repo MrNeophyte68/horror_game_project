@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://ktavka20ntcd"]
+
+[ext_resource type="PackedScene" uid="uid://bdc1d24pdltw3" path="res://glb_models/mega_pack2.glb" id="1_kky8h"]
+
+[node name="mega_pack2" instance=ExtResource("1_kky8h")]

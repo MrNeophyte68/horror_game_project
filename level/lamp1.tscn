@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=4 uid="uid://1g5aineinfhv"]
+
+[ext_resource type="Texture2D" uid="uid://hpo8uswesli1" path="res://glb_models/PSX Mega Pack (source file)_lamp_3.png" id="1_1jpyl"]
+[ext_resource type="Texture2D" uid="uid://cw6cqoi858mgg" path="res://glb_models/PSX Mega Pack (source file)_lamp_3_emission.png" id="2_oy47m"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vki34"]
+resource_name = "lamp_3_on"
+cull_mode = 2
+albedo_texture = ExtResource("1_1jpyl")
+emission_enabled = true
+emission_texture = ExtResource("2_oy47m")
+texture_filter = 2
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_y5d83"]
+_surfaces = [{
+"aabb": AABB(-0.599998, 4.65255e-08, 1.0405e-07, 1.2, 0.247487, 0.247487),
+"format": 34896613377,
+"index_count": 120,
+"index_data": PackedByteArray("AAABAAIAAwAAAAIABAAAAAMAAwACAAUAAwAFAAQAAgAGAAUAAgABAAYABAAFAAcABAAHAAAABQAGAAgABQAIAAcACAAGAAkAAQAJAAYABwAKAAAABwAIAAoAAAAKAAEACgAIAAsACAAJAAsAAQAKAAwACgALAAwAAQANAAkAAQAMAA0ADgALAAkADwAMAAsADwALAA4AEAANAAwAEAAMAA8AEQAJAA0AEQANABAADgAJABEADwASABAAEQATAA4ADgAUAA8ADwAUABIADgATABQAEAASABUAEAAVABEAFQASABQAEQAVABMAFQAUABMA"),
+"name": "lamp_3_on",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 22,
+"vertex_data": PackedByteArray("AABs2wAAAAAAAEEdrvgAAAAAAABs2wAAAAAAAAAAAAD//wAAAAAAAP//AABs2wAA//9BHa74AAD//2zbAAAAAP//rvhBHQAA//+SJP//AAAAAK74QR0AAP////+SJAAAAAD//5IkAAAAAJIk//8AAHH4GuZ2PgAAjQca5nY+AACNB3Y+GuYAAHH4dj4a5gAAHAqcOLLOAADi9bLOnDgAABwKss6cOAAA4vWcOLLOAAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_8mcnd"]
+resource_name = "PSX Mega Pack (source file)_lamp_3_on"
+_surfaces = [{
+"aabb": AABB(-0.599998, 4.65255e-08, 1.0405e-07, 1.2, 0.247487, 0.247487),
+"attribute_data": PackedByteArray("/1//2f+f/+v/n//Z/1//6/9f/+//n//v////2QAA/+sAAP/Z////6////+8AAP/vAAD/2f///+v////ZAAD/6////+8AAP/v/v80gwAA/9kAADSD////2f+f/9n/X//r/1//2f+f/+v/n//v/1//7/9//53/Yf/Z/53/2f9//53/nf/Z/2H/2f//NIMAAP/ZAAA0g////9lx+BoP////f3H45HAAAP9///8AAI0H5HCNBxoPAAAAAP8E/9n/9f/R//j/2f8H/9Hi9cZrHAo5FOL1ORQcCsZr//j/2f8H/9H/BP/Z//X/0f9l/9n/lP/R/5f/2f9o/9H/l//Z/2j/0f9l/9n/lP/R"),
+"format": 34896613399,
+"index_count": 120,
+"index_data": PackedByteArray("AAABAAIAAAADAAEAAQADAAQAAQAEAAUABgAHAAgABgAJAAcABwAJAAoABwAKAAsADAANAA4ADAAPAA0ADwAQAA0ADwARABAAEgATABQAEgAVABMAFgAXABgAFgAZABcAFwAZABoAFwAaABsAHAAdAB4AHwAgACEAIgAjACQAIgAlACMAJgAnACgAKAAnACkAJgAqACcAKAApACsALAAqACYAKwApAC0ALAAtACoAKwAtACwALgAvADAALgAxAC8AMgAzADQAMgA1ADMANgA3ADgANgA5ADcAOgA7ADwAOgA9ADsAPgA/AEAAPgBBAD8A"),
+"material": SubResource("StandardMaterial3D_vki34"),
+"name": "lamp_3_on",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 66,
+"vertex_data": PackedByteArray("AABs2wAAAjoAAEEdrvgCOgAAAABs2wI6AACu+EEdAjoAAP//kiQCOgAAkiT//wI6//9s2wAA/98AAK74QR3/3wAAbNsAAP/f//+u+EEd/9//////kiT/3wAA//+SJP/fAAAAAGzb/1///0Edrvj/X///AABs2/9fAABBHa74/1///5Ik////XwAAkiT///9f//8AAAAA//8AAGzbAAD//wAAAAAAAP////9s2wAA/////wAAbNuq6f//rvhBHarp//9s2wAAqun//0Edrviq6f//kiT//6rp/////5IkqukAAAAAAAACOgAAbNsAAAI6AAAAAGzbAjr//wAAAACq6f//AABs26rp//9s2wAAqukAAAAAAAD/////AABs2/////8AAAAA//8AAAAAbNv//3H4GuZ2Pv+f//+SJP///59x+HY+Gub/nwAAkiT///+f/////5Ik/5+NB3Y+Gub/n40HGuZ2Pv+fAAD//5Ik/5+NB3Y+Gub6yeL1nDiyzvrJcfh2Phrm+skcCpw4ss76yeL1nDiyzv+fHAqyzpw4/5/i9bLOnDj/nxwKnDiyzv+fcfga5nY+BHYcCrLOnDgEdo0HGuZ2PgR24vWyzpw4BHaNBxrmdj5P2xwKnDiyzk/bjQd2PhrmT9scCrLOnDhP23H4dj4a5mQ/4vWyzpw4ZD9x+Brmdj5kP+L1nDiyzmQ/AGMAxgBjAMYAYwDGAGMAxgBjAMYAYwDG////f////3////9/////f////3////9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/////f////3////9/////fwS1CWoEtQlqBLUJagS1CWoEtQlqBLUJagBjAMYAYwDGAGMAxgS1CWoEtQlqBLUJav9//z//f/8//3//P/9//z/+//9//v//f/7//3/+//9//v//f/7//3/+//9//v//f////3////9/////f////3////9/////f////3////9/AAD/fwAA/38AAP9/AAD/fwS1x3cEtcd3BLXHdwS1x3e/dR7Cv3Uewr91HsK/dR7C")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_y5d83")
+
+[node name="lamp" type="Node3D"]
+
+[node name="lamp_3_on" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0.00274354, 1.1009, -0.820668)
+cast_shadow = 0
+mesh = SubResource("ArrayMesh_8mcnd")
+skeleton = NodePath("")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -0.0768629, 0.562807, 0.334825)
+light_size = 1.0
+shadow_enabled = true
