@@ -52,16 +52,18 @@ func _physics_process(delta: float) -> void:
 			move_and_slide()
 			
 	if state == States.STALKING:
+		print(spotted)
+		# Face the player
+		var target_pos = player.global_position
+		look_at(target_pos, Vector3.UP)
 		if spotted == true:
 			velocity = Vector3.ZERO
-			# Face the player
-			var target_pos = player.global_position
-			look_at(target_pos, Vector3.UP)
-		
-		#detection_cast.look_at(player.global_transform.origin, Vector3.UP)
-		#if detection_cast.is_colliding():
-			#var collider = detection_cast.get_collider()
-		
+		else:
+			$NavigationAgent3D.set_target_position(player.global_position)
+			var next_pos = $NavigationAgent3D.get_next_path_position()
+			var direction = (next_pos - global_position).normalized()
+			velocity = direction * speed
+		move_and_slide()
 		
 	if state == States.CHASING:
 		# Move towards player
