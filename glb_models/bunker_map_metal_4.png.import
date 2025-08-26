@@ -2,14 +2,11 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bk8cvbk65i57t"
+uid="uid://b63y6txaofmfo"
 path.s3tc="res://.godot/imported/bunker_map_metal_4.png-d839cf1baa1f457a45aebb8150888673.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
-}
-generator_parameters={
-"md5": "d66dda71f014bfde68b84a783c6853ba"
 }
 
 [deps]

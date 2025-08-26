@@ -2,14 +2,11 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cac7dntmqtj7c"
+uid="uid://cdnyv502raaw4"
 path.s3tc="res://.godot/imported/bunker_setPanted_mesh.png-e6c19db6017cb91519989ddc3ef16b32.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
-}
-generator_parameters={
-"md5": "71e3a44d88f340bb31b21c68330e6b6e"
 }
 
 [deps]
