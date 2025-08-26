@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://cm8r2hjjcux6x"]
+[gd_scene load_steps=15 format=4 uid="uid://cm8r2hjjcux6x"]
 
 [ext_resource type="Script" uid="uid://cfwjqxsw1t1eq" path="res://scripts/door.gd" id="1_5hgsc"]
 [ext_resource type="Texture2D" uid="uid://j1etm4oci3ud" path="res://glb_models/PSX Mega Pack (source file)_door_3.png" id="1_l1wxo"]
@@ -144,6 +144,8 @@ _data = {
 &"open": SubResource("Animation_l1wxo")
 }
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_5hgsc"]
+
 [node name="door" type="Node3D"]
 script = ExtResource("1_5hgsc")
 
@@ -171,3 +173,12 @@ shape = SubResource("ConcavePolygonShape3D_l1wxo")
 libraries = {
 &"": SubResource("AnimationLibrary_jgmgg")
 }
+
+[node name="ai_trigger" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ai_trigger"]
+transform = Transform3D(1, 0, 0, 0, 2.42467, 0, 0, 0, 2.12517, 0, -0.593525, -1.06794)
+shape = SubResource("BoxShape3D_5hgsc")
+
+[connection signal="body_entered" from="ai_trigger" to="." method="ai_enter_door"]
+[connection signal="body_exited" from="ai_trigger" to="." method="ai_exit_door"]

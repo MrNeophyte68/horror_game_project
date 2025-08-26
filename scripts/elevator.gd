@@ -31,3 +31,5 @@ func elevator_close():
 	$Path3D/AnimationPlayer.play("elevator_moving")
 	await get_tree().create_timer(10.0, false).timeout
 	elevator_open()
+	get_tree().current_scene.get_node("Stalker").process_mode = Node.PROCESS_MODE_INHERIT
+	get_tree().current_scene.get_node("Stalker").visible = true

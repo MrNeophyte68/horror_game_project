@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://0kypj368bynj"]
+
+[ext_resource type="Script" uid="uid://r01kbxf7tu4w" path="res://scripts/stalker.gd" id="1_p7x4s"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ex804"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a6f8m"]
+radius = 0.1
+
+[node name="Stalker" type="CharacterBody3D"]
+process_mode = 4
+script = ExtResource("1_p7x4s")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_ex804")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_a6f8m")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_desired_distance = 0.5

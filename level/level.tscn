@@ -1,10 +1,12 @@
-[gd_scene load_steps=15 format=3 uid="uid://6n6tw3hrvg8i"]
+[gd_scene load_steps=17 format=3 uid="uid://6n6tw3hrvg8i"]
 
 [ext_resource type="Script" uid="uid://b6mn5m38gbdip" path="res://scripts/game_intro.gd" id="1_qohg2"]
 [ext_resource type="PackedScene" uid="uid://bc8gum0yfovaq" path="res://player/player.tscn" id="2_qohg2"]
 [ext_resource type="PackedScene" uid="uid://bthiyrqhjc2pr" path="res://level/starting_room.tscn" id="3_qohg2"]
 [ext_resource type="PackedScene" uid="uid://by81628uy2fly" path="res://ui/cutscene_ui.tscn" id="3_vkbyq"]
 [ext_resource type="PackedScene" uid="uid://doqlr1o8r6yos" path="res://level/camera.tscn" id="5_ktfr2"]
+[ext_resource type="PackedScene" uid="uid://0kypj368bynj" path="res://level/stalker.tscn" id="6_44x8d"]
+[ext_resource type="PackedScene" uid="uid://dwkv4h4362pvw" path="res://level/destination.tscn" id="7_ivpvi"]
 
 [sub_resource type="Gradient" id="Gradient_qohg2"]
 offsets = PackedFloat32Array(0, 0.363208, 1)
@@ -135,3 +137,58 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3.82,
 
 [node name="camera" parent="." instance=ExtResource("5_ktfr2")]
 transform = Transform3D(0.848048, 0, -0.529919, 0, 1, 0, 0.529919, 0, 0.848048, 10.0003, 0, 1.92458)
+
+[node name="Stalker" parent="." node_paths=PackedStringArray("patrol_destinations") instance=ExtResource("6_44x8d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.4588, 18.8055, 24.0642)
+patrol_destinations = [NodePath("../destination"), NodePath("../destination2"), NodePath("../destination3"), NodePath("../destination4"), NodePath("../destination5"), NodePath("../destination6"), NodePath("../destination7"), NodePath("../destination8"), NodePath("../destination9"), NodePath("../destination10"), NodePath("../destination11"), NodePath("../destination12"), NodePath("../destination13"), NodePath("../destination14"), NodePath("../destination15"), NodePath("../destination16"), NodePath("../destination17")]
+
+[node name="destination" parent="." instance=ExtResource("7_ivpvi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.64799, 18.316, -2.43139)
+
+[node name="destination2" parent="." instance=ExtResource("7_ivpvi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.26404, 18.316, -2.43139)
+
+[node name="destination3" parent="." instance=ExtResource("7_ivpvi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2569, 18.316, -2.43139)
+
+[node name="destination4" parent="." instance=ExtResource("7_ivpvi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.66707, 18.316, -6.24025)
+
+[node name="destination5" parent="." instance=ExtResource("7_ivpvi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.26404, 18.316, -6.32627)
+
+[node name="destination6" parent="." instance=ExtResource("7_ivpvi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.64799, 18.316, -6.56471)
+
+[node name="destination7" parent="." instance=ExtResource("7_ivpvi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.9842, 18.316, 24.2762)
+
+[node name="destination8" parent="." instance=ExtResource("7_ivpvi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.3905, 18.316, 24.2762)
+
+[node name="destination9" parent="." instance=ExtResource("7_ivpvi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.6378, 18.316, 23.9783)
+
+[node name="destination10" parent="." instance=ExtResource("7_ivpvi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.22117, 18.316, 17.3806)
+
+[node name="destination11" parent="." instance=ExtResource("7_ivpvi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.34834, 18.316, -15.2105)
+
+[node name="destination12" parent="." instance=ExtResource("7_ivpvi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.34834, 18.316, -24.4935)
+
+[node name="destination13" parent="." instance=ExtResource("7_ivpvi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.98979, 18.468, -28.315)
+
+[node name="destination14" parent="." instance=ExtResource("7_ivpvi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.2733, 18.468, -19.5009)
+
+[node name="destination15" parent="." instance=ExtResource("7_ivpvi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.73072, 18.468, -16.5065)
+
+[node name="destination16" parent="." instance=ExtResource("7_ivpvi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.7479, 18.468, -28.5034)
+
+[node name="destination17" parent="." instance=ExtResource("7_ivpvi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.0813, 18.468, 5.0252)
