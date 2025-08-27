@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://djaf1m66migh6"]
+[gd_scene load_steps=17 format=4 uid="uid://djaf1m66migh6"]
 
 [ext_resource type="Script" uid="uid://cfwjqxsw1t1eq" path="res://scripts/door.gd" id="1_og7wt"]
 [ext_resource type="Texture2D" uid="uid://b4l11v08467b2" path="res://glb_models/PSX Mega Pack (source file)_door_1.png" id="2_g653j"]
@@ -130,21 +130,6 @@ tracks/0/keys = {
 "values": [Vector3(0, 0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_dqhvf"]
-resource_name = "close"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("hinge:rotation")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 1.5708), Vector3(0, 0, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_kdepk"]
 resource_name = "open"
 tracks/0/type = "value"
@@ -160,12 +145,30 @@ tracks/0/keys = {
 "values": [Vector3(0, 0, 0), Vector3(0, 0, 1.5708)]
 }
 
+[sub_resource type="Animation" id="Animation_og7wt"]
+resource_name = "open1"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("hinge:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -1.5708)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8oumk"]
 _data = {
 &"RESET": SubResource("Animation_0hfix"),
-&"close": SubResource("Animation_dqhvf"),
-&"open": SubResource("Animation_kdepk")
+&"open": SubResource("Animation_kdepk"),
+&"open1": SubResource("Animation_og7wt")
 }
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_og7wt"]
+size = Vector3(1, 1, 2.08588)
 
 [node name="door" type="Node3D"]
 script = ExtResource("1_og7wt")
@@ -195,3 +198,21 @@ skeleton = NodePath("")
 libraries = {
 &"": SubResource("AnimationLibrary_8oumk")
 }
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(2.16559, 0, 0, 0, 1.59719, 0, 0, 0, 1, 0, 0.847409, -1.04918)
+shape = SubResource("BoxShape3D_og7wt")
+
+[node name="Area3D1" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.993623, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D1"]
+transform = Transform3D(2.18335, 0, 0, 0, 1.79516, 0, 0, 0, 1, 0, 0.109406, -1.04918)
+shape = SubResource("BoxShape3D_og7wt")
+
+[connection signal="body_entered" from="Area3D" to="." method="facing_front_enter"]
+[connection signal="body_exited" from="Area3D" to="." method="facing_front_exit"]
+[connection signal="body_entered" from="Area3D1" to="." method="facing_back_enter"]
+[connection signal="body_exited" from="Area3D1" to="." method="facing_back_exit"]
