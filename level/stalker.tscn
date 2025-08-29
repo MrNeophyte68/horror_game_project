@@ -71,13 +71,9 @@ autostart = true
 wait_time = 0.25
 autostart = true
 
-[node name="StalkingMeter" type="Timer" parent="."]
-wait_time = 10.0
-
 [node name="BackTimer" type="Timer" parent="."]
 wait_time = 8.0
 
 [connection signal="timeout" from="DetectionTimer" to="." method="_on_detection_timer_timeout"]
 [connection signal="timeout" from="BackDetectionTimer" to="." method="_on_back_detection_timer_timeout"]
-[connection signal="timeout" from="StalkingMeter" to="." method="_on_stalking_meter_timeout"]
 [connection signal="timeout" from="BackTimer" to="." method="_on_back_timer_timeout"]
