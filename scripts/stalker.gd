@@ -1,99 +1,119 @@
 extends CharacterBody3D
 
-# This enum lists all the possible states the character can be in.
-enum States {ROAMING, STALKING, CHASING, SEARCHING}
+enum States { ROAMING, STALKING, CHASING, SEARCHING }
 
-# This variable keeps track of the character's current state.
 var state: States = States.ROAMING
 
 @export var patrol_destinations: Array[Node3D]
+
 @onready var player: CharacterBody3D = $"../Player"
-@onready var detection_area = $DetectionArea
-@onready var detection_cast = $DetectionCast
-@onready var rng = RandomNumberGenerator.new()
-var speed = 3.0
-var destination
-var destination_value
-var spotted = false
+@onready var detection_area: Area3D = $DetectionArea
+@onready var detection_cast: RayCast3D = $DetectionCast
+@onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
+@onready var rng := RandomNumberGenerator.new()
+
+var speed := 3.0
+var destination: Node3D
+var destination_position: Vector3
+var destination_value: int = -1
+var spotted := false
+
 
 func _ready() -> void:
 	pick_destination()
 
-func pick_destination(dont_choose = null):
-	var num = rng.randi_range(0, patrol_destinations.size() - 1)
-	destination_value = num
-	destination = patrol_destinations[num]
-	if destination != null and dont_choose != null and destination == patrol_destinations[dont_choose]:
-		if dont_choose < 1:
-			destination = patrol_destinations[dont_choose + 1]
-		if dont_choose > 0 and dont_choose <= patrol_destinations.size() - 1:
-			destination = patrol_destinations[dont_choose - 1]
 
-func update_target_location():
-	$NavigationAgent3D.target_position = destination.global_transform.origin
+func pick_destination(exclude_index: int = -1) -> void:
+	var idx := rng.randi_range(0, patrol_destinations.size() - 1)
+	if idx == exclude_index:
+		idx = (idx + 1) % patrol_destinations.size()
+	
+	destination_value = idx
+	destination = patrol_destinations[idx]
+	destination_position = destination.global_position  # cache position
+
+
+func update_target_location() -> void:
+	nav_agent.target_position = destination_position
+
 
 func _process(delta: float) -> void:
-	if state == States.ROAMING:
-		if destination != null:
-			var look_dir = lerp_angle(deg_to_rad(global_rotation_degrees.y), atan2(-velocity.x, -velocity.z), 0.5)
-			global_rotation_degrees.y = rad_to_deg(look_dir)
-			update_target_location()
+	if state == States.ROAMING and destination:
+		var look_dir := lerp_angle(
+			deg_to_rad(global_rotation_degrees.y),
+			atan2(-velocity.x, -velocity.z),
+			0.5
+		)
+		global_rotation_degrees.y = rad_to_deg(look_dir)
+		update_target_location()
+
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-		
+
 	if state == States.ROAMING:
-		if destination != null:
-			var current_location = global_transform.origin
-			var next_location = $NavigationAgent3D.get_next_path_position()
-			var new_velocity = (next_location - current_location).normalized() * speed
-			velocity = velocity.move_toward(new_velocity, 0.25)
-			move_and_slide()
-			
-	if state == States.STALKING:
-		print(spotted)
-		# Face the player
-		var target_pos = player.global_position
-		look_at(target_pos, Vector3.UP)
-		if spotted == true:
-			velocity = Vector3.ZERO
-		else:
-			$NavigationAgent3D.set_target_position(player.global_position)
-			var next_pos = $NavigationAgent3D.get_next_path_position()
-			var direction = (next_pos - global_position).normalized()
-			velocity = direction * speed
-		move_and_slide()
-		
-	if state == States.CHASING:
-		# Move towards player
-		$NavigationAgent3D.set_target_position(player.global_position)
-		var next_pos = $NavigationAgent3D.get_next_path_position()
-		var direction = (next_pos - global_position).normalized()
-		
-		# Face the player
-		var target_pos = player.global_position
-		target_pos.y = global_position.y
-		look_at(target_pos, Vector3.UP)
-		velocity = direction * speed
-		move_and_slide()
+		_process_roaming()
+	elif state == States.STALKING:
+		_process_stalking()
+	elif state == States.CHASING:
+		_process_chasing()
+
+
+func _process_roaming() -> void:
+	if not destination:
+		return
+	var next := nav_agent.get_next_path_position()
+	var new_velocity := (next - global_position).normalized() * speed
+	velocity = velocity.move_toward(new_velocity, 0.25)
+	move_and_slide()
+
+
+func _process_stalking() -> void:
+	_face_target(player.global_position)
+
+	if spotted:
+		velocity = Vector3.ZERO
+	else:
+		nav_agent.target_position = player.global_position
+		velocity = _get_direction_to_target() * (speed + 6.0)
+
+	move_and_slide()
+
+
+func _process_chasing() -> void:
+	nav_agent.target_position = player.global_position
+	velocity = _get_direction_to_target() * speed
+
+	var target_pos := player.global_position
+	target_pos.y = global_position.y
+	_face_target(target_pos)
+
+	move_and_slide()
+
+
+func _get_direction_to_target() -> Vector3:
+	var next := nav_agent.get_next_path_position()
+	return (next - global_position).normalized()
+
+
+func _face_target(target: Vector3, tolerance := 0.01) -> void:
+	var direction := (target - global_position).normalized()
+	if direction.dot(global_transform.basis.z) < 1.0 - tolerance:
+		look_at(target, Vector3.UP)
+
 
 func _on_detection_timer_timeout() -> void:
-	var overlaps = detection_area.get_overlapping_bodies()
-	if overlaps.size() > 0:
-		for body in overlaps:
-			if body == player:
-				detection_cast.look_at(player.global_transform.origin, Vector3.UP)
-				detection_cast.force_raycast_update()
-				
-				if detection_cast.is_colliding():
-					var collider = detection_cast.get_collider()
-					if collider == player:
-						detection_cast.debug_shape_custom_color = Color(174,0,0)
-						state = States.STALKING
-						spotted = true
-					else:
-						spotted = false
-				
-				else:
-					detection_cast.debug_shape_custom_color = Color(0,255,0)
+	for body in detection_area.get_overlapping_bodies():
+		if body == player:
+			detection_cast.look_at(player.global_position, Vector3.UP)
+			detection_cast.force_raycast_update()
+
+			if detection_cast.is_colliding() and detection_cast.get_collider() == player:
+				detection_cast.debug_shape_custom_color = Color(1, 0, 0)
+				state = States.STALKING
+				spotted = true
+			else:
+				detection_cast.debug_shape_custom_color = Color(0, 1, 0)
+				spotted = false
+			return  #exit early after finding player

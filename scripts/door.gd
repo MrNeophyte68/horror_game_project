@@ -35,17 +35,22 @@ func facing_back_exit(body):
 		back = false
 
 func toggle_door():
-	if $AnimationPlayer.current_animation != "open":
-		opened = !opened
-		if !opened and front_opened:
+	if $AnimationPlayer.is_playing():
+		return  # Wait for the current animation to finish
+
+	opened = !opened
+
+	if !opened:
+		if front_opened:
 			$AnimationPlayer.play_backwards("open")
 			front_opened = false
-		if !opened and back_opened:
+		elif back_opened:
 			$AnimationPlayer.play_backwards("open1")
 			back_opened = false
-		if front and opened:
+	else:
+		if front:
 			$AnimationPlayer.play("open")
 			front_opened = true
-		if back and opened:
+		elif back:
 			$AnimationPlayer.play("open1")
 			back_opened = true
