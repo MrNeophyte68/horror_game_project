@@ -5,6 +5,8 @@ var front = false
 var back = false
 var front_opened = false
 var back_opened = false
+var ai_facing_front = false
+var ai_facing_back = false
 
 func ai_enter_door(body): #front
 	if body.name == "Stalker" and $AnimationPlayer.current_animation != "open" and !opened:
@@ -34,6 +36,16 @@ func facing_back_exit(body):
 	if body.name == "Player":
 		back = false
 
+func ai_facing_door_front(body):
+	if body.name == "Stalker":
+		ai_facing_front = true
+		ai_facing_back = false
+
+func ai_facing_door_back(body):
+	if body.name == "Stalker":
+		ai_facing_front = false
+		ai_facing_back = true
+
 func toggle_door():
 	if $AnimationPlayer.is_playing():
 		return  # Wait for the current animation to finish
@@ -54,3 +66,18 @@ func toggle_door():
 		elif back:
 			$AnimationPlayer.play("open1")
 			back_opened = true
+
+func _process(delta):
+	
+	if ai_facing_front and $AnimationPlayer.current_animation != "open" and !opened:
+		opened = true
+		front_opened = true
+		$AnimationPlayer.play("open")
+	
+	if ai_facing_back and $AnimationPlayer.current_animation != "open" and !opened:
+		opened = true
+		back_opened = true
+		$AnimationPlayer.play("open1")
+		
+		
+	
