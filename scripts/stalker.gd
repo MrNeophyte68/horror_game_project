@@ -6,7 +6,8 @@ var state: States = States.ROAMING
 
 @export var patrol_destinations: Array[Node3D]
 @export var stalking_max_time: float = 20.0
-@export var stalking_rate: float = 1.0
+@export var stalking_increase_rate: float = 1.0
+@export var stalking_decrease_rate: float = 1.0
 
 @onready var player: CharacterBody3D = $"../Player"
 @onready var detection_area: Area3D = $DetectionArea
@@ -77,8 +78,8 @@ func _process_stalking(delta: float) -> void:
 	stalking_meter_ended = false
 	
 	if spotted:
-		# decrease timer
-		stalking_time -= stalking_rate * delta
+		# decrease timer 
+		stalking_time -= stalking_decrease_rate * delta
 		if stalking_time <= 0.0:
 			stalking_time = 0.0
 			stalking_meter_ended = true
@@ -90,31 +91,13 @@ func _process_stalking(delta: float) -> void:
 		
 	else:
 		if not stalking_meter_ended:
-			stalking_time += stalking_rate * delta
+			stalking_time += stalking_increase_rate * delta
 			stalking_time = min(stalking_time, stalking_max_time)
 			
 		nav_agent.target_position = player.global_position
 		velocity = _get_direction_to_target() * (speed + 6.0)
 	
 	move_and_slide()
-	
-	
-	
-	#if spotted:
-		#if $StalkingMeter.is_stopped():
-			#$StalkingMeter.start()
-		#velocity = Vector3.ZERO
-	#else:
-		## Restarts the timer
-		#if not $StalkingMeter.is_stopped():
-			#$StalkingMeter.stop()
-			#$StalkingMeter.start()
-		#
-		#nav_agent.target_position = player.global_position
-		#velocity = _get_direction_to_target() * (speed + 6.0)
-#
-	#move_and_slide()
-
 
 func _process_chasing() -> void:
 	nav_agent.target_position = player.global_position
