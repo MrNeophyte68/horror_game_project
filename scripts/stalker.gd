@@ -16,8 +16,8 @@ var speed := 3.0
 var destination: Node3D
 var destination_position: Vector3
 var destination_value: int = -1
-var spotted := false
-
+var spotted: bool = false
+var stalking_meter_ended: bool = false
 
 func _ready() -> void:
 	pick_destination()
@@ -71,10 +71,18 @@ func _process_roaming() -> void:
 
 func _process_stalking() -> void:
 	_face_target(player.global_position)
-
+	stalking_meter_ended = false
+	
 	if spotted:
+		if $StalkingMeter.is_stopped():
+			$StalkingMeter.start()
 		velocity = Vector3.ZERO
 	else:
+		# Restarts the timer
+		if not $StalkingMeter.is_stopped():
+			$StalkingMeter.stop()
+			$StalkingMeter.start()
+		
 		nav_agent.target_position = player.global_position
 		velocity = _get_direction_to_target() * (speed + 6.0)
 
@@ -108,12 +116,18 @@ func _on_detection_timer_timeout() -> void:
 		if body == player:
 			detection_cast.look_at(player.global_position, Vector3.UP)
 			detection_cast.force_raycast_update()
-
-			if detection_cast.is_colliding() and detection_cast.get_collider() == player:
-				detection_cast.debug_shape_custom_color = Color(1, 0, 0)
-				state = States.STALKING
-				spotted = true
-			else:
-				detection_cast.debug_shape_custom_color = Color(0, 1, 0)
-				spotted = false
+			
+			if stalking_meter_ended == false:
+				if detection_cast.is_colliding() and detection_cast.get_collider() == player:
+					detection_cast.debug_shape_custom_color = Color(1, 0, 0)
+					state = States.STALKING
+					spotted = true
+				else:
+					detection_cast.debug_shape_custom_color = Color(0, 1, 0)
+					spotted = false
 			return  #exit early after finding player
+
+
+func _on_stalking_meter_timeout() -> void:
+	stalking_meter_ended = true
+	state = States.CHASING
