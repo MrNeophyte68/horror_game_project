@@ -5,16 +5,16 @@
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ex804"]
 
+[sub_resource type="BoxMesh" id="BoxMesh_ex804"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a6f8m"]
+albedo_color = Color(0.435294, 0, 0, 1)
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a6f8m"]
 radius = 0.1
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_a6f8m"]
 points = PackedVector3Array(-0.000195742, 1, -0.000195742, 0.194988, -1, -0.980814, -0.000195742, -1, -1, -0.195184, -1, -0.980814, -0.382733, -1, -0.924041, -0.555599, -1, -0.831637, -0.707126, -1, -0.707126, -0.831637, -1, -0.555599, -0.924041, -1, -0.382733, -0.980814, -1, -0.195184, -1, -1, -0.000195742, -0.980814, -1, 0.194988, -0.924041, -1, 0.382537, -0.831637, -1, 0.555403, -0.707126, -1, 0.70693, -0.555599, -1, 0.831441, -0.382733, -1, 0.923845, -0.195184, -1, 0.980619, -0.000195742, -1, 1, 0.194988, -1, 0.980619, 0.382537, -1, 0.923845, 0.555403, -1, 0.831441, 0.70693, -1, 0.70693, 0.831441, -1, 0.555403, 0.923845, -1, 0.382537, 0.980619, -1, 0.194988, 1, -1, -0.000195742, 0.980619, -1, -0.195184, 0.923845, -1, -0.382733, 0.831441, -1, -0.555599, 0.70693, -1, -0.707126, 0.555403, -1, -0.831637, 0.382537, -1, -0.924041)
-
-[sub_resource type="BoxMesh" id="BoxMesh_ex804"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a6f8m"]
-albedo_color = Color(0.435294, 0, 0, 1)
 
 [node name="Stalker" type="CharacterBody3D"]
 process_mode = 4
@@ -22,6 +22,12 @@ script = ExtResource("1_p7x4s")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_ex804")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.335646, -0.451646)
+mesh = SubResource("BoxMesh_ex804")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_a6f8m")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_a6f8m")
@@ -39,25 +45,39 @@ visible = false
 transform = Transform3D(90, 0, 0, 0, -1.31134e-06, -30, 0, 30, -1.31134e-06, 0, 0, -29.7309)
 shape = SubResource("ConvexPolygonShape3D_a6f8m")
 
+[node name="BackDetectionArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BackDetectionArea"]
+transform = Transform3D(-90, 2.62268e-06, 0, 3.43923e-13, 1.31134e-06, -30, -7.86805e-06, -30, -1.31134e-06, 0, 0, 29.9948)
+shape = SubResource("ConvexPolygonShape3D_a6f8m")
+
+[node name="cone" parent="BackDetectionArea" instance=ExtResource("2_ex804")]
+transform = Transform3D(-30, 8.74228e-07, 0, 1.14641e-13, 4.37114e-07, -10, -2.62268e-06, -10, -4.37114e-07, 0, 0, 9.89914)
+visible = false
+
+[node name="BackDetectionCast" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, -100)
+debug_shape_custom_color = Color(1, 0, 0, 1)
+
 [node name="DetectionCast" type="RayCast3D" parent="."]
 target_position = Vector3(0, 0, -100)
 debug_shape_custom_color = Color(0.856494, 3.65794e-06, 8.66354e-07, 1)
 
-[node name="BackDetectionCast" type="RayCast3D" parent="."]
-target_position = Vector3(0, 0, 100)
-debug_shape_custom_color = Color(1, 0, 0, 1)
-
 [node name="DetectionTimer" type="Timer" parent="."]
+wait_time = 0.25
+autostart = true
+
+[node name="BackDetectionTimer" type="Timer" parent="."]
 wait_time = 0.25
 autostart = true
 
 [node name="StalkingMeter" type="Timer" parent="."]
 wait_time = 10.0
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.335646, -0.451646)
-mesh = SubResource("BoxMesh_ex804")
-surface_material_override/0 = SubResource("StandardMaterial3D_a6f8m")
+[node name="BackTimer" type="Timer" parent="."]
+wait_time = 8.0
 
 [connection signal="timeout" from="DetectionTimer" to="." method="_on_detection_timer_timeout"]
+[connection signal="timeout" from="BackDetectionTimer" to="." method="_on_back_detection_timer_timeout"]
 [connection signal="timeout" from="StalkingMeter" to="." method="_on_stalking_meter_timeout"]
+[connection signal="timeout" from="BackTimer" to="." method="_on_back_timer_timeout"]

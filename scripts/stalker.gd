@@ -127,7 +127,29 @@ func _on_detection_timer_timeout() -> void:
 					spotted = false
 			return  #exit early after finding player
 
+func _on_back_detection_timer_timeout() -> void:
+	for body in $BackDetectionArea.get_overlapping_bodies():
+		if body == player:
+			print(body)
+			$BackDetectionCast.look_at(player.global_position, Vector3.UP)
+			$BackDetectionCast.force_raycast_update()
+			
+			if stalking_meter_ended == false:
+				if $BackDetectionCast.is_colliding() and $BackDetectionCast.get_collider() == player:
+					if $BackTimer.is_stopped():
+						$BackTimer.start()
+					$BackDetectionCast.debug_shape_custom_color = Color(0, 0, 1)
+					print($BackTimer.time_left)
+				else:
+					if not $BackTimer.is_stopped():
+						$BackTimer.stop()
+						$BackTimer.start()
+					$BackDetectionCast.debug_shape_custom_color = Color(0, 1, 0)
+			return
 
 func _on_stalking_meter_timeout() -> void:
 	stalking_meter_ended = true
 	state = States.CHASING
+
+func _on_back_timer_timeout() -> void:
+	state = States.STALKING
