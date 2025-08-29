@@ -68,11 +68,11 @@ func hand_bob(vel : float, delta):
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	hand_pos = hand.position
-	SPEED = 0.0
-	can_sprint = false
-	JUMP_VELOCITY = 0.0
-	cam_speed = 0.0
-	await get_tree().create_timer(11.0, false).timeout
+	#SPEED = 0.0
+	#can_sprint = false
+	#JUMP_VELOCITY = 0.0
+	#cam_speed = 0.0
+	#await get_tree().create_timer(11.0, false).timeout
 	SPEED = 3.0
 	can_sprint = true
 	JUMP_VELOCITY = 4.5

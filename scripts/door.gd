@@ -78,6 +78,3 @@ func _process(delta):
 		opened = true
 		back_opened = true
 		$AnimationPlayer.play("open1")
-		
-		
-	
