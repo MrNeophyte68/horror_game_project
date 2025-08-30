@@ -48,3 +48,6 @@ transform = Transform3D(-0.3, 0, -2.62268e-08, 0, 0.3, 0, 2.62268e-08, 0, -0.3, 
 visible = false
 
 [node name="player_ui" parent="." instance=ExtResource("4_yw30f")]
+
+[editable path="player_ui"]
+[editable path="player_ui/pause_menu"]

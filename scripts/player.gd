@@ -27,6 +27,9 @@ var head_bob_index = 0.0
 var head_bob_current_intensity = 0.0
 @onready var eyes = $head/eyes
 
+#stamina bar properties
+@onready var stamina = $player_ui/TextureProgressBar
+
 func _input(event):
 	if !cam: return
 	if event is InputEventMouseMotion:
@@ -68,6 +71,7 @@ func hand_bob(vel : float, delta):
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	hand_pos = hand.position
+	#remove # for cutscene
 	#SPEED = 0.0
 	#can_sprint = false
 	#JUMP_VELOCITY = 0.0
@@ -88,9 +92,14 @@ func _physics_process(delta: float) -> void:
 	
 	if can_sprint:
 		if Input.is_action_pressed("sprint"):
-			SPEED = SPRINT_SPEED
-			head_bob_current_intensity = head_bob_sprint_intensity
-			head_bob_index += head_bob_sprint_speed*delta
+			if stamina.value > 0:
+				SPEED = SPRINT_SPEED
+				head_bob_current_intensity = head_bob_sprint_intensity
+				head_bob_index += head_bob_sprint_speed*delta
+			else:
+				SPEED = WALK_SPEED
+				head_bob_current_intensity = head_bob_walk_intensity
+				head_bob_index += head_bob_walk_speed*delta
 		else:
 			SPEED = WALK_SPEED
 			head_bob_current_intensity = head_bob_walk_intensity
