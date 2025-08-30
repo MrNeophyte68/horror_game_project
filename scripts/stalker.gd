@@ -6,7 +6,7 @@ var state: States = States.ROAMING
 
 @export var patrol_destinations: Array[Node3D]
 @export var stalking_max_time: float = 20.0
-@export var stalking_increase_rate: float = 1.0
+@export var stalking_increase_rate: float = 0
 @export var stalking_decrease_rate: float = 1.0
 
 @onready var player: CharacterBody3D = $"../Player"
@@ -101,7 +101,7 @@ func _process_stalking(delta: float) -> void:
 
 func _process_chasing() -> void:
 	nav_agent.target_position = player.global_position
-	velocity = _get_direction_to_target() * speed
+	velocity = _get_direction_to_target() * (speed +6.0)
 
 	var target_pos := player.global_position
 	target_pos.y = global_position.y
