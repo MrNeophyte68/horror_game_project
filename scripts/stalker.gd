@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-enum States { ROAMING, STALKING, CHASING, SEARCHING }
+enum States { ROAMING, STALKING, CHASING}
 
 var state: States = States.ROAMING
 
@@ -84,9 +84,7 @@ func _process_stalking(delta: float) -> void:
 			stalking_time = 0.0
 			stalking_meter_ended = true
 			state = States.CHASING
-			print("Stalking finished")
 			
-		print(stalking_time)
 		velocity = Vector3.ZERO
 		
 	else:
@@ -140,7 +138,6 @@ func _on_detection_timer_timeout() -> void:
 func _on_back_detection_timer_timeout() -> void:
 	for body in $BackDetectionArea.get_overlapping_bodies():
 		if body == player:
-			print(body)
 			$BackDetectionCast.look_at(player.global_position, Vector3.UP)
 			$BackDetectionCast.force_raycast_update()
 			
@@ -149,7 +146,6 @@ func _on_back_detection_timer_timeout() -> void:
 					if $BackTimer.is_stopped():
 						$BackTimer.start()
 					$BackDetectionCast.debug_shape_custom_color = Color(0, 0, 1)
-					print($BackTimer.time_left)
 				else:
 					if not $BackTimer.is_stopped():
 						$BackTimer.stop()
