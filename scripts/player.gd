@@ -27,16 +27,23 @@ var head_bob_index = 0.0
 var head_bob_current_intensity = 0.0
 @onready var eyes = $head/eyes
 
-#stamina bar properties
-@onready var stamina = $player_ui/TextureProgressBar
+#stamina bar
+@onready var ui = get_tree().root.get_node("Level/Player/player_ui")
+
+#window vaulting
+var near_window = false
+var is_vaulting = false
+@onready var raycast = $head/RayCast3D
+var can_move = true
 
 func _input(event):
 	if !cam: return
-	if event is InputEventMouseMotion:
-		cam.rotation.x -= event.relative.y * cam_speed
-		cam.rotation.x = clamp(cam.rotation.x, -1.25, 1.5)
-		self.rotation.y -= event.relative.x * cam_speed
-		mouse_input = event.relative
+	if can_move:
+		if event is InputEventMouseMotion:
+			cam.rotation.x -= event.relative.y * cam_speed
+			cam.rotation.x = clamp(cam.rotation.x, -1.25, 1.5)
+			self.rotation.y -= event.relative.x * cam_speed
+			mouse_input = event.relative
 
 func cam_tilt(input_x, delta):
 		if cam:
@@ -92,7 +99,7 @@ func _physics_process(delta: float) -> void:
 	
 	if can_sprint:
 		if Input.is_action_pressed("sprint"):
-			if stamina.value > 0:
+			if ui.stamina.value > 0:
 				SPEED = SPRINT_SPEED
 				head_bob_current_intensity = head_bob_sprint_intensity
 				head_bob_index += head_bob_sprint_speed*delta
@@ -129,3 +136,42 @@ func _physics_process(delta: float) -> void:
 	cam_tilt(input_dir.x, delta)
 	hand_sway(delta)
 	hand_bob(velocity.length(),delta)
+	
+func _process(delta: float) -> void:
+	if near_window and Input.is_action_pressed("interact") and ui.stamina.value >= 200 and raycast.can_vault:
+		start_vault()
+		raycast.can_vault = false
+
+func start_vault():
+	if is_vaulting:
+		return
+	is_vaulting = true
+	ui.stamina.value -= 200.0
+	ui.can_regen = false
+	ui.s_timer = 0
+	can_move = false
+	
+	# stop velocity so physics doesn't fight the tween
+	velocity = Vector3.ZERO  
+
+	var tween = get_tree().create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	
+	# Calculate forward vault target (move ~2 meters forward)
+	var forward_offset = -transform.basis.z.normalized() * 1.0  # forward is -Z in Godot
+	var target_pos = global_position + forward_offset
+
+	# Move player (use global_position, not global_transform:origin)
+	tween.tween_property(self, "global_position", target_pos, 0.35)
+	
+	# Camera tilt (forward)
+	tween.parallel().tween_property($head/eyes/Camera3D, "rotation_degrees:x", -20, 0.2)
+	tween.parallel().tween_property($head/eyes/Camera3D, "rotation_degrees:z", -10, 0.2)
+
+	# Reset tilt
+	tween.tween_property($head/eyes/Camera3D, "rotation_degrees:x", 0, 0.2)
+	tween.tween_property($head/eyes/Camera3D, "rotation_degrees:z", 0, 0.2)
+
+	tween.finished.connect(func():
+		is_vaulting = false
+		can_move = true
+	)

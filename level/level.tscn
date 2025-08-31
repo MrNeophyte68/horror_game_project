@@ -122,6 +122,9 @@ shadow_enabled = true
 [node name="Node3D" parent="." instance=ExtResource("3_qohg2")]
 transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0)
 
+[node name="window" parent="Node3D" index="35" node_paths=PackedStringArray("vault_target")]
+vault_target = NodePath("../../Player")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_vkbyq")
@@ -192,3 +195,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.7479, 18.468, -28.5034)
 
 [node name="destination17" parent="." instance=ExtResource("7_ivpvi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.0813, 18.468, 5.0252)
+
+[editable path="Node3D"]
+[editable path="Player"]
