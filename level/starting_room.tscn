@@ -2194,7 +2194,7 @@ skeleton = NodePath("")
 shape = SubResource("ConcavePolygonShape3D_xt2e3")
 
 [node name="floor_ceiling_22" type="MeshInstance3D" parent="NavigationRegion3D/second_floor2/ceiling/mini_floor2"]
-transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -6.159, 16.163, 9.895)
+transform = Transform3D(1.01329, 0, 0, 0, 0, -1, 0, 1, 0, -6.159, 16.163, 9.895)
 lod_bias = 20.0
 mesh = SubResource("ArrayMesh_0p0c8")
 skeleton = NodePath("")
@@ -2837,7 +2837,7 @@ skeleton = NodePath("")
 shape = SubResource("ConcavePolygonShape3D_5o8pr")
 
 [node name="wall_62" type="MeshInstance3D" parent="NavigationRegion3D/second_floor3/wall"]
-transform = Transform3D(-5.07508e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1.16104, -4.37114e-08, 1.91069e-15, 19.769, 16.172, 13.561)
+transform = Transform3D(-5.07508e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1.16104, -4.37114e-08, 1.91069e-15, 19.765, 16.172, 13.561)
 mesh = SubResource("ArrayMesh_xt2e3")
 skeleton = NodePath("")
 
@@ -3789,7 +3789,7 @@ skeleton = NodePath("")
 shape = SubResource("ConcavePolygonShape3D_5o8pr")
 
 [node name="doorway_3_wide" type="MeshInstance3D" parent="NavigationRegion3D/second_floor1/wall"]
-transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -9.99275, 16.172, -11.879)
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -9.993, 16.172, -11.87)
 mesh = SubResource("ArrayMesh_5o8pr")
 skeleton = NodePath("")
 

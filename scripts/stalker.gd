@@ -93,13 +93,13 @@ func _process_stalking(delta: float) -> void:
 			stalking_time = min(stalking_time, stalking_max_time)
 			
 		nav_agent.target_position = player.global_position
-		velocity = _get_direction_to_target() * (speed + 6.0)
+		velocity = _get_direction_to_target() * (speed + 3.0)
 	
 	move_and_slide()
 
 func _process_chasing() -> void:
 	nav_agent.target_position = player.global_position
-	velocity = _get_direction_to_target() * (speed +6.0)
+	velocity = _get_direction_to_target() * (speed + 3.0)
 
 	var target_pos := player.global_position
 	target_pos.y = global_position.y

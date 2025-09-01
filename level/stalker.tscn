@@ -1,7 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://0kypj368bynj"]
+[gd_scene load_steps=13 format=3 uid="uid://0kypj368bynj"]
 
 [ext_resource type="Script" uid="uid://r01kbxf7tu4w" path="res://scripts/stalker.gd" id="1_p7x4s"]
 [ext_resource type="PackedScene" uid="uid://bqe6abbour5wd" path="res://level/cone.tscn" id="2_ex804"]
+[ext_resource type="PackedScene" uid="uid://d03h64hj4dipk" path="res://glb_models/female_body_monster.glb" id="3_a6f8m"]
+[ext_resource type="Texture2D" uid="uid://con0jyis4y5eq" path="res://Texture/mask_mx_3.png" id="4_3dkhd"]
+[ext_resource type="PackedScene" uid="uid://da4bg0rf0a668" path="res://level/bright_mask1.tscn" id="5_81uck"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ex804"]
 
@@ -16,11 +19,18 @@ radius = 0.1
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_a6f8m"]
 points = PackedVector3Array(-0.000195742, 1, -0.000195742, 0.194988, -1, -0.980814, -0.000195742, -1, -1, -0.195184, -1, -0.980814, -0.382733, -1, -0.924041, -0.555599, -1, -0.831637, -0.707126, -1, -0.707126, -0.831637, -1, -0.555599, -0.924041, -1, -0.382733, -0.980814, -1, -0.195184, -1, -1, -0.000195742, -0.980814, -1, 0.194988, -0.924041, -1, 0.382537, -0.831637, -1, 0.555403, -0.707126, -1, 0.70693, -0.555599, -1, 0.831441, -0.382733, -1, 0.923845, -0.195184, -1, 0.980619, -0.000195742, -1, 1, 0.194988, -1, 0.980619, 0.382537, -1, 0.923845, 0.555403, -1, 0.831441, 0.70693, -1, 0.70693, 0.831441, -1, 0.555403, 0.923845, -1, 0.382537, 0.980619, -1, 0.194988, 1, -1, -0.000195742, 0.980619, -1, -0.195184, 0.923845, -1, -0.382733, 0.831441, -1, -0.555599, 0.70693, -1, -0.707126, 0.555403, -1, -0.831637, 0.382537, -1, -0.924041)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j0w3w"]
+albedo_texture = ExtResource("4_3dkhd")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nkc4y"]
+albedo_texture = ExtResource("4_3dkhd")
+
 [node name="Stalker" type="CharacterBody3D"]
 process_mode = 4
 script = ExtResource("1_p7x4s")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("CapsuleMesh_ex804")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D"]
@@ -74,6 +84,20 @@ autostart = true
 [node name="BackTimer" type="Timer" parent="."]
 wait_time = 8.0
 
+[node name="female_body_monster" parent="." instance=ExtResource("3_a6f8m")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -0.970945, 0)
+
+[node name="female_body_nude" parent="female_body_monster/rig/Skeleton3D" index="0"]
+material_override = SubResource("StandardMaterial3D_j0w3w")
+
+[node name="female_head_base" parent="female_body_monster/rig/Skeleton3D" index="1"]
+material_override = SubResource("StandardMaterial3D_nkc4y")
+
+[node name="bright_mask" parent="female_body_monster" instance=ExtResource("5_81uck")]
+transform = Transform3D(0.68433, 0, 0, 0, -6.44768e-08, -0.747398, 0, 1.47506, -3.26698e-08, 5.95746e-10, 1.68233, -0.00681454)
+
 [connection signal="timeout" from="DetectionTimer" to="." method="_on_detection_timer_timeout"]
 [connection signal="timeout" from="BackDetectionTimer" to="." method="_on_back_detection_timer_timeout"]
 [connection signal="timeout" from="BackTimer" to="." method="_on_back_timer_timeout"]
+
+[editable path="female_body_monster"]
