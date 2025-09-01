@@ -146,6 +146,7 @@ func _on_back_detection_timer_timeout() -> void:
 					if $BackTimer.is_stopped():
 						$BackTimer.start()
 					$BackDetectionCast.debug_shape_custom_color = Color(0, 0, 1)
+					print($BackTimer.time_left)
 				else:
 					if not $BackTimer.is_stopped():
 						$BackTimer.stop()
@@ -155,3 +156,4 @@ func _on_back_detection_timer_timeout() -> void:
 
 func _on_back_timer_timeout() -> void:
 	state = States.STALKING
+	look_at(player.global_position)

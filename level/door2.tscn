@@ -204,8 +204,8 @@ shape = SubResource("BoxShape3D_5hgsc")
 transform = Transform3D(1.67276, 0, 0, 0, 1.63103, 0, 0, 0, 2.12517, -0.00929058, -0.490205, -1.06984)
 shape = SubResource("BoxShape3D_5hgsc")
 
-[connection signal="body_entered" from="ai_trigger" to="." method="ai_facing_door_front"]
 [connection signal="body_entered" from="ai_trigger" to="." method="facing_front_enter"]
+[connection signal="body_entered" from="ai_trigger" to="." method="ai_facing_door_front"]
 [connection signal="body_exited" from="ai_trigger" to="." method="facing_front_exit"]
 [connection signal="body_entered" from="ai_trigger1_back" to="." method="facing_back_enter"]
 [connection signal="body_entered" from="ai_trigger1_back" to="." method="ai_facing_door_back"]
