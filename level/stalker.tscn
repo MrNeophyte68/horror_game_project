@@ -73,7 +73,7 @@ debug_shape_custom_color = Color(1, 0, 0, 1)
 target_position = Vector3(0, 0, -100)
 debug_shape_custom_color = Color(0.856494, 3.65794e-06, 8.66354e-07, 1)
 
-[node name="DetectionTimer" type="Timer" parent="."]
+[node name="DetectionTimer" type="Timer" parent="." groups=["Stalker"]]
 wait_time = 0.25
 autostart = true
 

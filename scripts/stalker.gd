@@ -1,6 +1,7 @@
 extends CharacterBody3D
+class_name Stalker
 
-enum States { ROAMING, STALKING, CHASING}
+enum States { ROAMING, STALKING, CHASING, STUNNED}
 
 var state: States = States.ROAMING
 
@@ -23,7 +24,11 @@ var spotted: bool = false
 var stalking_meter_ended: bool = false
 var stalking_time: float = stalking_max_time
 
+var stunned: bool = false
+var stun_remaining: float = 0.0
+
 func _ready() -> void:
+	add_to_group("Stalker")
 	pick_destination()
 
 
@@ -42,7 +47,7 @@ func update_target_location() -> void:
 
 
 func _process(delta: float) -> void:
-	if state == States.ROAMING and destination:
+	if state == States.ROAMING and destination and speed > 0.0:
 		var look_dir := lerp_angle(
 			deg_to_rad(global_rotation_degrees.y),
 			atan2(-velocity.x, -velocity.z),
@@ -62,6 +67,9 @@ func _physics_process(delta: float) -> void:
 		_process_stalking(delta)
 	elif state == States.CHASING:
 		_process_chasing()
+	elif state == States.STUNNED:
+		_process_stunned(delta)
+		move_and_slide()
 
 
 func _process_roaming() -> void:
@@ -98,15 +106,33 @@ func _process_stalking(delta: float) -> void:
 	move_and_slide()
 
 func _process_chasing() -> void:
+	# Switches to stunned state when camera used
+	if stunned == true:
+		state = States.STUNNED
+		stun_remaining = 10.0
+
 	nav_agent.target_position = player.global_position
-	velocity = _get_direction_to_target() * (speed + 3.0)
+	velocity = _get_direction_to_target() * (speed+ 3.0)
 
 	var target_pos := player.global_position
 	target_pos.y = global_position.y
 	_face_target(target_pos)
+	
 
 	move_and_slide()
-
+	
+func _process_stunned(delta) -> void:
+	velocity = Vector3.ZERO
+	stun_remaining -= delta
+	
+	if stun_remaining <= delta:
+		# Reset after stun
+		stunned = false
+		spotted = false
+		stalking_meter_ended = false
+		stalking_time = stalking_max_time # Refill timer
+		state = States.ROAMING
+		pick_destination()
 
 func _get_direction_to_target() -> Vector3:
 	var next := nav_agent.get_next_path_position()

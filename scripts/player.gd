@@ -36,44 +36,10 @@ var is_vaulting = false
 @onready var raycast = $head/RayCast3D
 var can_move = true
 
-func _input(event):
-	if !cam: return
-	if can_move:
-		if event is InputEventMouseMotion:
-			cam.rotation.x -= event.relative.y * cam_speed
-			cam.rotation.x = clamp(cam.rotation.x, -1.25, 1.5)
-			self.rotation.y -= event.relative.x * cam_speed
-			mouse_input = event.relative
-
-func cam_tilt(input_x, delta):
-		if cam:
-			cam.rotation.z = lerp(cam.rotation.z, -input_x * cam_rotation_amount, 10 * delta)
-		if hand:
-			hand.rotation.z = lerp(hand.rotation.z, -input_x * hand_rotation_amount * 10, 10 * delta)
-
-func hand_sway(delta):
-	if is_on_floor():
-		mouse_input = lerp(mouse_input, Vector2.ZERO, 10 * delta)
-		hand.rotation.x = lerp(hand.rotation.x, mouse_input.y * hand_rotation_amount, 10 * delta)
-		hand.rotation.y = lerp(hand.rotation.y, mouse_input.x * hand_rotation_amount, 10 * delta)
-
-func hand_bob(vel : float, delta):
-	if is_on_floor():
-		if hand:
-			if vel > 2:
-				if SPEED == WALK_SPEED:
-					var bob_amount : float = 0.01
-					var bob_freq : float = 0.01
-					hand.position.y = lerp(hand.position.y, hand_pos.y + sin(Time.get_ticks_msec() * bob_freq) * bob_amount, 10 * delta)
-					hand.position.x = lerp(hand.position.x, hand_pos.x + sin(Time.get_ticks_msec() * bob_freq * 0.5) * bob_amount, 10 * delta)
-				if SPEED == SPRINT_SPEED:
-					var bob_amount : float = 0.022
-					var bob_freq : float = 0.022
-					hand.position.y = lerp(hand.position.y, hand_pos.y + sin(Time.get_ticks_msec() * bob_freq) * bob_amount, 10 * delta)
-					hand.position.x = lerp(hand.position.x, hand_pos.x + sin(Time.get_ticks_msec() * bob_freq * 0.5) * bob_amount, 10 * delta)
-			else:
-				hand.position.y = lerp(hand.position.y, hand_pos.y, 10 * delta)
-				hand.position.x = lerp(hand.position.x, hand_pos.x, 10 * delta)
+#variables used for abilities (camera)
+@onready var stalker = $"../Stalker"
+@onready var ability_cast = $head/AbilityCast
+var ability_valid = false
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -88,6 +54,8 @@ func _ready() -> void:
 	can_sprint = true
 	JUMP_VELOCITY = 4.5
 	cam_speed = 0.007
+	
+	ability_cast.visible = false ## Hides ability cast when debugging because its ugly and annoying
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -132,6 +100,8 @@ func _physics_process(delta: float) -> void:
 		eyes.position.y = lerp(eyes.position.y, 0.0, delta*lerp_speed)
 		eyes.position.x = lerp(eyes.position.x, 0.0, delta*lerp_speed)
 
+	ability()
+
 	move_and_slide()
 	cam_tilt(input_dir.x, delta)
 	hand_sway(delta)
@@ -175,3 +145,55 @@ func start_vault():
 		is_vaulting = false
 		can_move = true
 	)
+
+func _input(event):
+	if !cam: return
+	if can_move:
+		if event is InputEventMouseMotion:
+			cam.rotation.x -= event.relative.y * cam_speed
+			cam.rotation.x = clamp(cam.rotation.x, -1.25, 1.5)
+			self.rotation.y -= event.relative.x * cam_speed
+			mouse_input = event.relative
+
+func cam_tilt(input_x, delta):
+		if cam:
+			cam.rotation.z = lerp(cam.rotation.z, -input_x * cam_rotation_amount, 10 * delta)
+		if hand:
+			hand.rotation.z = lerp(hand.rotation.z, -input_x * hand_rotation_amount * 10, 10 * delta)
+
+func hand_sway(delta):
+	if is_on_floor():
+		mouse_input = lerp(mouse_input, Vector2.ZERO, 10 * delta)
+		hand.rotation.x = lerp(hand.rotation.x, mouse_input.y * hand_rotation_amount, 10 * delta)
+		hand.rotation.y = lerp(hand.rotation.y, mouse_input.x * hand_rotation_amount, 10 * delta)
+
+func hand_bob(vel : float, delta):
+	if is_on_floor():
+		if hand:
+			if vel > 2:
+				if SPEED == WALK_SPEED:
+					var bob_amount : float = 0.01
+					var bob_freq : float = 0.01
+					hand.position.y = lerp(hand.position.y, hand_pos.y + sin(Time.get_ticks_msec() * bob_freq) * bob_amount, 10 * delta)
+					hand.position.x = lerp(hand.position.x, hand_pos.x + sin(Time.get_ticks_msec() * bob_freq * 0.5) * bob_amount, 10 * delta)
+				if SPEED == SPRINT_SPEED:
+					var bob_amount : float = 0.022
+					var bob_freq : float = 0.022
+					hand.position.y = lerp(hand.position.y, hand_pos.y + sin(Time.get_ticks_msec() * bob_freq) * bob_amount, 10 * delta)
+					hand.position.x = lerp(hand.position.x, hand_pos.x + sin(Time.get_ticks_msec() * bob_freq * 0.5) * bob_amount, 10 * delta)
+			else:
+				hand.position.y = lerp(hand.position.y, hand_pos.y, 10 * delta)
+				hand.position.x = lerp(hand.position.x, hand_pos.x, 10 * delta)
+
+# function that checks if an ability is valid and so can affect stalker
+func ability() -> void:
+	ability_valid = false # reset each tick
+	
+	for body in $head/AbilityArea.get_overlapping_bodies():
+		if body == stalker:
+			ability_cast.target_position = ability_cast.to_local(stalker.global_position).normalized() * 100.0
+			ability_cast.force_raycast_update()
+			
+			if ability_cast.is_colliding() and ability_cast.get_collider() == stalker:
+				ability_valid = true
+				break # exit early if valid
