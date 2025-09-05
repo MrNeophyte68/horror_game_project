@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://2xpj74ysuet8" path="res://Texture/Cur_Grab2.png" id="1_cfom6"]
 [ext_resource type="Script" uid="uid://bcm5bdc8fit87" path="res://ui/player_ui.gd" id="1_ehg4m"]
 [ext_resource type="PackedScene" uid="uid://c38ofq4se5pcb" path="res://ui/pause_menu.tscn" id="3_iwa1g"]
-[ext_resource type="Script" path="res://ui/texture_progress_bar.gd" id="4_iwa1g"]
+[ext_resource type="Script" uid="uid://c7oafhtbptfpy" path="res://ui/texture_progress_bar.gd" id="4_iwa1g"]
 [ext_resource type="Texture2D" uid="uid://b8jqai65nrng5" path="res://Texture/black_background_1920x1080.png" id="4_lp0io"]
 [ext_resource type="Texture2D" uid="uid://bur6uyv8iddy4" path="res://Texture/white_background_1920x1080.png" id="5_ykvpg"]
 
