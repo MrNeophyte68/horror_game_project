@@ -1419,6 +1419,7 @@ shape = SubResource("ConcavePolygonShape3D_lyyba")
 
 [node name="floor_ceiling_3" type="MeshInstance3D" parent="first_floor/starting_room"]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -2.02257, 3.00464, 2)
+lod_bias = 20.0
 mesh = SubResource("ArrayMesh_wxe2h")
 skeleton = NodePath("")
 
@@ -1520,7 +1521,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.83901, 16.527, 15.6163)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.9819, 16.527, 0.102283)
 
 [node name="lamp15" parent="lights" instance=ExtResource("8_eppn4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.181, 2.003, 1.813)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.181, 2.003, 1.98205)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_5o8pr")

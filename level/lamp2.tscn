@@ -83,4 +83,5 @@ skeleton = NodePath("")
 [node name="OmniLight3D" type="OmniLight3D" parent="ceiling_lamp_mp_1_on"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.26803)
 light_color = Color(1, 0.466667, 0, 1)
+shadow_enabled = true
 omni_range = 4.0
