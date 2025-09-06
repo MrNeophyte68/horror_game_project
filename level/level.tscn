@@ -136,7 +136,7 @@ transform = Transform3D(-0.417156, 0.285801, -0.862727, 0.679403, 0.728571, -0.0
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3.82, 1, 2)
 
 [node name="camera" parent="." instance=ExtResource("5_ktfr2")]
-transform = Transform3D(0.848048, 0, -0.529919, 0, 1, 0, 0.529919, 0, 0.848048, 10.0003, 0, 1.92458)
+transform = Transform3D(0.848048, 0, -0.529919, 0, 1, 0, 0.529919, 0, 0.848048, -0.999156, 0, 0.424252)
 
 [node name="Stalker" parent="." node_paths=PackedStringArray("patrol_destinations") instance=ExtResource("6_44x8d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.4588, 18.8055, 24.0642)

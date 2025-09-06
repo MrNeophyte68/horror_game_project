@@ -37,6 +37,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.659274, 0)
 script = ExtResource("2_g1dw6")
 
 [node name="AbilityArea" type="Area3D" parent="head"]
+visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="head/AbilityArea"]
 transform = Transform3D(0.997472, 0, 0, 0, -4.36009e-08, 0.997472, 0, -0.997472, -4.36009e-08, 0, 0, -4.08995)
