@@ -1168,16 +1168,6 @@ skeleton = NodePath("")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="first_floor/wall/mini_wall4/wall_9/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_tlshr")
 
-[node name="wall_11" type="MeshInstance3D" parent="first_floor/wall/mini_wall4"]
-transform = Transform3D(-1, 8.74228e-08, 4.37114e-08, -4.37114e-08, 1.91069e-15, -1, -8.74228e-08, -1, 1.91069e-15, 13.8777, 0, 3.97356)
-mesh = SubResource("ArrayMesh_lyyba")
-skeleton = NodePath("")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="first_floor/wall/mini_wall4/wall_11"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="first_floor/wall/mini_wall4/wall_11/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_tlshr")
-
 [node name="wall_8" type="MeshInstance3D" parent="first_floor/wall/mini_wall4"]
 transform = Transform3D(-1, 8.74228e-08, 4.37114e-08, -4.37114e-08, 1.91069e-15, -1, -8.74228e-08, -1, 1.91069e-15, 1.9355, 0, 3.97356)
 mesh = SubResource("ArrayMesh_lyyba")
@@ -1197,6 +1187,9 @@ skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="first_floor/wall/mini_wall4/wall_10/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_tlshr")
+
+[node name="window" parent="first_floor/wall" instance=ExtResource("17_3j4dr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.834, 0, -15.9319)
 
 [node name="ceiling" type="Node3D" parent="first_floor"]
 
