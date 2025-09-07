@@ -1393,7 +1393,7 @@ skeleton = NodePath("")
 shape = SubResource("ConcavePolygonShape3D_tlshr")
 
 [node name="wall_11" type="MeshInstance3D" parent="first_floor/wall/mini_wall8"]
-transform = Transform3D(-1, 8.74228e-08, 4.37114e-08, -4.37114e-08, 1.91069e-15, -1, -8.74228e-08, -1, 1.91069e-15, 13.8777, 0, 3.97356)
+transform = Transform3D(-1.02421, 8.74228e-08, 4.37114e-08, -4.47695e-08, 1.91069e-15, -1, -8.95391e-08, -1, 1.91069e-15, 13.8777, 0, 3.97356)
 mesh = SubResource("ArrayMesh_lyyba")
 skeleton = NodePath("")
 
