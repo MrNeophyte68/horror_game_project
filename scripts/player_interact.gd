@@ -21,15 +21,14 @@ func _physics_process(delta: float) -> void:
 			if Input.is_action_just_pressed("interact"):
 				hit.free()
 				$"../eyes/hand/camera3".visible = true
-				can_interact_elevator = true
+				#can_interact_elevator = true
 				
-		elif hit.name == "elevator":
-			if can_interact_elevator:
-				if !crosshair.visible:
-					crosshair.visible = true
-				if Input.is_action_just_pressed("interact"):
-					hit.get_parent().elevator_open()
-					
+		elif hit.name == "ElevatorCall":
+			if !crosshair.visible:
+				crosshair.visible = true
+			if Input.is_action_just_pressed("interact"):
+				hit.get_parent().elevator_move()
+				
 		elif hit.name == "exit":
 			if !crosshair.visible:
 				crosshair.visible = true

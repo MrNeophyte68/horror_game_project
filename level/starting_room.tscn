@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://coa58c76p8amy" path="res://glb_models/PSX Mega Pack (source file)_wood_4.png" id="4_tlshr"]
 [ext_resource type="Texture2D" uid="uid://u64sqoj1ypbl" path="res://glb_models/PSX Mega Pack (source file)_door_handle_1.png" id="5_0p0c8"]
 [ext_resource type="PackedScene" uid="uid://dkwt35waak0rm" path="res://level/lamp2.tscn" id="8_eppn4"]
-[ext_resource type="PackedScene" uid="uid://dncfpuh23wm7j" path="res://level/elevator.tscn" id="9_tlshr"]
+[ext_resource type="PackedScene" uid="uid://1qouuwji35bq" path="res://level/elevator.tscn" id="9_tlshr"]
 [ext_resource type="PackedScene" uid="uid://cm8r2hjjcux6x" path="res://level/door2.tscn" id="10_dhlt1"]
 [ext_resource type="PackedScene" uid="uid://wfvbyccngoms" path="res://level/lamp.tscn" id="11_cqg4v"]
 [ext_resource type="Texture2D" uid="uid://cl11qskpesvew" path="res://glb_models/PSX Mega Pack (source file)_window_2.png" id="12_eppn4"]
