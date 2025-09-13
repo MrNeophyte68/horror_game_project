@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://b5dy8vvmv32dq" path="res://glb_models/PSX Mega Pack (source file).glb" id="1_2t4ei"]
 
 [node name="PSX Mega Pack (source file)" instance=ExtResource("1_2t4ei")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.44637, 2.16922, 2.24474)
 
 [node name="clock_2_arm_hours" parent="clock_2" index="0"]
 transform = Transform3D(0.0287954, 3.32778e-07, -1.42828, 1.71469e-07, -1.42857, -3.29389e-07, -1.42828, -1.64794e-07, -0.0287954, 2.28882e-05, -0.00799996, 0)

@@ -162,7 +162,7 @@ _data = {
 }
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5hgsc"]
-size = Vector3(1, 0.620412, 1)
+size = Vector3(1, 0.775464, 1)
 
 [node name="door" type="Node3D"]
 script = ExtResource("1_5hgsc")
@@ -201,14 +201,14 @@ shape = SubResource("BoxShape3D_5hgsc")
 [node name="trigger1_back" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="trigger1_back"]
-transform = Transform3D(1.67276, 0, 0, 0, 1.63103, 0, 0, 0, 2.12517, -0.00929058, -0.490205, -1.06984)
+transform = Transform3D(1.67276, 0, 0, 0, 1.63103, 0, 0, 0, 2.12517, -0.00929058, -0.616652, -1.06984)
 shape = SubResource("BoxShape3D_5hgsc")
 
 [connection signal="body_entered" from="trigger_front" to="." method="facing_front_enter"]
 [connection signal="body_entered" from="trigger_front" to="." method="ai_facing_door_front"]
-[connection signal="body_exited" from="trigger_front" to="." method="facing_front_exit"]
 [connection signal="body_exited" from="trigger_front" to="." method="ai_facing_door_front_exit"]
-[connection signal="body_entered" from="trigger1_back" to="." method="ai_facing_door_back"]
+[connection signal="body_exited" from="trigger_front" to="." method="facing_front_exit"]
 [connection signal="body_entered" from="trigger1_back" to="." method="facing_back_enter"]
-[connection signal="body_exited" from="trigger1_back" to="." method="facing_back_exit"]
+[connection signal="body_entered" from="trigger1_back" to="." method="ai_facing_door_back"]
 [connection signal="body_exited" from="trigger1_back" to="." method="ai_facing_door_back_exit"]
+[connection signal="body_exited" from="trigger1_back" to="." method="facing_back_exit"]

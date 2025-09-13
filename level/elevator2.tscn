@@ -23,7 +23,7 @@ tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("ElevatorPlatform:position")
-tracks/0/interp = 1
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 9),
@@ -35,7 +35,7 @@ tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("ElevatorCall:position")
-tracks/1/interp = 1
+tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0.0333333, 9),
@@ -51,7 +51,7 @@ tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("ElevatorPlatform:position")
-tracks/0/interp = 1
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 9),
@@ -63,7 +63,7 @@ tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("ElevatorCall:position")
-tracks/1/interp = 1
+tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 9),
@@ -79,7 +79,7 @@ tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("ElevatorPlatform/platform_elevator_door_1_a:position")
-tracks/0/interp = 1
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 3),
@@ -91,7 +91,7 @@ tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("ElevatorPlatform/platform_elevator_door_2_a:position")
-tracks/1/interp = 1
+tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 3),
@@ -103,7 +103,7 @@ tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/path = NodePath("ElevatorPlatform/platform_elevator_door_1_b:position")
-tracks/2/interp = 1
+tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0.0333333, 3),
@@ -115,7 +115,7 @@ tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/path = NodePath("ElevatorPlatform/platform_elevator_door_2_b:position")
-tracks/3/interp = 1
+tracks/3/interp = 2
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0, 3),
@@ -893,6 +893,7 @@ shape = SubResource("BoxShape3D_5x7fc")
 
 [node name="elevator_doorway_1" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 4.37114e-08, 0, -4.37114e-08, 1, 0, -0.0479659, 0)
+lod_bias = 20.0
 mesh = SubResource("ArrayMesh_137v2")
 skeleton = NodePath("")
 
@@ -903,6 +904,7 @@ shape = SubResource("ConcavePolygonShape3D_n75j0")
 
 [node name="elevator_doorway_2" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 4.37114e-08, 0, -4.37114e-08, 1, 0, -0.048, -16.1955)
+lod_bias = 20.0
 mesh = SubResource("ArrayMesh_5x7fc")
 skeleton = NodePath("")
 
@@ -914,6 +916,7 @@ shape = SubResource("ConcavePolygonShape3D_an0uu")
 [node name="ElevatorPlatform" type="Node3D" parent="."]
 
 [node name="elevator_1" type="MeshInstance3D" parent="ElevatorPlatform"]
+lod_bias = 20.0
 mesh = SubResource("ArrayMesh_an0uu")
 skeleton = NodePath("")
 
@@ -924,6 +927,7 @@ shape = SubResource("ConcavePolygonShape3D_ahpk4")
 
 [node name="platform_elevator_door_2_b" type="MeshInstance3D" parent="ElevatorPlatform"]
 transform = Transform3D(1.06286, 0, 0, 0, 0, 1, 0, -1, 0, -0.6, -0.22, 0)
+lod_bias = 20.0
 mesh = SubResource("ArrayMesh_ec2ls")
 skeleton = NodePath("")
 
@@ -934,6 +938,7 @@ shape = SubResource("ConcavePolygonShape3D_8qyph")
 
 [node name="platform_elevator_door_1_b" type="MeshInstance3D" parent="ElevatorPlatform"]
 transform = Transform3D(1.05515, 0, 0, 0, 0, 1, 0, -1, 0, -0.6, 0, 0)
+lod_bias = 20.0
 mesh = SubResource("ArrayMesh_3jerp")
 skeleton = NodePath("")
 
@@ -944,6 +949,7 @@ shape = SubResource("ConcavePolygonShape3D_0ffm2")
 
 [node name="platform_elevator_door_1_a" type="MeshInstance3D" parent="ElevatorPlatform"]
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0.6, 0, 0)
+lod_bias = 20.0
 mesh = SubResource("ArrayMesh_xf8ni")
 skeleton = NodePath("")
 
@@ -954,6 +960,7 @@ shape = SubResource("ConcavePolygonShape3D_1pkkn")
 
 [node name="platform_elevator_door_2_a" type="MeshInstance3D" parent="ElevatorPlatform"]
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0.6, -0.22, 0)
+lod_bias = 20.0
 mesh = SubResource("ArrayMesh_aolpf")
 skeleton = NodePath("")
 
@@ -965,6 +972,7 @@ shape = SubResource("ConcavePolygonShape3D_5x7fc")
 [node name="DoorCollision" type="MeshInstance3D" parent="ElevatorPlatform"]
 transform = Transform3D(1, 0, 0, 0, 0.042978, 0, 0, 0, 1, 0, -0.288175, -1.05235)
 visible = false
+lod_bias = 20.0
 mesh = SubResource("BoxMesh_5x7fc")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="ElevatorPlatform/DoorCollision"]

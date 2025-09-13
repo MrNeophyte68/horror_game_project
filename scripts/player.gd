@@ -108,7 +108,7 @@ func _physics_process(delta: float) -> void:
 	hand_bob(velocity.length(),delta)
 	
 func _process(delta: float) -> void:
-	if near_window and Input.is_action_pressed("interact") and ui.stamina.value >= 200 and raycast.can_vault:
+	if near_window and Input.is_action_pressed("interact") and ui.stamina.value >= 100 and raycast.can_vault:
 		start_vault()
 		raycast.can_vault = false
 
@@ -116,7 +116,7 @@ func start_vault():
 	if is_vaulting:
 		return
 	is_vaulting = true
-	ui.stamina.value -= 200.0
+	ui.stamina.value -= 100.0
 	ui.can_regen = false
 	ui.s_timer = 0
 	can_move = false
