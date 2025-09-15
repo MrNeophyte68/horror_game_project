@@ -29,17 +29,17 @@ var stun_remaining: float = 0.0
 
 func _ready() -> void:
 	add_to_group("Stalker")
-	pick_destination()
+	#pick_destination()
 
 
-func pick_destination(exclude_index: int = -1) -> void:
-	var idx := rng.randi_range(0, patrol_destinations.size() - 1)
-	if idx == exclude_index:
-		idx = (idx + 1) % patrol_destinations.size()
+#func pick_destination(exclude_index: int = -1) -> void:
+	#var idx := rng.randi_range(0, patrol_destinations.size() - 1)
+	#if idx == exclude_index:
+		#idx = (idx + 1) % patrol_destinations.size()
 	
-	destination_value = idx
-	destination = patrol_destinations[idx]
-	destination_position = destination.global_position  # cache position
+	#destination_value = idx
+	#destination = patrol_destinations[idx]
+	#destination_position = destination.global_position  # cache position
 
 
 func update_target_location() -> void:
@@ -132,7 +132,7 @@ func _process_stunned(delta) -> void:
 		stalking_meter_ended = false
 		stalking_time = stalking_max_time # Refill timer
 		state = States.ROAMING
-		pick_destination()
+		#pick_destination()
 
 func _get_direction_to_target() -> Vector3:
 	var next := nav_agent.get_next_path_position()

@@ -95,6 +95,7 @@ material_override = SubResource("StandardMaterial3D_nkc4y")
 
 [node name="bright_mask" parent="female_body_monster" instance=ExtResource("5_81uck")]
 transform = Transform3D(0.68433, 0, 0, 0, -6.44768e-08, -0.747398, 0, 1.47506, -3.26698e-08, 5.95746e-10, 1.68233, -0.00681454)
+visible = false
 
 [connection signal="timeout" from="DetectionTimer" to="." method="_on_detection_timer_timeout"]
 [connection signal="timeout" from="BackDetectionTimer" to="." method="_on_back_detection_timer_timeout"]

@@ -14,6 +14,7 @@ func _physics_process(delta: float) -> void:
 				crosshair.visible = true
 			if Input.is_action_just_pressed("interact"):
 				hit.get_parent().get_parent().get_parent().toggle_door()
+				hit.free()
 				
 		elif hit.name == "camera":
 			if !crosshair.visible:

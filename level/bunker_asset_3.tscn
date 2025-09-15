@@ -3,3 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://bdc1d24pdltw3" path="res://glb_models/mega_pack2.glb" id="1_kky8h"]
 
 [node name="mega_pack2" instance=ExtResource("1_kky8h")]
+
+[node name="electrical_equipment_1" parent="." index="400"]
+transform = Transform3D(1, 0, 0, 0, -3.57628e-06, -1, 0, 1, -3.57628e-06, 85.4, -0.0392424, 0.2)
