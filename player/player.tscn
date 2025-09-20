@@ -80,3 +80,6 @@ autostart = true
 [node name="FlashTimer" type="Timer" parent="."]
 
 [connection signal="timeout" from="AbilityTimer" to="." method="_on_ability_timer_timeout"]
+
+[editable path="player_ui"]
+[editable path="player_ui/pause_menu"]

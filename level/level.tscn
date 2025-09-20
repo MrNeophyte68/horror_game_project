@@ -136,3 +136,5 @@ transform = Transform3D(0.684432, 0, 0.729076, 0, 1, 0, -0.729076, 0, 0.684432, 
 
 [editable path="Node3D"]
 [editable path="Player"]
+[editable path="Player/player_ui"]
+[editable path="Player/player_ui/pause_menu"]

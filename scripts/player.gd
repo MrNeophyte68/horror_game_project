@@ -5,7 +5,9 @@ var SPEED = 0.0
 var JUMP_VELOCITY = 4.5
 const WALK_SPEED = 3.0
 const SPRINT_SPEED = 6.0
+const CROUCH_SPEED = 1.5
 var can_sprint = false
+var can_crouch = false
 
 @export var cam : Node3D
 @export var cam_speed : float = 5
@@ -26,6 +28,9 @@ var head_bob_vector = Vector2.ZERO
 var head_bob_index = 0.0
 var head_bob_current_intensity = 0.0
 @onready var eyes = $head/eyes
+@onready var head = $head
+const head_bob_crouch_intensity = 0.05
+const head_bob_crouch_speed = 7.0
 
 #stamina bar
 @onready var ui = get_tree().root.get_node("Level/Player/player_ui")
@@ -44,67 +49,79 @@ var ability_valid = false
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	hand_pos = hand.position
-	SPEED = 0.0
-	can_sprint = false
-	JUMP_VELOCITY = 0.0
-	cam_speed = 0.0
-	await get_tree().create_timer(11.0, false).timeout
-	SPEED = 3.0
-	can_sprint = true
+	#can_move = false
+	#can_sprint = false
+	#await get_tree().create_timer(11.0, false).timeout
+	SPEED = WALK_SPEED
 	JUMP_VELOCITY = 4.5
 	cam_speed = 0.007
 	
 	ability_cast.visible = false ## Hides ability cast when debugging because its ugly and annoying
 
 func _physics_process(delta: float) -> void:
-	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 		velocity += get_gravity() * 0.001
-	#if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		#velocity.y = JUMP_VELOCITY
-	
-	if can_sprint:
-		if Input.is_action_pressed("sprint"):
-			if ui.stamina.value > 0:
-				SPEED = SPRINT_SPEED
-				head_bob_current_intensity = head_bob_sprint_intensity
-				head_bob_index += head_bob_sprint_speed*delta
+
+	if can_move:
+		if can_sprint:
+			if Input.is_action_pressed("sprint"):
+				if ui.stamina.value > 0:
+					SPEED = SPRINT_SPEED
+					head_bob_current_intensity = head_bob_sprint_intensity
+					head_bob_index += head_bob_sprint_speed * delta
+				else:
+					SPEED = WALK_SPEED
+					head_bob_current_intensity = head_bob_walk_intensity
+					head_bob_index += head_bob_walk_speed * delta
 			else:
 				SPEED = WALK_SPEED
 				head_bob_current_intensity = head_bob_walk_intensity
-				head_bob_index += head_bob_walk_speed*delta
-		else:
+				head_bob_index += head_bob_walk_speed * delta
+				
+		if Input.is_action_just_pressed("crouch"):
+			can_crouch = !can_crouch
+		
+		if can_crouch:
+			SPEED = CROUCH_SPEED
+			head_bob_current_intensity = head_bob_crouch_intensity
+			head_bob_index += head_bob_crouch_speed * delta
+			can_sprint = false
+			head.position.y = lerp(head.position.y, -0.1, delta*5.0)
+		elif !can_crouch and SPEED != SPRINT_SPEED:
 			SPEED = WALK_SPEED
-			head_bob_current_intensity = head_bob_walk_intensity
-			head_bob_index += head_bob_walk_speed*delta
-	
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
-	direction = lerp(direction, (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized(), delta * lerp_speed)
-	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
-	
-	if is_on_floor() && input_dir != Vector2.ZERO:
-		head_bob_vector.y = sin(head_bob_index)
-		head_bob_vector.x = sin(head_bob_index/2)+0.5
-		eyes.position.y = lerp(eyes.position.y, head_bob_vector.y*(head_bob_current_intensity/2.0), delta*lerp_speed)
-		eyes.position.x = lerp(eyes.position.x, head_bob_vector.x*head_bob_current_intensity, delta*lerp_speed)
-	else:
-		eyes.position.y = lerp(eyes.position.y, 0.0, delta*lerp_speed)
-		eyes.position.x = lerp(eyes.position.x, 0.0, delta*lerp_speed)
+			can_sprint = true
+			head.position.y = lerp(head.position.y, 0.659, delta*5.0)
 
-	ability()
+		var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
+		direction = lerp(direction, (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized(), delta * lerp_speed)
+		
+		if direction:
+			velocity.x = direction.x * SPEED
+			velocity.z = direction.z * SPEED
+		else:
+			velocity.x = move_toward(velocity.x, 0, SPEED)
+			velocity.z = move_toward(velocity.z, 0, SPEED)
+
+		if is_on_floor() && input_dir != Vector2.ZERO:
+			head_bob_vector.y = sin(head_bob_index)
+			head_bob_vector.x = sin(head_bob_index / 2) + 0.5
+			eyes.position.y = lerp(eyes.position.y, head_bob_vector.y * (head_bob_current_intensity / 2.0), delta * lerp_speed)
+			eyes.position.x = lerp(eyes.position.x, head_bob_vector.x * head_bob_current_intensity, delta * lerp_speed)
+		else:
+			eyes.position.y = lerp(eyes.position.y, 0.0, delta * lerp_speed)
+			eyes.position.x = lerp(eyes.position.x, 0.0, delta * lerp_speed)
+
+		ability()
+		cam_tilt(input_dir.x, delta)
+		hand_sway(delta)
+		hand_bob(velocity.length(), delta)
+	else:
+		# Prevent movement while in air if can_move is false
+		velocity.x = 0
+		velocity.z = 0
 
 	move_and_slide()
-	cam_tilt(input_dir.x, delta)
-	hand_sway(delta)
-	hand_bob(velocity.length(),delta)
 	
 func _process(delta: float) -> void:
 	if near_window and Input.is_action_pressed("interact") and ui.stamina.value >= 100 and raycast.can_vault:
@@ -121,9 +138,10 @@ func start_vault():
 	can_move = false
 	
 	# stop velocity so physics doesn't fight the tween
-	velocity = Vector3.ZERO  
+	velocity = Vector3.ZERO
 
 	var tween = get_tree().create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(cam, "rotation", Vector3.ZERO, 0.1)
 	
 	# Calculate forward vault target (move ~2 meters forward)
 	var forward_offset = -transform.basis.z.normalized() * 1.0  # forward is -Z in Godot
@@ -178,6 +196,11 @@ func hand_bob(vel : float, delta):
 				if SPEED == SPRINT_SPEED:
 					var bob_amount : float = 0.022
 					var bob_freq : float = 0.022
+					hand.position.y = lerp(hand.position.y, hand_pos.y + sin(Time.get_ticks_msec() * bob_freq) * bob_amount, 10 * delta)
+					hand.position.x = lerp(hand.position.x, hand_pos.x + sin(Time.get_ticks_msec() * bob_freq * 0.5) * bob_amount, 10 * delta)
+				if SPEED == CROUCH_SPEED:
+					var bob_amount : float = 0.007
+					var bob_freq : float = 0.007
 					hand.position.y = lerp(hand.position.y, hand_pos.y + sin(Time.get_ticks_msec() * bob_freq) * bob_amount, 10 * delta)
 					hand.position.x = lerp(hand.position.x, hand_pos.x + sin(Time.get_ticks_msec() * bob_freq * 0.5) * bob_amount, 10 * delta)
 			else:

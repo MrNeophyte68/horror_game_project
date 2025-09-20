@@ -32,9 +32,9 @@ texture = ExtResource("1_cfom6")
 [node name="TextureProgressBar" type="TextureProgressBar" parent="."]
 layout_mode = 0
 offset_left = 186.0
-offset_top = 270.0
+offset_top = 300.0
 offset_right = 2106.0
-offset_bottom = 1350.0
+offset_bottom = 1380.0
 scale = Vector2(0.105977, 0.00760728)
 max_value = 300.0
 texture_under = ExtResource("4_lp0io")

@@ -5,8 +5,8 @@ extends TextureProgressBar
 func _ready() -> void:
 	modulate.a = 0.0
 
-	await get_tree().create_timer(11.0, false).timeout
+	#await get_tree().create_timer(11.0, false).timeout
 
 	# Create a tween
 	var tween = create_tween()
-	tween.tween_property(self, "modulate:a", 0.35, 2.0) # fade over 2 seconds
+	tween.tween_property(self, "modulate:a", 0.3, 2.0) # fade over 2 seconds

@@ -6,6 +6,7 @@ var can_regen = false
 var time_to_wait = 6.0
 var s_timer = 0
 var can_start_stimer = true
+var can_crouch = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -47,7 +48,10 @@ func _process(delta: float) -> void:
 		can_start_stimer = false
 		s_timer = 0
 	
-	if Input.is_action_pressed("sprint") and (Input.is_action_pressed("move_right") or Input.is_action_pressed("move_left") or Input.is_action_pressed("move_forward") or Input.is_action_pressed("move_backward")):
+	if Input.is_action_just_pressed("crouch"):
+		can_crouch = !can_crouch
+	
+	if !can_crouch and Input.is_action_pressed("sprint") and (Input.is_action_pressed("move_right") or Input.is_action_pressed("move_left") or Input.is_action_pressed("move_forward") or Input.is_action_pressed("move_backward")):
 		stamina.value -= 1.0
 		can_regen = false
 		s_timer = 0

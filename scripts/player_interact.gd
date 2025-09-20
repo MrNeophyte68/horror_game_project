@@ -5,6 +5,7 @@ var can_vault = false
 
 @onready var crosshair = get_parent().get_parent().get_node("player_ui/CanvasLayer/crosshair")
 var can_interact_elevator = false
+@onready var crouch_check = get_parent().get_parent()
 
 func _physics_process(delta: float) -> void:
 	if is_colliding():
@@ -36,7 +37,7 @@ func _physics_process(delta: float) -> void:
 			if Input.is_action_just_pressed("interact"):
 				hit.get_parent().elevator_close()
 				
-		elif hit.name == "window":
+		elif hit.name == "window" and !crouch_check.can_crouch:
 			if Input.is_action_just_pressed("interact"):
 				can_vault = true
 				
