@@ -1,4 +1,4 @@
-[gd_scene load_steps=183 format=4 uid="uid://bthiyrqhjc2pr"]
+[gd_scene load_steps=184 format=4 uid="uid://bthiyrqhjc2pr"]
 
 [ext_resource type="PackedScene" uid="uid://brofngqyvl55r" path="res://level/elevator2.tscn" id="1_eppn4"]
 [ext_resource type="Texture2D" uid="uid://b7l7ocga2of7w" path="res://glb_models/PSX Mega Pack (source file)_tiles_floor_1.png" id="1_f1n8k"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://u64sqoj1ypbl" path="res://glb_models/PSX Mega Pack (source file)_door_handle_1.png" id="5_0p0c8"]
 [ext_resource type="PackedScene" uid="uid://cm8r2hjjcux6x" path="res://level/door2.tscn" id="10_dhlt1"]
 [ext_resource type="PackedScene" uid="uid://wfvbyccngoms" path="res://level/lamp.tscn" id="11_cqg4v"]
+[ext_resource type="PackedScene" uid="uid://dkwt35waak0rm" path="res://level/lamp2.tscn" id="11_hqpg8"]
 [ext_resource type="Texture2D" uid="uid://cl11qskpesvew" path="res://glb_models/PSX Mega Pack (source file)_window_2.png" id="12_eppn4"]
 [ext_resource type="Texture2D" uid="uid://c1o1w5odt1syb" path="res://glb_models/PSX Mega Pack (source file)_window_2_emission.png" id="13_0p0c8"]
 [ext_resource type="PackedScene" uid="uid://dg0gwkwf0gekm" path="res://level/window_vault.tscn" id="17_3j4dr"]
@@ -5152,10 +5153,40 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.9456, 0.398555, -5.10369)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.7189, 0.398555, 11.9157)
 
 [node name="lamp15" parent="lights" instance=ExtResource("11_cqg4v")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.0437, 0.398555, 9.2194)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.0437, 0.398555, 8.48451)
 
 [node name="lamp16" parent="lights" instance=ExtResource("11_cqg4v")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.1452, 0.398555, 13.9767)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.8156, 0.398555, 13.9767)
+
+[node name="lamp17" parent="lights" instance=ExtResource("11_hqpg8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.0228, 1.96909, -29.958)
+
+[node name="lamp18" parent="lights" instance=ExtResource("11_hqpg8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.9492, 1.96909, -29.958)
+
+[node name="lamp19" parent="lights" instance=ExtResource("11_hqpg8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.9821, 1.96909, -29.958)
+
+[node name="lamp20" parent="lights" instance=ExtResource("11_hqpg8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.9626, 1.96909, -6.13024)
+
+[node name="lamp21" parent="lights" instance=ExtResource("11_hqpg8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.9002, 1.96909, -6.13024)
+
+[node name="lamp22" parent="lights" instance=ExtResource("11_hqpg8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.8836, 1.96909, -6.13024)
+
+[node name="lamp23" parent="lights" instance=ExtResource("11_hqpg8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.946, 1.96909, -9.53479)
+
+[node name="lamp24" parent="lights" instance=ExtResource("11_hqpg8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.946, 1.96909, -13.5552)
+
+[node name="lamp25" parent="lights" instance=ExtResource("11_hqpg8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.946, 1.96909, -17.5132)
+
+[node name="lamp26" parent="lights" instance=ExtResource("11_hqpg8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.9077, 1.96909, 13.9414)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_5o8pr")
