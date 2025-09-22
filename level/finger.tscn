@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://c21w7v6ghunna"]
+
+[ext_resource type="PackedScene" uid="uid://biiv0brj1awts" path="res://glb_models/finger.glb" id="1_gllpc"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gllpc"]
+size = Vector3(0.15744, 0.570648, 0.144913)
+
+[node name="finger" type="RigidBody3D" groups=["fingers"]]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, -2.18557e-08, -0.5, 0, 0.5, -2.18557e-08, -0.000892639, 0.0065422, -0.0555868)
+shape = SubResource("BoxShape3D_gllpc")
+
+[node name="finger" parent="." instance=ExtResource("1_gllpc")]
+transform = Transform3D(0.5, 0, 0, 0, 0.0487046, -0.497622, 0, 0.497622, 0.0487046, 0, 0, -0.0213404)

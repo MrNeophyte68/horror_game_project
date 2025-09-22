@@ -7,45 +7,48 @@ var can_vault = false
 var can_interact_elevator = false
 @onready var crouch_check = get_parent().get_parent()
 
+var score: int = 0
+@export var hud: Node
+
 func _physics_process(delta: float) -> void:
 	if is_colliding():
 		var hit = get_collider()
-		if hit.name == "door":
+		
+		# Group-based interaction for fingers
+		if hit.is_in_group("fingers"):
+			if Input.is_action_just_pressed("interact"):
+				hit.queue_free()
+				score += 1
+				hud.update_score(score)
+		
+		# Name-based interaction for other objects
+		elif Input.is_action_just_pressed("interact"):
+			match hit.name:
+				"door":
+					hit.get_parent().get_parent().get_parent().toggle_door()
+					hit.queue_free()
+
+				"drawer":
+					hit.get_parent().get_parent().get_parent().toggle_drawer()
+
+				"camera":
+					hit.queue_free()
+					$"../eyes/hand/camera3".visible = true
+
+				"ElevatorCall":
+					hit.get_parent().elevator_move()
+
+				"exit":
+					hit.get_parent().elevator_close()
+
+				"window":
+					if !crouch_check.can_crouch:
+						can_vault = true
+
+		# Crosshair visibility for interactables
+		if hit.is_in_group("fingers") or hit.name in ["door", "drawer", "camera", "ElevatorCall", "exit"]:
 			if !crosshair.visible:
 				crosshair.visible = true
-			if Input.is_action_just_pressed("interact"):
-				hit.get_parent().get_parent().get_parent().toggle_door()
-				hit.free()
-		elif hit.name == "drawer":
-			if !crosshair.visible:
-				crosshair.visible = true
-			if Input.is_action_just_pressed("interact"):
-				hit.get_parent().get_parent().get_parent().toggle_drawer()
-				
-		elif hit.name == "camera":
-			if !crosshair.visible:
-				crosshair.visible = true
-			if Input.is_action_just_pressed("interact"):
-				hit.free()
-				$"../eyes/hand/camera3".visible = true
-				#can_interact_elevator = true
-				
-		elif hit.name == "ElevatorCall":
-			if !crosshair.visible:
-				crosshair.visible = true
-			if Input.is_action_just_pressed("interact"):
-				hit.get_parent().elevator_move()
-				
-		elif hit.name == "exit":
-			if !crosshair.visible:
-				crosshair.visible = true
-			if Input.is_action_just_pressed("interact"):
-				hit.get_parent().elevator_close()
-				
-		elif hit.name == "window" and !crouch_check.can_crouch:
-			if Input.is_action_just_pressed("interact"):
-				can_vault = true
-				
 		else:
 			if crosshair.visible:
 				crosshair.visible = false

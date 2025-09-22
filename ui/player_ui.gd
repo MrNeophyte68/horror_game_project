@@ -1,7 +1,7 @@
 extends Control
 
 #variables for stamina bar
-@onready var stamina = $TextureProgressBar
+@onready var stamina = $CanvasLayer/TextureProgressBar
 var can_regen = false
 var time_to_wait = 6.0
 var s_timer = 0

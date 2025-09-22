@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://tfkbwj413ywp"]
+[gd_scene load_steps=8 format=3 uid="uid://tfkbwj413ywp"]
 
 [ext_resource type="Texture2D" uid="uid://2xpj74ysuet8" path="res://Texture/Cur_Grab2.png" id="1_cfom6"]
 [ext_resource type="Script" uid="uid://bcm5bdc8fit87" path="res://ui/player_ui.gd" id="1_ehg4m"]
+[ext_resource type="Script" uid="uid://do1fv3qm6wd48" path="res://ui/score.gd" id="2_hff70"]
 [ext_resource type="PackedScene" uid="uid://c38ofq4se5pcb" path="res://ui/pause_menu.tscn" id="3_iwa1g"]
 [ext_resource type="Script" uid="uid://c7oafhtbptfpy" path="res://ui/texture_progress_bar.gd" id="4_iwa1g"]
 [ext_resource type="Texture2D" uid="uid://b8jqai65nrng5" path="res://Texture/black_background_1920x1080.png" id="4_lp0io"]
@@ -18,6 +19,7 @@ grow_vertical = 2
 script = ExtResource("1_ehg4m")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("2_hff70")
 
 [node name="crosshair" type="CenterContainer" parent="CanvasLayer"]
 offset_right = 576.0
@@ -27,10 +29,11 @@ offset_bottom = 335.0
 layout_mode = 2
 texture = ExtResource("1_cfom6")
 
-[node name="pause_menu" parent="." instance=ExtResource("3_iwa1g")]
+[node name="Score" type="Label" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 23.0
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
-layout_mode = 0
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer"]
 offset_left = 186.0
 offset_top = 300.0
 offset_right = 2106.0
@@ -40,6 +43,8 @@ max_value = 300.0
 texture_under = ExtResource("4_lp0io")
 texture_progress = ExtResource("5_ykvpg")
 script = ExtResource("4_iwa1g")
+
+[node name="pause_menu" parent="." instance=ExtResource("3_iwa1g")]
 
 [connection signal="pressed" from="pause_menu/resume" to="." method="resume_game"]
 [connection signal="pressed" from="pause_menu/quit" to="." method="quit_game"]
