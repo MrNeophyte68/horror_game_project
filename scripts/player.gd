@@ -49,9 +49,11 @@ var ability_valid = false
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	hand_pos = hand.position
-	#can_move = false
-	#can_sprint = false
-	#await get_tree().create_timer(11.0, false).timeout
+	can_move = false
+	can_sprint = false
+	await get_tree().create_timer(26.0, false).timeout
+	can_move = true
+	can_sprint = true
 	SPEED = WALK_SPEED
 	JUMP_VELOCITY = 4.5
 	cam_speed = 0.007
@@ -87,11 +89,11 @@ func _physics_process(delta: float) -> void:
 			head_bob_current_intensity = head_bob_crouch_intensity
 			head_bob_index += head_bob_crouch_speed * delta
 			can_sprint = false
-			head.position.y = lerp(head.position.y, -0.1, delta*5.0)
+			head.position.y = lerp(head.position.y, -0.1, delta*6.0)
 		elif !can_crouch and SPEED != SPRINT_SPEED:
 			SPEED = WALK_SPEED
 			can_sprint = true
-			head.position.y = lerp(head.position.y, 0.659, delta*5.0)
+			head.position.y = lerp(head.position.y, 0.659, delta*6.0)
 
 		var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 		direction = lerp(direction, (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized(), delta * lerp_speed)
