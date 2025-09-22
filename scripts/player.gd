@@ -72,6 +72,7 @@ func _physics_process(delta: float) -> void:
 					SPEED = SPRINT_SPEED
 					head_bob_current_intensity = head_bob_sprint_intensity
 					head_bob_index += head_bob_sprint_speed * delta
+					head.position.y = lerp(head.position.y, 0.659, delta*6.0)
 				else:
 					SPEED = WALK_SPEED
 					head_bob_current_intensity = head_bob_walk_intensity

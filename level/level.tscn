@@ -153,7 +153,7 @@ libraries = {
 }
 
 [node name="cutscene_camera" type="Camera3D" parent="."]
-transform = Transform3D(0.770475, -0.126104, -0.624873, 0.46754, 0.778117, 0.419452, 0.43333, -0.61533, 0.658478, -3.83145, 0.760775, 3.64125)
+transform = Transform3D(0.770475, -0.126104, -0.624872, 0.46754, 0.778117, 0.419452, 0.433329, -0.61533, 0.658478, -3.83145, 0.760775, 3.64125)
 
 [node name="cutscene_ui" parent="." instance=ExtResource("3_vkbyq")]
 
