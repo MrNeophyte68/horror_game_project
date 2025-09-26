@@ -53,9 +53,15 @@ func _physics_process(delta: float) -> void:
 						hud.update_score(score)
 						hit.get_parent().get_parent().bought = true
 						hit.get_parent().get_parent().animationplayer.play("open")
+						
+				"fusebox_door":
+					hit.get_parent().get_parent().get_parent().toggle_door()
+					
+				"fusebox":
+					hit.get_parent().get_parent().try_inspect()
 
 		# Crosshair visibility for interactables
-		if hit.is_in_group("fingers") or hit.name in ["door", "drawer", "camera", "ElevatorCall", "exit"]:
+		if hit.is_in_group("fingers") or hit.name in ["door", "drawer", "camera", "ElevatorCall", "exit", "fusebox_door", "fusebox"]:
 			if !crosshair.visible:
 				crosshair.visible = true
 		elif hit.name in ["buy_door"] and hit.get_parent().get_parent().bought == false:

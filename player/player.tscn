@@ -45,10 +45,11 @@ shape = SubResource("CylinderShape3D_boad6")
 debug_color = Color(0.784309, 0.454476, 0.58398, 0.419608)
 
 [node name="AbilityCast" type="RayCast3D" parent="head"]
+visible = false
 target_position = Vector3(0, 0, -100)
 
 [node name="RayCast3D" type="RayCast3D" parent="head" node_paths=PackedStringArray("hud")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.340782)
+transform = Transform3D(1, 0, 0, 0, -3.0598e-08, -1, 0, 0.7, -4.37114e-08, 0, 0, 0)
 target_position = Vector3(0, -1.5, 0)
 collision_mask = 3
 script = ExtResource("3_g1dw6")

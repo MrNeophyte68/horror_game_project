@@ -1,12 +1,16 @@
-[gd_scene load_steps=19 format=3 uid="uid://6n6tw3hrvg8i"]
+[gd_scene load_steps=23 format=3 uid="uid://6n6tw3hrvg8i"]
 
 [ext_resource type="Script" uid="uid://b6mn5m38gbdip" path="res://scripts/game_intro.gd" id="1_qohg2"]
 [ext_resource type="PackedScene" uid="uid://c21w7v6ghunna" path="res://level/finger.tscn" id="2_44x8d"]
 [ext_resource type="PackedScene" uid="uid://bc8gum0yfovaq" path="res://player/player.tscn" id="2_qohg2"]
 [ext_resource type="PackedScene" uid="uid://bthiyrqhjc2pr" path="res://level/starting_room.tscn" id="3_qohg2"]
 [ext_resource type="PackedScene" uid="uid://by81628uy2fly" path="res://ui/cutscene_ui.tscn" id="3_vkbyq"]
+[ext_resource type="PackedScene" uid="uid://cewkyl7ivv7ub" path="res://level/fuses/rigidbody_red_fuse.tscn" id="4_xii2b"]
 [ext_resource type="PackedScene" uid="uid://doqlr1o8r6yos" path="res://level/camera.tscn" id="5_ktfr2"]
+[ext_resource type="PackedScene" uid="uid://dpj447c6lgdg3" path="res://level/fuses/rigidbody_green_fuse.tscn" id="5_rhqlf"]
+[ext_resource type="PackedScene" uid="uid://b485h3l0sfjvt" path="res://level/fuses/rigidbody_blue_fuse.tscn" id="6_l5lfc"]
 [ext_resource type="Shader" uid="uid://d2wx3kwmqlf1m" path="res://shader/chromatic.gdshader" id="7_ivpvi"]
+[ext_resource type="PackedScene" uid="uid://qxcccn7ywulv" path="res://level/fuses/rigidbody_yellow_fuse.tscn" id="7_m3nah"]
 
 [sub_resource type="Gradient" id="Gradient_qohg2"]
 offsets = PackedFloat32Array(0, 0.363208, 1)
@@ -152,6 +156,10 @@ shader_parameter/vignette_color = Color(0, 0, 0, 1)
 [node name="Level" type="Node3D"]
 script = ExtResource("1_qohg2")
 finger_scene = ExtResource("2_44x8d")
+red_fuse_scene = ExtResource("4_xii2b")
+green_fuse_scene = ExtResource("5_rhqlf")
+blue_fuse_scene = ExtResource("6_l5lfc")
+yellow_fuse_scene = ExtResource("7_m3nah")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_vkbyq")
@@ -161,7 +169,7 @@ transform = Transform3D(0.99914, -0.0234915, -0.0341803, 0.0414746, 0.565919, 0.
 visible = false
 shadow_enabled = true
 
-[node name="Node3D" parent="." instance=ExtResource("3_qohg2")]
+[node name="map" parent="." instance=ExtResource("3_qohg2")]
 transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -240,7 +248,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.4727, 0.723643, -22.147)
 [node name="Marker3D16" type="Marker3D" parent="FingerSpawnPoints"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.5474, 0.359299, -1.45972)
 
-[editable path="Node3D"]
+[node name="fuse_spawn_points" type="Node3D" parent="."]
+
+[node name="Marker3D" type="Marker3D" parent="fuse_spawn_points"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.24322, 0.754352, 1.95934)
+
+[node name="Marker3D2" type="Marker3D" parent="fuse_spawn_points"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.92809, 0.542722, 1.80585)
+
+[node name="Marker3D3" type="Marker3D" parent="fuse_spawn_points"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.70651, 0.764082, -1.12751)
+
+[editable path="map"]
 [editable path="Player"]
 [editable path="Player/player_ui"]
 [editable path="Player/player_ui/pause_menu"]
