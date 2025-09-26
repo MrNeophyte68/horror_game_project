@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://kxfje16laxcx"]
+
+[ext_resource type="PackedScene" uid="uid://dbh6pp00pmlin" path="res://glb_models/PSX Tech (source).glb" id="1_has6d"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="PSX Tech (source)" parent="." instance=ExtResource("1_has6d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.10114, 0, -0.480341)
+
+[editable path="PSX Tech (source)"]

@@ -137,9 +137,9 @@ _data = {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0v1st"]
 shader = ExtResource("7_ivpvi")
-shader_parameter/aberration_intensity = 2.0
-shader_parameter/aberration_threshold = 0.9
-shader_parameter/grain_intensity = 0.1
+shader_parameter/aberration_intensity = 2.5
+shader_parameter/aberration_threshold = 0.7
+shader_parameter/grain_intensity = 0.15
 shader_parameter/min_lum = 0.0
 shader_parameter/max_lum = 1.0
 shader_parameter/time_scale = 0.5

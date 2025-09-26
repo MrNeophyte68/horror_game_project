@@ -49,9 +49,9 @@ var ability_valid = false
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	hand_pos = hand.position
-	can_move = false
-	can_sprint = false
-	await get_tree().create_timer(26.0, false).timeout
+	#can_move = false
+	#can_sprint = false
+	#await get_tree().create_timer(26.0, false).timeout
 	can_move = true
 	can_sprint = true
 	SPEED = WALK_SPEED

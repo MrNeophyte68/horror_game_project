@@ -44,7 +44,16 @@ texture_under = ExtResource("4_lp0io")
 texture_progress = ExtResource("5_ykvpg")
 script = ExtResource("4_iwa1g")
 
+[node name="buy_door_message" type="Label" parent="CanvasLayer"]
+offset_left = 194.0
+offset_top = 274.0
+offset_right = 379.0
+offset_bottom = 297.0
+text = "unlock for 5 fingers"
+uppercase = true
+
 [node name="pause_menu" parent="." instance=ExtResource("3_iwa1g")]
+visible = false
 
 [connection signal="pressed" from="pause_menu/resume" to="." method="resume_game"]
 [connection signal="pressed" from="pause_menu/quit" to="." method="quit_game"]

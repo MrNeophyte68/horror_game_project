@@ -80,9 +80,6 @@ offset_top = 286.0
 offset_right = 54.0
 offset_bottom = 309.0
 
-[node name="pause_menu" parent="player_ui" index="1"]
-visible = false
-
 [node name="AbilityTimer" type="Timer" parent="."]
 wait_time = 0.25
 autostart = true
