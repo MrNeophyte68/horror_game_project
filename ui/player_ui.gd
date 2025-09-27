@@ -44,7 +44,7 @@ func _physics_process(delta: float) -> void:
 		can_regen = false
 		
 	if can_regen == true:
-		stamina.value += 20.0 * delta
+		stamina.value += 40.0 * delta
 		can_start_stimer = false
 		s_timer = 0
 	
