@@ -22,7 +22,7 @@ func quit_game():
 	get_tree().quit()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("pause"):
 		$pause_menu.visible = !$pause_menu.visible
 		get_tree().paused = $pause_menu.visible
@@ -44,7 +44,7 @@ func _process(delta: float) -> void:
 		can_regen = false
 		
 	if can_regen == true:
-		stamina.value += 0.5
+		stamina.value += 20.0 * delta
 		can_start_stimer = false
 		s_timer = 0
 	
@@ -52,6 +52,6 @@ func _process(delta: float) -> void:
 		can_crouch = !can_crouch
 	
 	if !can_crouch and Input.is_action_pressed("sprint") and (Input.is_action_pressed("move_right") or Input.is_action_pressed("move_left") or Input.is_action_pressed("move_forward") or Input.is_action_pressed("move_backward")):
-		stamina.value -= 1.0
+		stamina.value -= 40.0 * delta
 		can_regen = false
 		s_timer = 0
