@@ -58,7 +58,6 @@ func exit_inspect_mode():
 
 	# Re-enable movement
 	var player = get_node("/root/Level/Player")
-	player.can_move = true
 
 	# Tween back to original camera position
 	tween = create_tween()
@@ -67,5 +66,7 @@ func exit_inspect_mode():
 		original_camera_transform, 
 		0.5
 	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+	player.can_move = true
 
 	print("Exited inspect mode")
