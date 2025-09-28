@@ -113,7 +113,6 @@ skeleton = NodePath("")
 shape = SubResource("ConcavePolygonShape3D_mbpvw")
 
 [node name="Area3D" type="Area3D" parent="."]
-visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 2.57494, 0, 0, 0, 1, 0, 1.39214, 0)

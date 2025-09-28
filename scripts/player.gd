@@ -7,7 +7,8 @@ const WALK_SPEED = 3.0
 const SPRINT_SPEED = 6.0
 const CROUCH_SPEED = 1.5
 var can_sprint = false
-var can_crouch = false
+var can_crouch = true
+var crouching = false
 
 @export var cam : Node3D
 @export var cam_speed : float = 5
@@ -82,16 +83,17 @@ func _physics_process(delta: float) -> void:
 				head_bob_current_intensity = head_bob_walk_intensity
 				head_bob_index += head_bob_walk_speed * delta
 				
-		if Input.is_action_just_pressed("crouch"):
-			can_crouch = !can_crouch
+		if can_crouch:	
+			if Input.is_action_just_pressed("crouch"):
+				crouching = !crouching
 		
-		if can_crouch:
+		if crouching:
 			SPEED = CROUCH_SPEED
 			head_bob_current_intensity = head_bob_crouch_intensity
 			head_bob_index += head_bob_crouch_speed * delta
 			can_sprint = false
 			head.position.y = lerp(head.position.y, -0.1, delta*6.0)
-		elif !can_crouch and SPEED != SPRINT_SPEED:
+		elif !crouching and SPEED != SPRINT_SPEED:
 			SPEED = WALK_SPEED
 			can_sprint = true
 			head.position.y = lerp(head.position.y, 0.659, delta*6.0)

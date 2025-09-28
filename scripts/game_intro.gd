@@ -38,7 +38,7 @@ func _ready():
 func _spawn_fingers():
 	var selected_points = finger_spawn_points.duplicate()
 	selected_points.shuffle()
-	selected_points = selected_points.slice(0, 10)
+	selected_points = selected_points.slice(0, 16)
 
 	for point in selected_points:
 		var finger = finger_scene.instantiate()

@@ -45,14 +45,14 @@ func _physics_process(delta: float) -> void:
 					hit.get_parent().elevator_close()
 
 				"window":
-					if !crouch_check.can_crouch:
+					if !crouch_check.crouching:
 						can_vault = true
 				"buy_door":
-					if score >= 5 and hit.get_parent().get_parent().bought == false:
+					if score >= 5 and hit.get_parent().get_parent().get_parent().bought == false:
 						score -= 5
 						hud.update_score(score)
-						hit.get_parent().get_parent().bought = true
-						hit.get_parent().get_parent().animationplayer.play("open")
+						hit.get_parent().get_parent().get_parent().bought = true
+						hit.get_parent().get_parent().get_parent().animationplayer.play("open")
 						
 				"fusebox_door":
 					hit.get_parent().get_parent().get_parent().toggle_door()
@@ -64,7 +64,7 @@ func _physics_process(delta: float) -> void:
 		if hit.is_in_group("fingers") or hit.name in ["door", "drawer", "camera", "ElevatorCall", "exit", "fusebox_door", "fusebox"]:
 			if !crosshair.visible:
 				crosshair.visible = true
-		elif hit.name in ["buy_door"] and hit.get_parent().get_parent().bought == false:
+		elif hit.name in ["buy_door"] and hit.get_parent().get_parent().get_parent().bought == false:
 			if !buy_door_message.visible:
 				buy_door_message.visible = true
 		else:
