@@ -10,3 +10,6 @@ transform = Transform3D(0.0287954, 3.32778e-07, -1.42828, 1.71469e-07, -1.42857,
 
 [node name="clock_2_arm_minutes" parent="clock_2" index="1"]
 transform = Transform3D(0.999999, -1.54159e-08, 0.00160571, -1.53731e-08, -1, -2.6627e-08, 0.00160575, 2.66023e-08, -0.999999, 2.28882e-05, -0.00599997, 0)
+
+[node name="pipe_1_short" parent="." index="111"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -37.1943, 0, 0.199292)
