@@ -1,7 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://bc8gum0yfovaq"]
 
 [ext_resource type="Script" uid="uid://caymdmd4oniai" path="res://scripts/player.gd" id="1_rkbax"]
-[ext_resource type="Script" uid="uid://biw5ss5ejl5gq" path="res://player/fp_cam.gd" id="2_g1dw6"]
 [ext_resource type="Script" uid="uid://messh7v8ei7j" path="res://scripts/player_interact.gd" id="3_g1dw6"]
 [ext_resource type="PackedScene" uid="uid://dnh3sfv3flis8" path="res://level/camera1.tscn" id="4_qjkh3"]
 [ext_resource type="PackedScene" uid="uid://tfkbwj413ywp" path="res://ui/player_ui.tscn" id="4_yw30f"]
@@ -11,6 +10,24 @@
 radius = 0.3
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_4flbx"]
+
+[sub_resource type="GDScript" id="GDScript_qjkh3"]
+script/source = "extends Node3D
+
+#var sensitivity = 0.2
+
+#func _ready() -> void:
+#	sensitivity = 0.0
+#	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+#	await get_tree().create_timer(11.0, false).timeout
+#	sensitivity = 0.2
+
+#func _input(event: InputEvent) -> void:
+#	if event is InputEventMouseMotion:
+#		get_parent().rotate_y(deg_to_rad(-event.relative.x * sensitivity))
+#		rotate_x(deg_to_rad(-event.relative.y * sensitivity))
+#		rotation.x = clamp(rotation.x, deg_to_rad(-90), deg_to_rad(90))
+"
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_boad6"]
 height = 8.0
@@ -34,7 +51,7 @@ mesh = SubResource("CapsuleMesh_4flbx")
 
 [node name="head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.659274, 0)
-script = ExtResource("2_g1dw6")
+script = SubResource("GDScript_qjkh3")
 
 [node name="AbilityArea" type="Area3D" parent="head"]
 visible = false
@@ -76,9 +93,9 @@ script = ExtResource("5_g6k8r")
 [node name="player_ui" parent="." instance=ExtResource("4_yw30f")]
 
 [node name="Score" parent="player_ui/CanvasLayer" index="1"]
-offset_left = 14.0
+offset_left = 4.0
 offset_top = 286.0
-offset_right = 54.0
+offset_right = 44.0
 offset_bottom = 309.0
 
 [node name="TextureProgressBar" parent="player_ui/CanvasLayer" index="2"]

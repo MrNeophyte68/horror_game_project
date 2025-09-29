@@ -48,7 +48,7 @@ shadow_mesh = SubResource("ArrayMesh_axn1g")
 [sub_resource type="BoxShape3D" id="BoxShape3D_33k71"]
 size = Vector3(0.0601807, 0.0567017, 0.196411)
 
-[node name="Node3D" type="RigidBody3D" groups=["fuse_spawn_points"]]
+[node name="Node3D" type="RigidBody3D" groups=["fuse_spawn_points", "green_fuse"]]
 
 [node name="fuse_etx_green_1" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_jwpm1")

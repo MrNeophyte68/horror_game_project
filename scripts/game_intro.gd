@@ -61,26 +61,21 @@ func _spawn_fuses():
 			push_error("Missing fuse scene for: " + key)
 			return
 
-	var fuse_names = fuse_data.keys()
-	fuse_names.shuffle()
-
-	var missing_count = randi_range(1, 3)
-	var missing_fuses = fuse_names.slice(0, missing_count)
-
+	var fuse_names = fuse_data.keys()  # All 4 fuses
 	spawn_points.shuffle()
 
-	if spawn_points.size() < missing_count:
+	if spawn_points.size() < fuse_names.size():
 		push_error("Not enough fuse spawn points!")
 		return
 
-	for i in range(missing_count):
-		var fuse_name = missing_fuses[i]  # e.g. "FuseRed"
+	for i in range(fuse_names.size()):
+		var fuse_name = fuse_names[i]  # e.g. "FuseRed"
 		var fuse_type = fuse_data[fuse_name]  # e.g. "red"
 
 		# Remove static fuse from fusebox
 		var fuse_node = $map/Puzzle/fusebox.get_node_or_null(fuse_name)
 		if fuse_node:
-			fuse_node.queue_free()
+			fuse_node.visible = false
 		else:
 			push_warning("Missing fuse node in fusebox: " + fuse_name)
 

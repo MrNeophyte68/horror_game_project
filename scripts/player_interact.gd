@@ -13,6 +13,8 @@ var score: int = 0
 @onready var buy_door_message = get_parent().get_parent().get_node("player_ui/CanvasLayer/buy_door_message")
 @export var door: Node3D
 
+var fuse_check := []
+
 func _physics_process(delta: float) -> void:
 	if is_colliding():
 		var hit = get_collider()
@@ -23,6 +25,26 @@ func _physics_process(delta: float) -> void:
 				hit.queue_free()
 				score += 1
 				hud.update_score(score)
+		
+		elif hit.is_in_group("blue_fuse"):
+			if Input.is_action_just_pressed("interact"):
+				hit.queue_free()
+				fuse_check.append("blue_fuse")
+		
+		elif hit.is_in_group("red_fuse"):
+			if Input.is_action_just_pressed("interact"):
+				hit.queue_free()
+				fuse_check.append("red_fuse")
+		
+		elif hit.is_in_group("green_fuse"):
+			if Input.is_action_just_pressed("interact"):
+				hit.queue_free()
+				fuse_check.append("green_fuse")
+		
+		elif hit.is_in_group("yellow_fuse"):
+			if Input.is_action_just_pressed("interact"):
+				hit.queue_free()
+				fuse_check.append("yellow_fuse")
 		
 		# Name-based interaction for other objects
 		elif Input.is_action_just_pressed("interact"):
@@ -59,9 +81,14 @@ func _physics_process(delta: float) -> void:
 					
 				"fusebox":
 					hit.get_parent().get_parent().try_inspect()
+					
+		elif Input.is_action_just_pressed("interact2"):
+			match hit.name:
+				"fusebox":
+					hit.get_parent().get_parent().fuse_visible()
 
 		# Crosshair visibility for interactables
-		if hit.is_in_group("fingers") or hit.name in ["door", "drawer", "camera", "ElevatorCall", "exit", "fusebox_door", "fusebox"]:
+		if hit.is_in_group("yellow_fuse") or hit.is_in_group("green_fuse") or hit.is_in_group("red_fuse") or hit.is_in_group("blue_fuse") or hit.is_in_group("fingers") or hit.name in ["door", "drawer", "camera", "ElevatorCall", "exit", "fusebox_door", "fusebox"]:
 			if !crosshair.visible:
 				crosshair.visible = true
 		elif hit.name in ["buy_door"] and hit.get_parent().get_parent().get_parent().bought == false:

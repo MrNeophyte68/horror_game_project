@@ -13,10 +13,22 @@ var meshes := []
 var selected_index := 0
 var is_rotating = false
 
+@onready var fuse_list = get_node("/root/Level/Player/head/RayCast3D")
+
 func _ready():
 	# Get the actual camera node inside the player
 	player_camera = get_node("/root/Level/Player/head/eyes/Camera3D")
 	meshes = interactable.get_children()
+
+func fuse_visible():
+	if "blue_fuse" in fuse_list.fuse_check:
+		$FuseBlue.visible = true
+	if "red_fuse" in fuse_list.fuse_check:
+		$FuseRed.visible = true
+	if "yellow_fuse" in fuse_list.fuse_check:
+		$FuseYellow.visible = true
+	if "green_fuse" in fuse_list.fuse_check:
+		$FuseGreen.visible = true
 	
 func handle_input():
 	if is_rotating:
@@ -33,7 +45,7 @@ func handle_input():
 		change_selection(3)
 
 	# Rotate current mesh with E
-	if Input.is_action_just_pressed("interact"):  # 'E' key
+	if Input.is_action_just_pressed("interact"):
 		rotate_selected()
 
 func change_selection(delta: int):
@@ -108,7 +120,6 @@ func enter_inspect_mode():
 	if inspecting:
 		return
 	inspecting = true
-
 	original_camera_transform = player_camera.global_transform
 
 	var player = get_node("/root/Level/Player")
@@ -117,7 +128,6 @@ func enter_inspect_mode():
 	player.can_sprint = false
 	raycast.enabled = false
 	
-
 	tween = create_tween()
 	tween.tween_property(
 		player_camera, "global_transform",
@@ -128,7 +138,6 @@ func enter_inspect_mode():
 
 func _on_tween_finished_enter():
 	can_exit = true
-
 
 func exit_inspect_mode():
 	if not inspecting:

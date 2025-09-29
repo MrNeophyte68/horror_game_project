@@ -48,7 +48,7 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_fjifw")
 
-[node name="Node3D" type="RigidBody3D" groups=["fuse_spawn_points"]]
+[node name="Node3D" type="RigidBody3D" groups=["fuse_spawn_points", "red_fuse"]]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_qhiqr")
