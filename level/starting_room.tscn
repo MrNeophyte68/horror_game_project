@@ -11150,6 +11150,7 @@ skeleton = NodePath("")
 [node name="StaticBody3D" type="StaticBody3D" parent="decorations/wooden_crate_1"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="decorations/wooden_crate_1/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0231113, -0.00610161, 0)
 shape = SubResource("ConcavePolygonShape3D_x71qs")
 
 [node name="wood_pallet_1" type="MeshInstance3D" parent="decorations"]
@@ -11279,4 +11280,4 @@ transform = Transform3D(-1.02002, 0, -8.74228e-08, 0, 1, 0, 8.91729e-08, 0, -1, 
 [node name="Puzzle" type="Node3D" parent="."]
 
 [node name="fusebox" parent="Puzzle" instance=ExtResource("39_g7f3u")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 4.66423, 1.58336, 3.9426)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 17.9939, 1.58336, -4.02883)

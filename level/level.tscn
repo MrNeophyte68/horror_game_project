@@ -257,7 +257,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.24322, 0.754352, 1.95934)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.92809, 0.542722, 1.80585)
 
 [node name="Marker3D3" type="Marker3D" parent="fuse_spawn_points"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.70651, 0.764082, -1.12751)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.4696, 1.35352, -22.2551)
 
 [node name="Marker3D4" type="Marker3D" parent="fuse_spawn_points"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.70651, 0.764082, 1.63063)

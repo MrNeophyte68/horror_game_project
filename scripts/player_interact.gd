@@ -14,6 +14,7 @@ var score: int = 0
 @export var door: Node3D
 
 var fuse_check := []
+@onready var fusebox = get_tree().root.get_node("Level/map/Puzzle/fusebox")
 
 func _physics_process(delta: float) -> void:
 	if is_colliding():
@@ -81,26 +82,53 @@ func _physics_process(delta: float) -> void:
 					
 				"fusebox":
 					hit.get_parent().get_parent().try_inspect()
-					
-		elif Input.is_action_just_pressed("interact2"):
-			match hit.name:
-				"fusebox":
-					hit.get_parent().get_parent().fuse_visible()
+				
+				"fuses":
+					hit.get_parent().get_parent().try_inspect_fuses()
 
 		# Crosshair visibility for interactables
-		if hit.is_in_group("yellow_fuse") or hit.is_in_group("green_fuse") or hit.is_in_group("red_fuse") or hit.is_in_group("blue_fuse") or hit.is_in_group("fingers") or hit.name in ["door", "drawer", "camera", "ElevatorCall", "exit", "fusebox_door", "fusebox"]:
+		if hit.is_in_group("yellow_fuse") or hit.is_in_group("green_fuse") or hit.is_in_group("red_fuse") or hit.is_in_group("blue_fuse") or hit.is_in_group("fingers") or hit.name in ["door", "drawer", "camera", "ElevatorCall", "exit", "fusebox_door"]:
 			if !crosshair.visible:
 				crosshair.visible = true
 		elif hit.name in ["buy_door"] and hit.get_parent().get_parent().get_parent().bought == false:
 			if !buy_door_message.visible:
 				buy_door_message.visible = true
+		elif hit.name in ["fusebox"] and !fusebox.inspecting:
+			for mesh in fusebox.highlight:
+				if !mesh.visible:
+					mesh.visible = true
+			if !crosshair.visible:
+				crosshair.visible = true
+		elif hit.name in ["fuses"] and !fusebox.inspecting_fuses:
+			for mesh in fusebox.highlight_fuse:
+				if !mesh.visible:
+					mesh.visible = true
+			if !crosshair.visible:
+				crosshair.visible = true
+			
 		else:
 			if crosshair.visible:
 				crosshair.visible = false
 			if buy_door_message.visible:
 				buy_door_message.visible = false
+			if !fusebox.inspecting:
+				for mesh in fusebox.highlight:
+					if mesh.visible:
+						mesh.visible = false
+			if !fusebox.inspecting_fuses:
+				for mesh in fusebox.highlight_fuse:
+					if mesh.visible:
+						mesh.visible = false
 	else:
 		if crosshair.visible:
 			crosshair.visible = false
 		if buy_door_message.visible:
 				buy_door_message.visible = false
+		if !fusebox.inspecting:
+			for mesh in fusebox.highlight:
+				if mesh.visible:
+					mesh.visible = false
+		if !fusebox.inspecting_fuses:
+			for mesh in fusebox.highlight_fuse:
+				if mesh.visible:
+					mesh.visible = false
