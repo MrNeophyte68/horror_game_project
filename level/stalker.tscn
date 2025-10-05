@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://0kypj368bynj"]
 
-[ext_resource type="Script" uid="uid://r01kbxf7tu4w" path="res://scripts/stalker.gd" id="1_p7x4s"]
+[ext_resource type="Script" uid="uid://r01kbxf7tu4w" path="res://old_code/stalker.gd" id="1_p7x4s"]
 [ext_resource type="PackedScene" uid="uid://bqe6abbour5wd" path="res://level/cone.tscn" id="2_ex804"]
 [ext_resource type="PackedScene" uid="uid://d03h64hj4dipk" path="res://glb_models/female_body_monster.glb" id="3_a6f8m"]
 [ext_resource type="Texture2D" uid="uid://con0jyis4y5eq" path="res://Texture/mask_mx_3.png" id="4_3dkhd"]

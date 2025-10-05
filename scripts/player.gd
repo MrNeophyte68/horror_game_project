@@ -41,10 +41,12 @@ var is_vaulting = false
 @onready var raycast = $head/RayCast3D
 var can_move = true
 
-#variables used for abilities (camera)
-@onready var stalker = $"../Stalker"
-@onready var ability_cast = $head/AbilityCast
-var ability_valid = false
+#inventory
+@onready var inventory: PlayerInventory = $Inventory
+@onready var right_hand: Node3D = $head/eyes/hand
+var current_item: Node3D = null
+var equipped_slot: int = -1  # -1 means no item is currently equipped
+var is_equipping: bool = false  # Prevents spamming
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -57,8 +59,6 @@ func _ready() -> void:
 	SPEED = WALK_SPEED
 	JUMP_VELOCITY = 4.5
 	cam_speed = 0.007
-	
-	ability_cast.visible = false ## Hides ability cast when debugging because its ugly and annoying
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
@@ -116,7 +116,6 @@ func _physics_process(delta: float) -> void:
 			eyes.position.y = lerp(eyes.position.y, 0.0, delta * lerp_speed)
 			eyes.position.x = lerp(eyes.position.x, 0.0, delta * lerp_speed)
 
-		ability()
 		cam_tilt(input_dir.x, delta)
 		hand_sway(delta)
 		hand_bob(velocity.length(), delta)
@@ -175,6 +174,16 @@ func _input(event):
 			cam.rotation.x = clamp(cam.rotation.x, -1.25, 1.5)
 			self.rotation.y -= event.relative.x * cam_speed
 			mouse_input = event.relative
+		
+		if event is InputEventKey and event.pressed and not event.echo:
+			var slot := -1
+			match event.keycode:
+				KEY_1: slot = 0
+				KEY_2: slot = 1
+				KEY_3: slot = 2
+			
+			if slot != -1:
+				toggle_item(slot)
 
 func cam_tilt(input_x, delta):
 		if cam:
@@ -211,15 +220,45 @@ func hand_bob(vel : float, delta):
 				hand.position.y = lerp(hand.position.y, hand_pos.y, 10 * delta)
 				hand.position.x = lerp(hand.position.x, hand_pos.x, 10 * delta)
 
-# function that checks if an ability is valid and so can affect stalker
-func ability() -> void:
-	ability_valid = false # reset each tick
-	
-	for body in $head/AbilityArea.get_overlapping_bodies():
-		if body == stalker:
-			ability_cast.target_position = ability_cast.to_local(stalker.global_position).normalized() * 100.0
-			ability_cast.force_raycast_update()
-			
-			if ability_cast.is_colliding() and ability_cast.get_collider() == stalker:
-				ability_valid = true
-				break # exit early if valid
+func toggle_item(slot: int) -> void:
+	if is_equipping:
+		return  # Prevent rapid switching
+		
+	if equipped_slot == slot:
+		unequip_item()
+	else:
+		equip_item(slot)
+
+func equip_item(slot: int) -> void:
+	is_equipping = true  # Lock input
+	var item_scene = inventory.get_item(slot)
+	if item_scene:
+		if current_item:
+			current_item.queue_free()
+
+		current_item = item_scene.instantiate()
+		right_hand.add_child(current_item)
+		current_item.transform = Transform3D.IDENTITY  # Reset position/rotation
+		equipped_slot = slot
+		
+		var anim_player = current_item.get_node_or_null("AnimationPlayer")
+		if anim_player:
+			if anim_player.has_animation("equip"):
+				anim_player.play("equip")
+	is_equipping = false  # Unlock input
+
+func unequip_item() -> void:
+	is_equipping = true  # Lock input
+	if current_item:
+		var anim_player = current_item.get_node_or_null("AnimationPlayer")
+
+		if anim_player:
+			# Play 'equip' in reverse to hide it smoothly
+			if anim_player.has_animation("unequip"):
+				anim_player.play("unequip")
+				await anim_player.animation_finished
+				
+		current_item.queue_free()
+		current_item = null
+		equipped_slot = -1
+	is_equipping = false  # Unlock input

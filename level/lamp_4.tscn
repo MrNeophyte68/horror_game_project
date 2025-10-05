@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=4 uid="uid://c7brlkehx886c"]
 
-[ext_resource type="Script" uid="uid://30hql8is5mc8" path="res://scripts/lamp_4.gd" id="1_df4rp"]
+[ext_resource type="Script" uid="uid://30hql8is5mc8" path="res://old_code/lamp_4.gd" id="1_df4rp"]
 [ext_resource type="Texture2D" uid="uid://bvw1pdvtkpbq8" path="res://glb_models/PSX Mega Pack (source file)_pipe_mp_1.png" id="2_p7d7t"]
 [ext_resource type="Texture2D" uid="uid://55yuunii0vch" path="res://glb_models/PSX Mega Pack (source file)_lamp_1_on_yellow.png" id="3_1o2l2"]
 [ext_resource type="Texture2D" uid="uid://cbutgf7ws6xh5" path="res://glb_models/PSX Mega Pack (source file)_wood_3.png" id="4_b6njv"]

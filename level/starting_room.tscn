@@ -11209,7 +11209,7 @@ mesh = SubResource("ArrayMesh_hqpg8")
 skeleton = NodePath("")
 
 [node name="pipes_hr_1" type="MeshInstance3D" parent="decorations"]
-transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 19.9921, 0.0100003, -15.8387)
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 19.9303, 0.0100003, -15.8387)
 mesh = SubResource("ArrayMesh_x71qs")
 skeleton = NodePath("")
 

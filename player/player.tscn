@@ -1,26 +1,21 @@
-[gd_scene load_steps=9 format=3 uid="uid://bc8gum0yfovaq"]
+[gd_scene load_steps=7 format=3 uid="uid://bc8gum0yfovaq"]
 
 [ext_resource type="Script" uid="uid://caymdmd4oniai" path="res://scripts/player.gd" id="1_rkbax"]
 [ext_resource type="Script" uid="uid://messh7v8ei7j" path="res://scripts/player_interact.gd" id="3_g1dw6"]
-[ext_resource type="PackedScene" uid="uid://dnh3sfv3flis8" path="res://level/camera1.tscn" id="4_qjkh3"]
+[ext_resource type="Script" uid="uid://tvn267l6o2lg" path="res://scripts/Inventory_Items/inventory.gd" id="4_qjkh3"]
 [ext_resource type="PackedScene" uid="uid://tfkbwj413ywp" path="res://ui/player_ui.tscn" id="4_yw30f"]
-[ext_resource type="Script" uid="uid://c4dh7crswoxsy" path="res://scripts/camera_1.gd" id="5_g6k8r"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sh265"]
 radius = 0.3
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_4flbx"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_boad6"]
-height = 8.0
-radius = 3.0
-
 [node name="player" type="CharacterBody3D" node_paths=PackedStringArray("cam", "hand")]
 script = ExtResource("1_rkbax")
 cam = NodePath("head")
 cam_rotation_amount = 0.07
 hand = NodePath("head/eyes/hand")
-hand_rotation_amount = 0.07
+hand_rotation_amount = 0.01
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_sh265")
@@ -31,18 +26,6 @@ mesh = SubResource("CapsuleMesh_4flbx")
 
 [node name="head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.659274, 0)
-
-[node name="AbilityArea" type="Area3D" parent="head"]
-visible = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="head/AbilityArea"]
-transform = Transform3D(0.997472, 0, 0, 0, -4.36009e-08, 0.997472, 0, -0.997472, -4.36009e-08, 0, 0, -4.08995)
-shape = SubResource("CylinderShape3D_boad6")
-debug_color = Color(0.784309, 0.454476, 0.58398, 0.419608)
-
-[node name="AbilityCast" type="RayCast3D" parent="head"]
-visible = false
-target_position = Vector3(0, 0, -100)
 
 [node name="RayCast3D" type="RayCast3D" parent="head" node_paths=PackedStringArray("hud")]
 transform = Transform3D(1, 0, 0, 0, -3.0598e-08, -1, 0, 0.7, -4.37114e-08, 0, 0, 0)
@@ -55,19 +38,7 @@ hud = NodePath("../../player_ui/CanvasLayer")
 
 [node name="Camera3D" type="Camera3D" parent="head/eyes"]
 
-[node name="Flash" type="SpotLight3D" parent="head/eyes/Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.619354)
-visible = false
-distance_fade_enabled = true
-spot_range = 10.0
-spot_angle = 55.0
-
 [node name="hand" type="Node3D" parent="head/eyes"]
-
-[node name="camera3" parent="head/eyes/hand" instance=ExtResource("4_qjkh3")]
-transform = Transform3D(-0.3, 0, -2.62268e-08, 0, 0.3, 0, 2.62268e-08, 0, -0.3, 0.2, -0.189, -0.249)
-visible = false
-script = ExtResource("5_g6k8r")
 
 [node name="player_ui" parent="." instance=ExtResource("4_yw30f")]
 
@@ -85,19 +56,13 @@ offset_bottom = 1393.0
 scale = Vector2(0.025977, 0.00760728)
 
 [node name="buy_door_message" parent="player_ui/CanvasLayer" index="3"]
-offset_left = 224.0
-offset_top = 276.0
-offset_right = 351.0
-offset_bottom = 299.0
-text = "unlock for $5"
+offset_left = 195.0
+offset_top = 278.0
+offset_right = 380.0
+offset_bottom = 301.0
 
-[node name="AbilityTimer" type="Timer" parent="."]
-wait_time = 0.25
-autostart = true
-
-[node name="FlashTimer" type="Timer" parent="."]
-
-[connection signal="timeout" from="AbilityTimer" to="." method="_on_ability_timer_timeout"]
+[node name="Inventory" type="Node" parent="."]
+script = ExtResource("4_qjkh3")
 
 [editable path="player_ui"]
 [editable path="player_ui/pause_menu"]

@@ -1,57 +1,17 @@
-[gd_scene load_steps=6 format=4 uid="uid://c21w7v6ghunna"]
+[gd_scene load_steps=3 format=3 uid="uid://c21w7v6ghunna"]
 
-[ext_resource type="Texture2D" uid="uid://dtb62hfcaiei2" path="res://glb_models/PSX Mega Pack (source file)_cash_2.png" id="1_gllpc"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v2m80"]
-resource_name = "cash_2"
-cull_mode = 2
-albedo_texture = ExtResource("1_gllpc")
-texture_filter = 2
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_k1uw8"]
-_surfaces = [{
-"aabb": AABB(-0.0513216, -0.114048, -0.0313632, 0.103066, 0.228096, 0.0313632),
-"format": 34896613377,
-"index_count": 60,
-"index_data": PackedByteArray("AAABAAIAAAADAAEABAACAAEAAwAEAAEABQAAAAIAAwAAAAUABAAGAAIABQACAAYAAwAHAAQAAwAFAAcABwAIAAQACAAGAAQABwAJAAgACAAKAAYACQAKAAgACwAFAAYABwAFAAsACwAGAAoABwALAAkACQALAAoA"),
-"name": "cash_2",
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 12,
-"vertex_data": PackedByteArray("AAD///7/AAAAAAAAAAAAAAAA//8AAAAAAAAAAP//AACFgAAAAAAAAIWA///+/wAAhYD//wAAAACFgAAA//8AAP//AAAAAAAA//8AAP//AAD/////AAAAAP/////+/wAA")
-}]
-blend_shape_mode = 0
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_y8aev"]
-resource_name = "PSX Mega Pack (source file)_cash_2"
-_surfaces = [{
-"aabb": AABB(-0.0513216, -0.114048, -0.0313632, 0.103066, 0.228096, 0.0313632),
-"attribute_data": PackedByteArray("AAD//////9sAAP/b//////+////////b/7//2///////////AAD/2////9sAAP///z///wAA/9v/P//bAAD//////6MAAP/T////0wAA/6P///9nAAD/Z////zcAAAAA//8AAAAA/zf///9rAAD/a///////v//b////2/+///8AAP///z//2wAA/9v/P///"),
-"format": 34896613399,
-"index_count": 60,
-"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAATABAAFAAVABMAFgAXABgAFgAZABcAGgAZABYAGgAbABkAHAAdAB4AHAAfAB0AIAAhACIAIAAjACEA"),
-"material": SubResource("StandardMaterial3D_v2m80"),
-"name": "cash_2",
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 36,
-"vertex_data": PackedByteArray("AAD///7/qioAAAAAAACqKgAA//8AAKoqAAAAAP//qiqFgAAA////P///AAAAAP8/hYAAAAAA/z///wAA////P///AAD//1TV/////wAAVNX//wAAAABU1f/////+/1TVhYD///7//78AAP//AAD/v4WA//8AAP+/AAD///7//7+FgAAA////P//////+//8///8AAP///z+FgP///v//PwAAAAD///8/AAD///7//z+FgAAAAAD//wAA//8AAP//AAAAAAAA//+FgP//AAD/////AAAAAP///////wAA/////////v//v4WA//8AAP+//////wAA/7+FgP///v//vwAAAAD///8/hYAAAAAA/z8AAAAAAAD/P4WAAAD///8/VFWqqlRVqqpUVaqqVFWqqgAA/38AAP9/AAD/fwAA/3+qqlRVqqpUVaqqVFWqqlRV////f////3////9/////f/9//3//f/9//3//f/9//3//f/9//3//f/8//7//P/+//z//v/8//7//P/+//z//v////3////9/////f////38AAP9/AAD/fwAA/38AAP9/")
-}]
-blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_k1uw8")
+[ext_resource type="PackedScene" uid="uid://biiv0brj1awts" path="res://glb_models/finger.glb" id="1_gllpc"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gllpc"]
-size = Vector3(0.121994, 0.26561, 0.0473785)
+size = Vector3(0.0796928, 0.224602, 0.0504799)
 
 [node name="finger" type="RigidBody3D" groups=["fingers"]]
 collision_layer = 3
 collision_mask = 3
 
-[node name="finger" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
-mesh = SubResource("ArrayMesh_y8aev")
-skeleton = NodePath("")
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0.00182343, 0.0201797, -0.00527191)
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -0.00178718, 0.00135226, -0.025776)
 shape = SubResource("BoxShape3D_gllpc")
+
+[node name="finger" parent="." instance=ExtResource("1_gllpc")]
+transform = Transform3D(0.4, 0, 0, 0, 0.0388664, -0.398107, 0, 0.398107, 0.0388664, 0, 0, 0)

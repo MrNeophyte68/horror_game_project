@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://6n6tw3hrvg8i"]
+[gd_scene load_steps=22 format=3 uid="uid://6n6tw3hrvg8i"]
 
 [ext_resource type="Script" uid="uid://b6mn5m38gbdip" path="res://scripts/game_intro.gd" id="1_qohg2"]
 [ext_resource type="PackedScene" uid="uid://c21w7v6ghunna" path="res://level/finger.tscn" id="2_44x8d"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://bthiyrqhjc2pr" path="res://level/starting_room.tscn" id="3_qohg2"]
 [ext_resource type="PackedScene" uid="uid://by81628uy2fly" path="res://ui/cutscene_ui.tscn" id="3_vkbyq"]
 [ext_resource type="PackedScene" uid="uid://cewkyl7ivv7ub" path="res://level/fuses/rigidbody_red_fuse.tscn" id="4_xii2b"]
-[ext_resource type="PackedScene" uid="uid://doqlr1o8r6yos" path="res://level/camera.tscn" id="5_ktfr2"]
 [ext_resource type="PackedScene" uid="uid://dpj447c6lgdg3" path="res://level/fuses/rigidbody_green_fuse.tscn" id="5_rhqlf"]
 [ext_resource type="PackedScene" uid="uid://b485h3l0sfjvt" path="res://level/fuses/rigidbody_blue_fuse.tscn" id="6_l5lfc"]
 [ext_resource type="Shader" uid="uid://d2wx3kwmqlf1m" path="res://shader/chromatic.gdshader" id="7_ivpvi"]
@@ -195,31 +194,28 @@ material = SubResource("ShaderMaterial_0v1st")
 offset_right = 580.0
 offset_bottom = 328.0
 
-[node name="camera" parent="." instance=ExtResource("5_ktfr2")]
-transform = Transform3D(0.684432, 0, 0.729076, 0, 1, 0, -0.729076, 0, 0.684432, 0.0469744, 1.09623, -4.54229)
-
 [node name="FingerSpawnPoints" type="Node3D" parent="."]
 
 [node name="Marker3D" type="Marker3D" parent="FingerSpawnPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.661813, 1.14408, 3.80582)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.708652, 1.14408, 3.78356)
 
 [node name="Marker3D2" type="Marker3D" parent="FingerSpawnPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.91887, 0.369498, 0.248248)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.91887, 0.369498, 0.301202)
 
 [node name="Marker3D3" type="Marker3D" parent="FingerSpawnPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.13763, 1.19556, -11.6631)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.95934, 1.19556, -11.6631)
 
 [node name="Marker3D4" type="Marker3D" parent="FingerSpawnPoints"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.198583, 0.80277, -4.20781)
 
 [node name="Marker3D5" type="Marker3D" parent="FingerSpawnPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.13763, 0.634313, -12.2532)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.94478, 0.665609, -12.1987)
 
 [node name="Marker3D6" type="Marker3D" parent="FingerSpawnPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.198583, 0.329845, -4.58473)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.232969, 0.37062, -4.58473)
 
 [node name="Marker3D7" type="Marker3D" parent="FingerSpawnPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.95394, 0.595548, -21.4799)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.95394, 0.527008, -21.4799)
 
 [node name="Marker3D8" type="Marker3D" parent="FingerSpawnPoints"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.0099, 0.361393, -25.8054)
@@ -234,7 +230,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.0565, 0.985487, -13.5877)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.0786, 0.270254, -13.5877)
 
 [node name="Marker3D12" type="Marker3D" parent="FingerSpawnPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.0399, 0.253394, -10.7421)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.0399, 0.282064, -10.7421)
 
 [node name="Marker3D13" type="Marker3D" parent="FingerSpawnPoints"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.0251, 1.59885, -10.8754)

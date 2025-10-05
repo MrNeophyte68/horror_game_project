@@ -57,10 +57,6 @@ func _physics_process(delta: float) -> void:
 				"drawer":
 					hit.get_parent().get_parent().get_parent().toggle_drawer()
 
-				"camera":
-					hit.queue_free()
-					$"../eyes/hand/camera3".visible = true
-
 				"ElevatorCall":
 					hit.get_parent().elevator_move()
 
@@ -87,18 +83,21 @@ func _physics_process(delta: float) -> void:
 					hit.get_parent().get_parent().try_inspect_fuses()
 
 		# Crosshair visibility for interactables
-		if hit.is_in_group("yellow_fuse") or hit.is_in_group("green_fuse") or hit.is_in_group("red_fuse") or hit.is_in_group("blue_fuse") or hit.is_in_group("fingers") or hit.name in ["door", "drawer", "camera", "ElevatorCall", "exit", "fusebox_door"]:
+		if hit.is_in_group("yellow_fuse") or hit.is_in_group("green_fuse") or hit.is_in_group("red_fuse") or hit.is_in_group("blue_fuse") or hit.is_in_group("fingers") or hit.name in ["door", "drawer", "ElevatorCall", "exit", "fusebox_door"]:
 			if !crosshair.visible:
 				crosshair.visible = true
+				
 		elif hit.name in ["buy_door"] and hit.get_parent().get_parent().get_parent().bought == false:
 			if !buy_door_message.visible:
 				buy_door_message.visible = true
+				
 		elif hit.name in ["fusebox"] and !fusebox.inspecting:
 			for mesh in fusebox.highlight:
 				if !mesh.visible:
 					mesh.visible = true
 			if !crosshair.visible:
 				crosshair.visible = true
+				
 		elif hit.name in ["fuses"] and !fusebox.inspecting_fuses:
 			for mesh in fusebox.highlight_fuse:
 				if !mesh.visible:
