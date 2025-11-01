@@ -72,6 +72,17 @@ func _physics_process(delta: float) -> void:
 	
 	if raycast.can_cut and near_window and is_cutting:
 		$head/RayCast3D/CanvasLayer/CutProgress.value += delta * 40.0
+		if $head/RayCast3D/CanvasLayer/CutProgress.value == 500:
+			current_item.queue_free()
+			can_move = true
+			$head/RayCast3D/CanvasLayer/CutProgress.modulate.a = 0.0
+			#$head/RayCast3D/CanvasLayer/CutProgress.value = 0
+			is_cutting = false
+			$player_ui/CanvasLayer/saw_break_msg.visible = true
+			await get_tree().create_timer(2.0, false).timeout
+			$player_ui/CanvasLayer/saw_break_msg.visible = false
+			
+
 
 	if can_move:
 		if can_sprint:

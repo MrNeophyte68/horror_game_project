@@ -99,6 +99,7 @@ func _physics_process(delta: float) -> void:
 						if $CanvasLayer/CutProgress.value == 500.0:
 							hit.get_parent().unlock()
 							can_cut = false
+							$CanvasLayer/CutProgress.value = 0
 		else:
 			can_cut = false
 
