@@ -80,6 +80,12 @@ offset_top = 278.0
 offset_right = 380.0
 offset_bottom = 301.0
 
+[node name="saw_break_msg" parent="player_ui/CanvasLayer" index="4"]
+offset_left = 224.0
+offset_top = 278.0
+offset_right = 354.0
+offset_bottom = 301.0
+
 [node name="pause_menu" parent="player_ui" index="1"]
 layer = 4
 
