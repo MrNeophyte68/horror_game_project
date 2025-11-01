@@ -18,4 +18,8 @@ func _process(delta: float):
 		$wooden_plank_2.visible = true
 		body.name = "locked"
 	else:
+		$wooden_plank_2.visible = false
 		body.name = "window"
+
+func unlock():
+	locked = false

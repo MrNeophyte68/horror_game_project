@@ -96,6 +96,9 @@ func _physics_process(delta: float) -> void:
 				"locked":
 					if !crouch_check.crouching:
 						can_cut = true
+						if $CanvasLayer/CutProgress.value == 500.0:
+							hit.get_parent().unlock()
+							can_cut = false
 		else:
 			can_cut = false
 
