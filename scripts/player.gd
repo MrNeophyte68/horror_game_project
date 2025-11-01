@@ -47,8 +47,13 @@ var can_move = true
 var current_item: Node3D = null
 var equipped_slot: int = -1  # -1 means no item is currently equipped
 var is_equipping: bool = false  # Prevents spamming
+var item_list = ["lighter", "saw"]
+var is_cutting: bool = false
+
+
 
 func _ready() -> void:
+	$head/RayCast3D/CanvasLayer/CutProgress.modulate.a = 0.0
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	hand_pos = hand.position
 	#can_move = false
@@ -64,6 +69,9 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 		velocity += get_gravity() * 0.001
+	
+	if raycast.can_cut and near_window and is_cutting:
+		$head/RayCast3D/CanvasLayer/CutProgress.value += delta * 40.0
 
 	if can_move:
 		if can_sprint:
@@ -130,6 +138,25 @@ func _process(delta: float) -> void:
 	if near_window and Input.is_action_pressed("interact") and ui.stamina.value >= 100 and raycast.can_vault:
 		start_vault()
 		raycast.can_vault = false
+
+	for item in item_list:
+		var n
+		if current_item != null:
+			n = current_item.get_node_or_null(item)
+		if is_instance_valid(n):
+			if n.name == "saw" and raycast.can_cut and near_window:
+				if not current_item.get_node_or_null("AnimationPlayer").is_playing():
+					current_item.get_node_or_null("AnimationPlayer").play("cutting")
+					can_move = false
+					is_cutting = true
+					$head/RayCast3D/CanvasLayer/CutProgress.modulate.a = 0.2
+			else:
+				if current_item.get_node_or_null("AnimationPlayer").is_playing() and current_item.get_node_or_null("AnimationPlayer").current_animation == "cutting":
+					current_item.get_node_or_null("AnimationPlayer").stop()
+					can_move = true
+					$head/RayCast3D/CanvasLayer/CutProgress.modulate.a = 0.0
+					$head/RayCast3D/CanvasLayer/CutProgress.value = 0
+					is_cutting = false
 
 func start_vault():
 	if is_vaulting:
@@ -245,6 +272,7 @@ func equip_item(slot: int) -> void:
 		if anim_player:
 			if anim_player.has_animation("equip"):
 				anim_player.play("equip")
+				await get_tree().create_timer(2.0, false).timeout
 	is_equipping = false  # Unlock input
 
 func unequip_item() -> void:

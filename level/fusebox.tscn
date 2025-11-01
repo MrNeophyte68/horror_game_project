@@ -1,9 +1,10 @@
-[gd_scene load_steps=80 format=4 uid="uid://c54vpcwmkyp5w"]
+[gd_scene load_steps=88 format=4 uid="uid://c54vpcwmkyp5w"]
 
 [ext_resource type="Texture2D" uid="uid://n7lj0e174ey8" path="res://glb_models/PSX Tech (source)_electronics_etx_part_1.png" id="1_6mxwh"]
 [ext_resource type="Script" uid="uid://qtv2legiiql8" path="res://scripts/fusebox.gd" id="1_rsx6k"]
 [ext_resource type="Texture2D" uid="uid://bovfjf4ly4f8k" path="res://glb_models/PSX Tech (source)_electronics_etx_part_1_emission.png" id="2_rsx6k"]
 [ext_resource type="Texture2D" uid="uid://c3n37qhdgidb0" path="res://glb_models/PSX Tech (source)_grate_etx_1.png" id="3_271q0"]
+[ext_resource type="Texture2D" uid="uid://bv33nls285bck" path="res://Texture/DECA7B-image-75_preview_rev_1.png" id="5_271q0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_io3si"]
 resource_name = "electronics_etx_part_1"
@@ -1037,6 +1038,43 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_64cmo")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4nwjn"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+albedo_color = Color(1, 0.67451, 0.47451, 1)
+albedo_texture = ExtResource("5_271q0")
+billboard_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_rro5v"]
+offsets = PackedFloat32Array(0, 0.568182, 1)
+colors = PackedColorArray(0.957185, 0.552849, 0, 1, 0.796808, 0.486551, 1.34766e-06, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fwx4k"]
+gradient = SubResource("Gradient_rro5v")
+
+[sub_resource type="Gradient" id="Gradient_3nr3y"]
+offsets = PackedFloat32Array(0, 0.509091, 1)
+colors = PackedColorArray(0.8646, 0.458621, 0, 1, 0.949096, 0.527185, 1.92523e-07, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7orek"]
+gradient = SubResource("Gradient_3nr3y")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xm7hg"]
+angle_min = 513.1
+angle_max = 670.3
+spread = 180.0
+flatness = 0.8
+initial_velocity_min = 0.2
+initial_velocity_max = 0.2
+gravity = Vector3(0, -0.3, 0)
+color = Color(1, 0.604574, 0.152871, 1)
+color_ramp = SubResource("GradientTexture1D_7orek")
+color_initial_ramp = SubResource("GradientTexture1D_fwx4k")
+
+[sub_resource type="QuadMesh" id="QuadMesh_fcxuj"]
+size = Vector2(0.03, 0.03)
+
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_rsx6k")
 
@@ -1100,7 +1138,7 @@ mesh = SubResource("ArrayMesh_pp73a")
 skeleton = NodePath("")
 
 [node name="straight2" type="MeshInstance3D" parent="fuse_box_etx_1/Interactable"]
-transform = Transform3D(0.666667, 0, 0, 0, 0.666667, 0, 0, 0, 0.666667, 0, 0.0279997, 0.112)
+transform = Transform3D(-2.91409e-08, 0, 0.666667, 0, 0.666667, 0, -0.666667, 0, -2.91409e-08, 0, 0.0279997, 0.112)
 mesh = SubResource("ArrayMesh_tw5yb")
 skeleton = NodePath("")
 
@@ -1112,7 +1150,7 @@ mesh = SubResource("ArrayMesh_tw5yb")
 skeleton = NodePath("")
 
 [node name="corner3" type="MeshInstance3D" parent="fuse_box_etx_1/Interactable"]
-transform = Transform3D(0.666667, 0, 0, 0, 0.666667, 0, 0, 0, 0.666667, 0.0699997, 0.0279997, 0.112)
+transform = Transform3D(-2.91409e-08, 0, 0.666667, 0, 0.666667, 0, -0.666667, 0, -2.91409e-08, 0.0699997, 0.0279997, 0.112)
 mesh = SubResource("ArrayMesh_ei647")
 skeleton = NodePath("")
 
@@ -1247,28 +1285,28 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.200182, 0.477273)
 [node name="highlight_fuses" type="Node3D" parent="."]
 
 [node name="FuseRed2" type="MeshInstance3D" parent="highlight_fuses"]
-transform = Transform3D(1.05, 0, 0, 0, -4.5897e-08, -1.05, 0, 1.05, -4.5897e-08, -0.053, 0.185, 0.091)
+transform = Transform3D(1.05, 0, 0, 0, -4.5897e-08, -1.05, 0, 1.05, -4.5897e-08, 0.161, 0.185, 0.091)
 visible = false
 material_override = SubResource("StandardMaterial3D_271q0")
 mesh = SubResource("ArrayMesh_74f61")
 skeleton = NodePath("")
 
 [node name="FuseGreen2" type="MeshInstance3D" parent="highlight_fuses"]
-transform = Transform3D(1.05, 0, 0, 0, -4.5897e-08, -1.05, 0, 1.05, -4.5897e-08, 0.16, 0.189, 0.088)
+transform = Transform3D(1.05, 0, 0, 0, -4.5897e-08, -1.05, 0, 1.05, -4.5897e-08, -0.162, 0.189, 0.087)
 visible = false
 material_override = SubResource("StandardMaterial3D_463er")
 mesh = SubResource("ArrayMesh_jwpm1")
 skeleton = NodePath("")
 
 [node name="FuseYellow2" type="MeshInstance3D" parent="highlight_fuses"]
-transform = Transform3D(1.05, 0, 0, 0, -4.5897e-08, -1.05, 0, 1.05, -4.5897e-08, 0.055, 0.187, 0.092)
+transform = Transform3D(1.05, 0, 0, 0, -4.5897e-08, -1.05, 0, 1.05, -4.5897e-08, -0.053, 0.187, 0.092)
 visible = false
 material_override = SubResource("StandardMaterial3D_miu2h")
 mesh = SubResource("ArrayMesh_k4emr")
 skeleton = NodePath("")
 
 [node name="FuseBlue2" type="MeshInstance3D" parent="highlight_fuses"]
-transform = Transform3D(1.05, 0, 0, 0, -4.5897e-08, -1.05, 0, 1.05, -4.5897e-08, -0.162, 0.189, 0.087)
+transform = Transform3D(1.05, 0, 0, 0, -4.5897e-08, -1.05, 0, 1.05, -4.5897e-08, 0.055, 0.189, 0.087)
 visible = false
 material_override = SubResource("StandardMaterial3D_rsx6k")
 mesh = SubResource("ArrayMesh_v6be8")
@@ -1277,25 +1315,36 @@ skeleton = NodePath("")
 [node name="fuses" type="Node3D" parent="."]
 
 [node name="FuseBlue" type="MeshInstance3D" parent="fuses"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.162, 0.189, 0.087)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.055, 0.189, 0.087)
 visible = false
 mesh = SubResource("ArrayMesh_v6be8")
 skeleton = NodePath("")
 
 [node name="FuseRed" type="MeshInstance3D" parent="fuses"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.053, 0.185, 0.091)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.161, 0.185, 0.091)
 visible = false
 mesh = SubResource("ArrayMesh_74f61")
 skeleton = NodePath("")
 
 [node name="FuseYellow" type="MeshInstance3D" parent="fuses"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.055, 0.187, 0.092)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.053, 0.187, 0.092)
 visible = false
 mesh = SubResource("ArrayMesh_k4emr")
 skeleton = NodePath("")
 
 [node name="FuseGreen" type="MeshInstance3D" parent="fuses"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.16, 0.189, 0.088)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.162, 0.189, 0.087)
 visible = false
 mesh = SubResource("ArrayMesh_jwpm1")
 skeleton = NodePath("")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.157159, 0.987573, 0, -0.987573, 0.157159, -4.47035e-07, 0.0480161, 0.192387)
+material_override = SubResource("StandardMaterial3D_4nwjn")
+amount = 15
+amount_ratio = 0.6905
+lifetime = 8.0
+speed_scale = 1.5
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_xm7hg")
+draw_pass_1 = SubResource("QuadMesh_fcxuj")

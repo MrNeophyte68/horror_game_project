@@ -6,7 +6,7 @@ group_uniforms quality_and_performance;
 uniform int raymarch_steps : hint_range(2, 24) = 6;
 uniform bool sample_jitter = true;
 ///Disables Jittering and Perspective seam solutions, in favor of a faster method.
-uniform bool potato_mode = false; 
+uniform bool potato_mode = false;
 
 group_uniforms general_parameters;
 uniform sampler3D sample_noise;
@@ -123,10 +123,10 @@ void vertex() {
         NORMAL = cam_rotation * NORMAL;
 
         // Apply the Z offset after billboard rotation to move the plane along the camera's Z axis.
-		
+
 		float post_offset = CAMERA_DIRECTION_WORLD.y+billboard_z_offset;
-		
-		
+
+
         VERTEX += MAIN_CAM_INV_VIEW_MATRIX[2].xyz * post_offset;
     }
     world_position = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
@@ -175,7 +175,7 @@ void fragment() {
     }
 
     t_enter = max(0.0, t_enter);
-	
+
     float total_distance = t_enter;
     float march_range = t_exit - t_enter;
     if (march_range <= 0.0001) {
@@ -189,11 +189,11 @@ void fragment() {
     int adjusted_steps = int(float(raymarch_steps) * step_multiplier);
     adjusted_steps = clamp(adjusted_steps, raymarch_steps, 24);
 	float step_size = march_range / float(raymarch_steps); // Distribute steps evenly over the intersection range
-	
+
 	bool potato_conditions = raymarch_steps<4 && !sample_jitter || potato_mode;
-	
-	
-	
+
+
+
 	if (!potato_conditions){
     	float step_size = march_range / float(adjusted_steps);
 	}

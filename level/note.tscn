@@ -1,0 +1,156 @@
+[gd_scene load_steps=16 format=4 uid="uid://c6u3h4ohbkawm"]
+
+[ext_resource type="Script" uid="uid://dijv5ghlbjf2h" path="res://scripts/note.gd" id="1_nqwe1"]
+[ext_resource type="Texture2D" uid="uid://yvdo8asytsqu" path="res://glb_models/note_1_written.png" id="1_se83s"]
+[ext_resource type="Texture2D" uid="uid://dho3vm5sf722j" path="res://glb_models/bunker_map_note_1.png" id="2_nqwe1"]
+[ext_resource type="FontFile" uid="uid://boklayjowuk2e" path="res://Texture/Atarian/SF Atarian System Extended Bold.ttf" id="4_kwltm"]
+[ext_resource type="FontFile" uid="uid://dmabftw3owvrs" path="res://Texture/Atarian/SF Atarian System Bold Italic.ttf" id="5_hav7y"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kwltm"]
+transparency = 2
+alpha_scissor_threshold = 0.393
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("1_se83s")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hs42x"]
+resource_name = "note_1"
+transparency = 4
+cull_mode = 2
+albedo_texture = ExtResource("2_nqwe1")
+texture_filter = 2
+texture_repeat = false
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_3ol3w"]
+_surfaces = [{
+"aabb": AABB(-0.109883, -0.15, -0.00250004, 0.217358, 0.3, 0.00100005),
+"format": 34896613377,
+"index_count": 12,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUA"),
+"name": "note_1",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAAAAAAD+////AgAAAAAA//8AAAAA//8AAAMAAAAAAAAA/P8AAP7////+/wAA//8AAP//AAAAAP//+/8AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_hav7y"]
+resource_name = "bunker_map_note_1"
+_surfaces = [{
+"aabb": AABB(-0.109883, -0.15, -0.00250004, 0.217358, 0.3, 0.00100005),
+"attribute_data": PackedByteArray("OyIAALXb//87Iv//tdsAADsiAAC12///tdsAADsi//8="),
+"format": 34896613399,
+"index_count": 12,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUA"),
+"material": SubResource("StandardMaterial3D_hs42x"),
+"name": "note_1",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAAAA///+////AgD//wAA//8AAP////8AAAMA//8AAAAA/P/+f/7////+//5///8AAP///n8AAP//+//+f////3////9/////f////3//f////3////9/////f///")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_3ol3w")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_se83s"]
+data = PackedVector3Array(-0.1099, -0.15, -0.0025, 0.1075, 0.15, -0.0025, -0.1099, 0.15, -0.0025, -0.1099, -0.15, -0.0025, 0.1075, -0.15, -0.0025, 0.1075, 0.15, -0.0025, -0.1099, -0.15, -0.0015, 0.1075, 0.15, -0.0015, 0.1075, -0.15, -0.0015, -0.1099, -0.15, -0.0015, -0.1099, 0.15, -0.0015, 0.1075, 0.15, -0.0015)
+
+[sub_resource type="LabelSettings" id="LabelSettings_hav7y"]
+font = ExtResource("4_kwltm")
+
+[sub_resource type="LabelSettings" id="LabelSettings_ocet3"]
+font = ExtResource("5_hav7y")
+
+[sub_resource type="LabelSettings" id="LabelSettings_lbsyo"]
+font = ExtResource("5_hav7y")
+
+[sub_resource type="LabelSettings" id="LabelSettings_vecj6"]
+font = ExtResource("5_hav7y")
+
+[sub_resource type="LabelSettings" id="LabelSettings_gmwhq"]
+font = ExtResource("5_hav7y")
+
+[node name="note" type="Node3D"]
+script = ExtResource("1_nqwe1")
+
+[node name="note_1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_kwltm")
+mesh = SubResource("ArrayMesh_hav7y")
+skeleton = NodePath("")
+
+[node name="note" type="StaticBody3D" parent="note_1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="note_1/note"]
+shape = SubResource("ConcavePolygonShape3D_se83s")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
+offset_right = 580.0
+offset_bottom = 328.0
+color = Color(0, 0, 0, 1)
+
+[node name="exit_message" type="Label" parent="CanvasLayer"]
+visible = false
+offset_left = 428.0
+offset_top = 291.0
+offset_right = 563.0
+offset_bottom = 314.0
+text = "Press E to exit"
+label_settings = SubResource("LabelSettings_hav7y")
+uppercase = true
+
+[node name="riddle1" type="Label" parent="CanvasLayer"]
+visible = false
+offset_left = 122.0
+offset_top = 73.0
+offset_right = 440.0
+offset_bottom = 230.0
+text = "Red marks bloom where fingers traced,
+A finger lost in a fit of rage, Her caress passes through my hollow light, Yellow fever burns through my empty skin, As dead hands knock upon my door.
+Three green shadows forget the shapes they used to follow, Infection of a love long past, Tears trickle down both her cheeks"
+label_settings = SubResource("LabelSettings_ocet3")
+horizontal_alignment = 1
+
+[node name="riddle2" type="Label" parent="CanvasLayer"]
+visible = false
+offset_left = 76.0
+offset_top = 117.0
+offset_right = 502.0
+offset_bottom = 194.0
+text = "My time slips away like sand flowing down an hourglass moments before my end,
+She was the first to bleed,
+Covered in blood, her body lifeless,
+Living, green like poison, ends in hell"
+label_settings = SubResource("LabelSettings_lbsyo")
+horizontal_alignment = 1
+
+[node name="riddle3" type="Label" parent="CanvasLayer"]
+visible = false
+offset_left = 113.0
+offset_top = 112.0
+offset_right = 463.0
+offset_bottom = 189.0
+text = "Chilly air skimmed across my peeled skin,
+He sliced three of my fingers and tossed it in the fire,
+He plucked my bleeding eyes out,
+The world went to darkness as I saw his green eyes one last time,"
+label_settings = SubResource("LabelSettings_vecj6")
+horizontal_alignment = 1
+
+[node name="riddle4" type="Label" parent="CanvasLayer"]
+visible = false
+offset_left = 147.0
+offset_top = 103.0
+offset_right = 424.0
+offset_bottom = 200.0
+text = "As the fire dimmed, I carved through her body in red,
+Flames set her body ablaze,
+She cried as I approached her,
+Her emerald eyes, lifeless,
+I killed her."
+label_settings = SubResource("LabelSettings_gmwhq")
+horizontal_alignment = 1

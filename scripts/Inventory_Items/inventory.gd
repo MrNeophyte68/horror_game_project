@@ -4,7 +4,7 @@ class_name PlayerInventory
 
 var inventory := [
 	preload("res://level/Items/lighter.tscn"),
-	null,
+	preload("res://level/Items/saw.tscn"),
 	null
 ]
 

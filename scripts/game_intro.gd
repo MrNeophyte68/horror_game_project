@@ -19,6 +19,9 @@ var fuse_data = {
 
 var fuse_scenes = {}
 
+@export var note_scene: PackedScene
+@onready var note_spawn_points := $note_spawn_points.get_children()
+
 	
 func _ready():
 	$cutscene_ui/AnimationPlayer.play("fade")
@@ -34,6 +37,19 @@ func _ready():
 	randomize()
 	_spawn_fingers()
 	_spawn_fuses()
+	_spawn_note()
+
+func _spawn_note():
+	var selected_points = note_spawn_points.duplicate()
+	selected_points.shuffle()
+	selected_points = selected_points.slice(0, 1)
+	
+	for point in selected_points:
+		var note = note_scene.instantiate()
+		note.global_position = point.global_position
+		note.rotate_y(randf_range(0, TAU))
+		add_child(note)
+	
 
 func _spawn_fingers():
 	var selected_points = finger_spawn_points.duplicate()

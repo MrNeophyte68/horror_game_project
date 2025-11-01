@@ -136,7 +136,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0.6, 0, 0)]
+"values": [Vector3(0.015, 0, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -148,7 +148,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0.6, -0.22, 0)]
+"values": [Vector3(0.015, -0.22, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -160,7 +160,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(-0.6, 0, 0)]
+"values": [Vector3(0.015, 0, 0)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -172,7 +172,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(-0.6, -0.22, 0)]
+"values": [Vector3(0.015, -0.22, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ahpk4"]
@@ -929,7 +929,7 @@ skeleton = NodePath("")
 shape = SubResource("ConcavePolygonShape3D_ahpk4")
 
 [node name="platform_elevator_door_2_b" type="MeshInstance3D" parent="ElevatorPlatform"]
-transform = Transform3D(1.06286, 0, 0, 0, 0, 1, 0, -1, 0, -0.6, -0.22, 0)
+transform = Transform3D(1.06286, 0, 0, 0, 0, 1, 0, -1, 0, 0.015, -0.22, 0)
 lod_bias = 20.0
 mesh = SubResource("ArrayMesh_ec2ls")
 skeleton = NodePath("")
@@ -940,7 +940,7 @@ skeleton = NodePath("")
 shape = SubResource("ConcavePolygonShape3D_8qyph")
 
 [node name="platform_elevator_door_1_b" type="MeshInstance3D" parent="ElevatorPlatform"]
-transform = Transform3D(1.05515, 0, 0, 0, 0, 1, 0, -1, 0, -0.6, 0, 0)
+transform = Transform3D(1.05515, 0, 0, 0, 0, 1, 0, -1, 0, 0.015, 0, 0)
 lod_bias = 20.0
 mesh = SubResource("ArrayMesh_3jerp")
 skeleton = NodePath("")
@@ -951,7 +951,7 @@ skeleton = NodePath("")
 shape = SubResource("ConcavePolygonShape3D_0ffm2")
 
 [node name="platform_elevator_door_1_a" type="MeshInstance3D" parent="ElevatorPlatform"]
-transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0.6, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0.015, 0, 0)
 lod_bias = 20.0
 mesh = SubResource("ArrayMesh_xf8ni")
 skeleton = NodePath("")
@@ -962,7 +962,7 @@ skeleton = NodePath("")
 shape = SubResource("ConcavePolygonShape3D_1pkkn")
 
 [node name="platform_elevator_door_2_a" type="MeshInstance3D" parent="ElevatorPlatform"]
-transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0.6, -0.22, 0)
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0.015, -0.22, 0)
 lod_bias = 20.0
 mesh = SubResource("ArrayMesh_aolpf")
 skeleton = NodePath("")

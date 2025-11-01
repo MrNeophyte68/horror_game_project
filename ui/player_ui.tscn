@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://tfkbwj413ywp"]
+[gd_scene load_steps=11 format=3 uid="uid://tfkbwj413ywp"]
 
 [ext_resource type="Texture2D" uid="uid://2xpj74ysuet8" path="res://Texture/Cur_Grab2.png" id="1_cfom6"]
 [ext_resource type="Script" uid="uid://bcm5bdc8fit87" path="res://ui/player_ui.gd" id="1_ehg4m"]
@@ -7,6 +7,13 @@
 [ext_resource type="Script" uid="uid://c7oafhtbptfpy" path="res://ui/texture_progress_bar.gd" id="4_iwa1g"]
 [ext_resource type="Texture2D" uid="uid://b8jqai65nrng5" path="res://Texture/black_background_1920x1080.png" id="4_lp0io"]
 [ext_resource type="Texture2D" uid="uid://bur6uyv8iddy4" path="res://Texture/white_background_1920x1080.png" id="5_ykvpg"]
+[ext_resource type="FontFile" uid="uid://boklayjowuk2e" path="res://Texture/Atarian/SF Atarian System Extended Bold.ttf" id="7_f7sc3"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_b6i2q"]
+font = ExtResource("7_f7sc3")
+
+[sub_resource type="LabelSettings" id="LabelSettings_g1ro4"]
+font = ExtResource("7_f7sc3")
 
 [node name="player_ui" type="Control"]
 process_mode = 3
@@ -32,6 +39,7 @@ texture = ExtResource("1_cfom6")
 [node name="Score" type="Label" parent="CanvasLayer"]
 offset_right = 40.0
 offset_bottom = 23.0
+label_settings = SubResource("LabelSettings_b6i2q")
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer"]
 offset_left = 186.0
@@ -50,6 +58,7 @@ offset_top = 274.0
 offset_right = 379.0
 offset_bottom = 297.0
 text = "unlock for 5 fingers"
+label_settings = SubResource("LabelSettings_g1ro4")
 uppercase = true
 
 [node name="pause_menu" parent="." instance=ExtResource("3_iwa1g")]

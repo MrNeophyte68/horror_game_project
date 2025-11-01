@@ -2,6 +2,8 @@ extends Node3D
 
 @export var vault_target: Node3D
 var can_vault = false
+var locked: bool = true
+@onready var body: StaticBody3D = $window
 
 func window_detect(body):
 	if body.name == "Player":
@@ -10,3 +12,10 @@ func window_detect(body):
 func window_detect_exit(body):
 	if body.name == "Player":
 		body.near_window = false
+
+func _process(delta: float):
+	if locked:
+		$wooden_plank_2.visible = true
+		body.name = "locked"
+	else:
+		body.name = "window"

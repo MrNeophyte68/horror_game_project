@@ -583,58 +583,6 @@ frequency = 1.0
 [sub_resource type="NoiseTexture3D" id="NoiseTexture3D_rik4h"]
 noise = SubResource("FastNoiseLite_2xfti")
 
-[sub_resource type="Animation" id="Animation_6iw75"]
-resource_name = "equip"
-length = 1.7
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sketchfab_model:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.7),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(-0.207, -0.2, 0.121), Vector3(-0.207, 0, 0.121)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sketchfab_model/zippo_fbx/RootNode/Cube_004/pivot:rotation")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.766667, 1.46667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(-1.58898, 0, 0), Vector3(0.279253, 0, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("GPUParticles3D:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 1.34),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("OmniLight3D:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 1.7),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-
 [sub_resource type="Animation" id="Animation_ywnc8"]
 length = 0.001
 tracks/0/type = "value"
@@ -722,6 +670,58 @@ tracks/6/keys = {
 "values": [false]
 }
 
+[sub_resource type="Animation" id="Animation_6iw75"]
+resource_name = "equip"
+length = 1.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sketchfab_model:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.207, -0.2, 0.121), Vector3(-0.207, 0, 0.121)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sketchfab_model/zippo_fbx/RootNode/Cube_004/pivot:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.766667, 1.46667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-1.58898, 0, 0), Vector3(0.279253, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GPUParticles3D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.34),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("OmniLight3D:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
 [sub_resource type="Animation" id="Animation_62cqy"]
 resource_name = "unequip"
 length = 1.7
@@ -783,131 +783,131 @@ _data = {
 
 [node name="Item" instance=ExtResource("1_6iw75")]
 
-[node name="Node3D" type="Node3D" parent="." index="0"]
+[node name="lighter" type="Node3D" parent="." index="0"]
 transform = Transform3D(0.942449, 0, 0.33435, 0, 1, 0, -0.33435, 0, 0.942449, 0.378795, -0.0963912, -0.39562)
 
-[node name="Sketchfab_model" type="Node3D" parent="Node3D" index="0"]
+[node name="Sketchfab_model" type="Node3D" parent="lighter" index="0"]
 transform = Transform3D(0.04, 0, 5.55112e-17, 0, -1.74846e-09, 0.04, 0, -0.04, -1.74846e-09, -0.207, -0.3, 0.121)
 
-[node name="zippo_fbx" type="Node3D" parent="Node3D/Sketchfab_model" index="0"]
+[node name="zippo_fbx" type="Node3D" parent="lighter/Sketchfab_model" index="0"]
 transform = Transform3D(0.01, 0, 0, 0, 0, -0.01, 0, 0.01, 0, 0, 0, 0)
 
-[node name="RootNode" type="Node3D" parent="Node3D/Sketchfab_model/zippo_fbx" index="0"]
+[node name="RootNode" type="Node3D" parent="lighter/Sketchfab_model/zippo_fbx" index="0"]
 
-[node name="Cube" type="Node3D" parent="Node3D/Sketchfab_model/zippo_fbx/RootNode" index="0"]
+[node name="Cube" type="Node3D" parent="lighter/Sketchfab_model/zippo_fbx/RootNode" index="0"]
 transform = Transform3D(100, 0, 0, 0, -1.62921e-05, 100, 0, -100, -1.62921e-05, -0.0814733, -121.048, -58.9177)
 
-[node name="Cube_flashligthBase_0" type="MeshInstance3D" parent="Node3D/Sketchfab_model/zippo_fbx/RootNode/Cube" index="0"]
+[node name="Cube_flashligthBase_0" type="MeshInstance3D" parent="lighter/Sketchfab_model/zippo_fbx/RootNode/Cube" index="0"]
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_aew74")
 skeleton = NodePath("")
 
-[node name="Cube_001" type="Node3D" parent="Node3D/Sketchfab_model/zippo_fbx/RootNode" index="1"]
+[node name="Cube_001" type="Node3D" parent="lighter/Sketchfab_model/zippo_fbx/RootNode" index="1"]
 transform = Transform3D(100, 0, 0, 0, -1.62921e-05, 100, 0, -100, -1.62921e-05, 0.283299, 33.7805, -55.8254)
 
-[node name="Cube_001_metalLighter_0" type="MeshInstance3D" parent="Node3D/Sketchfab_model/zippo_fbx/RootNode/Cube_001" index="0"]
+[node name="Cube_001_metalLighter_0" type="MeshInstance3D" parent="lighter/Sketchfab_model/zippo_fbx/RootNode/Cube_001" index="0"]
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_xko00")
 skeleton = NodePath("")
 
-[node name="Cube_002" type="Node3D" parent="Node3D/Sketchfab_model/zippo_fbx/RootNode" index="2"]
+[node name="Cube_002" type="Node3D" parent="lighter/Sketchfab_model/zippo_fbx/RootNode" index="2"]
 transform = Transform3D(100, 0, 0, 0, -1.62921e-05, 100, 0, -100, -1.62921e-05, 1.86265e-06, 6.41074, 39.3905)
 
-[node name="Cube_002_metalLighter_0" type="MeshInstance3D" parent="Node3D/Sketchfab_model/zippo_fbx/RootNode/Cube_002" index="0"]
+[node name="Cube_002_metalLighter_0" type="MeshInstance3D" parent="lighter/Sketchfab_model/zippo_fbx/RootNode/Cube_002" index="0"]
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_r2s7s")
 skeleton = NodePath("")
 
-[node name="Cylinder" type="Node3D" parent="Node3D/Sketchfab_model/zippo_fbx/RootNode" index="3"]
+[node name="Cylinder" type="Node3D" parent="lighter/Sketchfab_model/zippo_fbx/RootNode" index="3"]
 transform = Transform3D(100, 0, 0, 0, -1.62921e-05, 100, 0, -100, -1.62921e-05, 3.74081e-06, 37.4188, -114.382)
 
-[node name="Cylinder_metalLighter_0" type="MeshInstance3D" parent="Node3D/Sketchfab_model/zippo_fbx/RootNode/Cylinder" index="0"]
+[node name="Cylinder_metalLighter_0" type="MeshInstance3D" parent="lighter/Sketchfab_model/zippo_fbx/RootNode/Cylinder" index="0"]
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_eciec")
 skeleton = NodePath("")
 
-[node name="Cylinder_001" type="Node3D" parent="Node3D/Sketchfab_model/zippo_fbx/RootNode" index="4"]
+[node name="Cylinder_001" type="Node3D" parent="lighter/Sketchfab_model/zippo_fbx/RootNode" index="4"]
 transform = Transform3D(100, 0, 0, 0, -1.62921e-05, 100, 0, -100, -1.62921e-05, 3.75633e-06, 14.0503, 18.516)
 
-[node name="Cylinder_001_metalLighter_0" type="MeshInstance3D" parent="Node3D/Sketchfab_model/zippo_fbx/RootNode/Cylinder_001" index="0"]
+[node name="Cylinder_001_metalLighter_0" type="MeshInstance3D" parent="lighter/Sketchfab_model/zippo_fbx/RootNode/Cylinder_001" index="0"]
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_78waq")
 skeleton = NodePath("")
 
-[node name="Cylinder_002" type="Node3D" parent="Node3D/Sketchfab_model/zippo_fbx/RootNode" index="5"]
+[node name="Cylinder_002" type="Node3D" parent="lighter/Sketchfab_model/zippo_fbx/RootNode" index="5"]
 transform = Transform3D(100, 0, 0, 0, -1.62921e-05, 100, 0, -100, -1.62921e-05, 3.72529e-06, 37.9682, -113.009)
 
-[node name="Cylinder_002_kzemien_2_0" type="MeshInstance3D" parent="Node3D/Sketchfab_model/zippo_fbx/RootNode/Cylinder_002" index="0"]
+[node name="Cylinder_002_kzemien_2_0" type="MeshInstance3D" parent="lighter/Sketchfab_model/zippo_fbx/RootNode/Cylinder_002" index="0"]
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_agx52")
 skeleton = NodePath("")
 
-[node name="Cylinder_003" type="Node3D" parent="Node3D/Sketchfab_model/zippo_fbx/RootNode" index="6"]
+[node name="Cylinder_003" type="Node3D" parent="lighter/Sketchfab_model/zippo_fbx/RootNode" index="6"]
 transform = Transform3D(100, 0, 0, 0, -1.62921e-05, 100, 0, -100, -1.62921e-05, 0.738279, -2.02869, -111.58)
 
-[node name="Cylinder_003_copper_0" type="MeshInstance3D" parent="Node3D/Sketchfab_model/zippo_fbx/RootNode/Cylinder_003" index="0"]
+[node name="Cylinder_003_copper_0" type="MeshInstance3D" parent="lighter/Sketchfab_model/zippo_fbx/RootNode/Cylinder_003" index="0"]
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_8l0v2")
 skeleton = NodePath("")
 
-[node name="Cylinder_003_kzemien_0" type="MeshInstance3D" parent="Node3D/Sketchfab_model/zippo_fbx/RootNode/Cylinder_003" index="1"]
+[node name="Cylinder_003_kzemien_0" type="MeshInstance3D" parent="lighter/Sketchfab_model/zippo_fbx/RootNode/Cylinder_003" index="1"]
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_juvt6")
 skeleton = NodePath("")
 
-[node name="Cube_003" type="Node3D" parent="Node3D/Sketchfab_model/zippo_fbx/RootNode" index="7"]
+[node name="Cube_003" type="Node3D" parent="lighter/Sketchfab_model/zippo_fbx/RootNode" index="7"]
 transform = Transform3D(100, 0, 0, 0, -1.62921e-05, 100, 0, -100, -1.62921e-05, -1.62981e-07, -6.69349, -27.2296)
 
-[node name="Cube_003_flashligthBase_0" type="MeshInstance3D" parent="Node3D/Sketchfab_model/zippo_fbx/RootNode/Cube_003" index="0"]
+[node name="Cube_003_flashligthBase_0" type="MeshInstance3D" parent="lighter/Sketchfab_model/zippo_fbx/RootNode/Cube_003" index="0"]
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_ilsvn")
 skeleton = NodePath("")
 
-[node name="Cylinder_004" type="Node3D" parent="Node3D/Sketchfab_model/zippo_fbx/RootNode" index="8"]
+[node name="Cylinder_004" type="Node3D" parent="lighter/Sketchfab_model/zippo_fbx/RootNode" index="8"]
 transform = Transform3D(100, 0, 0, 0, -1.62921e-05, 100, 0, -100, -1.62921e-05, -1.07619e-06, -5.15759, -56.3917)
 
-[node name="Cylinder_004_copper_0" type="MeshInstance3D" parent="Node3D/Sketchfab_model/zippo_fbx/RootNode/Cylinder_004" index="0"]
+[node name="Cylinder_004_copper_0" type="MeshInstance3D" parent="lighter/Sketchfab_model/zippo_fbx/RootNode/Cylinder_004" index="0"]
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_7m5cf")
 skeleton = NodePath("")
 
-[node name="Vert_001" type="Node3D" parent="Node3D/Sketchfab_model/zippo_fbx/RootNode" index="9"]
+[node name="Vert_001" type="Node3D" parent="lighter/Sketchfab_model/zippo_fbx/RootNode" index="9"]
 transform = Transform3D(100, 0, 0, 0, -1.62921e-05, 100, 0, -100, -1.62921e-05, -0.243674, 22.8207, -56.4404)
 
-[node name="Vert_001_wires_0" type="MeshInstance3D" parent="Node3D/Sketchfab_model/zippo_fbx/RootNode/Vert_001" index="0"]
+[node name="Vert_001_wires_0" type="MeshInstance3D" parent="lighter/Sketchfab_model/zippo_fbx/RootNode/Vert_001" index="0"]
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_ao67r")
 skeleton = NodePath("")
 
-[node name="Cylinder_005" type="Node3D" parent="Node3D/Sketchfab_model/zippo_fbx/RootNode" index="10"]
+[node name="Cylinder_005" type="Node3D" parent="lighter/Sketchfab_model/zippo_fbx/RootNode" index="10"]
 transform = Transform3D(100, 0, 0, 0, -1.62921e-05, 100, 0, -100, -1.62921e-05, 1.15219, -15.5705, 41.5207)
 
-[node name="Cylinder_005_metalLighter_0" type="MeshInstance3D" parent="Node3D/Sketchfab_model/zippo_fbx/RootNode/Cylinder_005" index="0"]
+[node name="Cylinder_005_metalLighter_0" type="MeshInstance3D" parent="lighter/Sketchfab_model/zippo_fbx/RootNode/Cylinder_005" index="0"]
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_tg8n5")
 skeleton = NodePath("")
 
-[node name="Cube_004" type="Node3D" parent="Node3D/Sketchfab_model/zippo_fbx/RootNode" index="11"]
+[node name="Cube_004" type="Node3D" parent="lighter/Sketchfab_model/zippo_fbx/RootNode" index="11"]
 transform = Transform3D(100, 0, 0, 0, -1.62921e-05, 100, 0, -100, -1.62921e-05, 1.4071, 80.5836, 129.217)
 
-[node name="pivot" type="Node3D" parent="Node3D/Sketchfab_model/zippo_fbx/RootNode/Cube_004" index="0"]
-transform = Transform3D(1, 0, 0, 0, -0.0181854, 0.999835, 0, -0.999835, -0.0181854, 0, 0.886431, -0.927083)
+[node name="pivot" type="Node3D" parent="lighter/Sketchfab_model/zippo_fbx/RootNode/Cube_004" index="0"]
+transform = Transform3D(1, 0, 0, 0, -0.0181826, 0.999835, 0, -0.999835, -0.0181826, 0, 0.886431, -0.927083)
 
-[node name="Cube_004_flashligthBase_0" type="MeshInstance3D" parent="Node3D/Sketchfab_model/zippo_fbx/RootNode/Cube_004/pivot" index="0"]
+[node name="Cube_004_flashligthBase_0" type="MeshInstance3D" parent="lighter/Sketchfab_model/zippo_fbx/RootNode/Cube_004/pivot" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.886431, 0.927083)
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_da4e2")
 skeleton = NodePath("")
 
-[node name="Sun" type="Node3D" parent="Node3D/Sketchfab_model/zippo_fbx/RootNode" index="12"]
+[node name="Sun" type="Node3D" parent="lighter/Sketchfab_model/zippo_fbx/RootNode" index="12"]
 transform = Transform3D(23.0039, 90.0007, -37.0229, -94.8117, 29.3048, 12.328, 21.9448, 32.2661, 92.0724, 165.052, 128.317, 65.9206)
 
-[node name="Object_29" type="Node3D" parent="Node3D/Sketchfab_model/zippo_fbx/RootNode/Sun" index="0"]
+[node name="Object_29" type="Node3D" parent="lighter/Sketchfab_model/zippo_fbx/RootNode/Sun" index="0"]
 transform = Transform3D(1, 0, 0, 0, 2.22045e-16, -1, 0, 1, 2.22045e-16, 0, 0, 0)
 
-[node name="Object_30" type="Node3D" parent="Node3D/Sketchfab_model/zippo_fbx/RootNode/Sun/Object_29" index="0"]
+[node name="Object_30" type="Node3D" parent="lighter/Sketchfab_model/zippo_fbx/RootNode/Sun/Object_29" index="0"]
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="Node3D" index="1"]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="lighter" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.223354, 0.0265777, 0.106287)
 visible = false
 amount = 500
@@ -915,7 +915,7 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_rik4h")
 draw_pass_1 = SubResource("QuadMesh_v5wjq")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Node3D" index="2"]
+[node name="OmniLight3D" type="OmniLight3D" parent="lighter" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.340248, -0.0343409, 0.0719216)
 visible = false
 light_color = Color(0.781572, 0.513844, 0.224712, 1)
@@ -925,7 +925,7 @@ script = ExtResource("21_62cqy")
 noise = SubResource("NoiseTexture3D_rik4h")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
-root_node = NodePath("../Node3D")
+root_node = NodePath("../lighter")
 libraries = {
 &"": SubResource("AnimationLibrary_62cqy")
 }

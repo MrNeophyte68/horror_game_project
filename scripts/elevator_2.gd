@@ -43,3 +43,6 @@ func elevator_move():
 		button_collision.disabled = false
 		down = false
 		up = true
+
+func power_on():
+	animation_player.play_backwards("Open")

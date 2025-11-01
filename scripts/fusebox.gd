@@ -37,15 +37,23 @@ var is_rotating = false
 		$fuse_box_etx_1/locations/location8
 	]
 
-@onready var highlight_fuse = [$highlight_fuses/FuseBlue2, $highlight_fuses/FuseRed2, $highlight_fuses/FuseYellow2, $highlight_fuses/FuseGreen2]
+@onready var highlight_fuse = [$highlight_fuses/FuseGreen2, $highlight_fuses/FuseYellow2, $highlight_fuses/FuseBlue2, $highlight_fuses/FuseRed2]
 var blueFuse = false
 var redFuse = false
 var yellowFuse = false
 var greenFuse = false
 var allFuses = false
-@onready var mesh_list_fuses = [$fuses/FuseBlue, $fuses/FuseRed, $fuses/FuseYellow, $fuses/FuseGreen]
+@onready var mesh_list_fuses = [$fuses/FuseGreen, $fuses/FuseYellow, $fuses/FuseBlue, $fuses/FuseRed]
 var swap_targets = []
 var counter = 0
+var wire_check #check if player put right combination
+var wire_finished: bool = false #true if player put right combination
+var fuse_finished: bool = false
+var set_fuse_comb: int = randi_range(1, 4)
+
+#elevator
+@onready var elevator = get_tree().root.get_node("Level/map/Elevator")
+var played_once := false
 
 func _ready():
 	randomize()
@@ -73,7 +81,7 @@ func fuse_visible():
 		$fuses/FuseGreen.visible = true
 		greenFuse = true
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if blueFuse and redFuse and yellowFuse and greenFuse:
 		allFuses = true
 
@@ -92,6 +100,26 @@ func _process(delta: float) -> void:
 				fuse_visible()
 		elif allFuses:
 			handle_input_fuses()
+			
+	wire_combination_check()
+	if wire_finished:
+		var col := get_node_or_null("fuse_box_etx_1/fusebox/CollisionShape3D")
+		if col:
+			col.queue_free()
+		exit_inspect_mode()
+		
+	fuse_combination_check()
+	if fuse_finished:
+		var col := get_node_or_null("fuse_box_etx_1/fuses/CollisionShape3D")
+		if col:
+			col.queue_free()
+		exit_inspect_mode_fuses()
+	
+	if wire_finished and fuse_finished:
+		$GPUParticles3D.visible = false
+		if not played_once:
+			elevator.power_on()
+			played_once = true
 
 func handle_input():
 	if is_rotating:
@@ -140,6 +168,16 @@ func rotate_selected():
 func _on_rotation_finished():
 	is_rotating = false
 	can_exit = true
+
+	var mesh = meshes[selected_index]
+	if mesh:
+		var rd = mesh.rotation_degrees
+		# Normalize each axis so it stays within [0, 360)
+		rd.x = fposmod(rd.x, 360.0)
+		rd.y = fposmod(rd.y, 360.0)
+		rd.z = fposmod(rd.z, 360.0)
+		mesh.rotation_degrees = rd
+
 	if inspecting:
 		highlight_selected()
 
@@ -160,6 +198,7 @@ func enter_inspect_mode():
 	if inspecting:
 		return
 	inspecting = true
+	can_exit = false
 	original_camera_transform = player_camera.global_transform
 	var player = get_node("/root/Level/Player")
 	var raycast = get_node("/root/Level/Player/head/RayCast3D")
@@ -221,9 +260,11 @@ func _setup_random_path():
 			if chosen_location_end == 2:
 				meshes = [$fuse_box_etx_1/Interactable/corner3, $fuse_box_etx_1/Interactable/straight, $fuse_box_etx_1/Interactable/straight2,
 				$fuse_box_etx_1/Interactable/corner, $fuse_box_etx_1/Interactable/corner4, $fuse_box_etx_1/Interactable/straight3, $fuse_box_etx_1/Interactable/corner2]
+				wire_check = "01011100001"
 			else:
 				meshes = [$fuse_box_etx_1/Interactable/corner3, $fuse_box_etx_1/Interactable/straight, $fuse_box_etx_1/Interactable/corner2,
 				$fuse_box_etx_1/Interactable/straight2, $fuse_box_etx_1/Interactable/corner, $fuse_box_etx_1/Interactable/corner4, $fuse_box_etx_1/Interactable/straight3]
+				wire_check = "01010110001"
 		elif pick_direction == 2:
 			$fuse_box_etx_1/connect/start.rotation_degrees.y = 90
 			var locations = [0, 2]
@@ -241,9 +282,11 @@ func _setup_random_path():
 			if chosen_location_end == 0:
 				meshes = [$fuse_box_etx_1/Interactable/corner, $fuse_box_etx_1/Interactable/corner2, $fuse_box_etx_1/Interactable/straight,
 				$fuse_box_etx_1/Interactable/straight2, $fuse_box_etx_1/Interactable/corner3, $fuse_box_etx_1/Interactable/straight3, $fuse_box_etx_1/Interactable/corner4]
+				wire_check = "11000110110"
 			else:
 				meshes = [$fuse_box_etx_1/Interactable/corner2, $fuse_box_etx_1/Interactable/corner, $fuse_box_etx_1/Interactable/straight,
 				$fuse_box_etx_1/Interactable/straight2, $fuse_box_etx_1/Interactable/corner3, $fuse_box_etx_1/Interactable/straight3, $fuse_box_etx_1/Interactable/corner4]
+				wire_check = "11011000110"
 		elif pick_direction == 3:
 			$fuse_box_etx_1/connect/start.rotation_degrees.y = 180
 			var locations = [0, 6]
@@ -261,9 +304,11 @@ func _setup_random_path():
 			if chosen_location_end == 0:
 				meshes = [$fuse_box_etx_1/Interactable/straight, $fuse_box_etx_1/Interactable/corner3, $fuse_box_etx_1/Interactable/corner,
 				$fuse_box_etx_1/Interactable/straight2, $fuse_box_etx_1/Interactable/corner2, $fuse_box_etx_1/Interactable/straight3, $fuse_box_etx_1/Interactable/corner4]
+				wire_check = "01000011110"
 			else:
 				meshes = [$fuse_box_etx_1/Interactable/corner2, $fuse_box_etx_1/Interactable/straight, $fuse_box_etx_1/Interactable/corner3,
 				$fuse_box_etx_1/Interactable/corner, $fuse_box_etx_1/Interactable/straight2, $fuse_box_etx_1/Interactable/straight3, $fuse_box_etx_1/Interactable/corner4]
+				wire_check = "01001001110"
 		elif pick_direction == 4:
 			$fuse_box_etx_1/connect/start.rotation_degrees.y = 270
 			var locations = [6, 8]
@@ -281,9 +326,11 @@ func _setup_random_path():
 			if chosen_location_end == 6:
 				meshes = [$fuse_box_etx_1/Interactable/corner3, $fuse_box_etx_1/Interactable/straight, $fuse_box_etx_1/Interactable/corner4,
 				$fuse_box_etx_1/Interactable/straight2, $fuse_box_etx_1/Interactable/straight3, $fuse_box_etx_1/Interactable/corner, $fuse_box_etx_1/Interactable/corner2]
+				wire_check = "01101100011"
 			else:
 				meshes = [$fuse_box_etx_1/Interactable/corner3, $fuse_box_etx_1/Interactable/straight, $fuse_box_etx_1/Interactable/corner4,
 				$fuse_box_etx_1/Interactable/straight2, $fuse_box_etx_1/Interactable/straight3, $fuse_box_etx_1/Interactable/corner2, $fuse_box_etx_1/Interactable/corner]
+				wire_check = "01110010011"
 	elif chosen_location == 0:
 		$fuse_box_etx_1/connect/start.global_position = mesh_list[chosen_location].global_position
 		var pick_direction = [1, 4].pick_random()
@@ -302,6 +349,7 @@ func _setup_random_path():
 				$fuse_box_etx_1/Interactable/straight3.global_position = mesh_list[7].global_position
 				meshes = [$fuse_box_etx_1/Interactable/straight, $fuse_box_etx_1/Interactable/corner, $fuse_box_etx_1/Interactable/corner4,
 				$fuse_box_etx_1/Interactable/straight2, $fuse_box_etx_1/Interactable/corner3, $fuse_box_etx_1/Interactable/straight3, $fuse_box_etx_1/Interactable/corner2]
+				wire_check = "01011100100"
 			elif chosen_location_end == 8:
 				$fuse_box_etx_1/connect/end.rotation_degrees.y = 0
 				$fuse_box_etx_1/Interactable/corner.global_position = mesh_list[2].global_position
@@ -313,6 +361,7 @@ func _setup_random_path():
 				$fuse_box_etx_1/Interactable/straight3.global_position = mesh_list[7].global_position
 				meshes = [$fuse_box_etx_1/Interactable/straight, $fuse_box_etx_1/Interactable/corner, $fuse_box_etx_1/Interactable/corner3,
 				$fuse_box_etx_1/Interactable/straight2, $fuse_box_etx_1/Interactable/corner2, $fuse_box_etx_1/Interactable/corner4, $fuse_box_etx_1/Interactable/straight3]
+				wire_check = "00011100001"
 		elif pick_direction == 4:
 			$fuse_box_etx_1/connect/start.rotation_degrees.y = 270
 			var chosen_location_end = [4, 8].pick_random()
@@ -328,6 +377,7 @@ func _setup_random_path():
 				$fuse_box_etx_1/Interactable/straight3.global_position = mesh_list[5].global_position
 				meshes = [$fuse_box_etx_1/Interactable/corner4, $fuse_box_etx_1/Interactable/corner3, $fuse_box_etx_1/Interactable/straight,
 				$fuse_box_etx_1/Interactable/straight3, $fuse_box_etx_1/Interactable/corner, $fuse_box_etx_1/Interactable/straight2, $fuse_box_etx_1/Interactable/corner2]
+				wire_check = "10101101100"
 			elif chosen_location_end == 8:
 				$fuse_box_etx_1/connect/end.rotation_degrees.y = -90
 				$fuse_box_etx_1/Interactable/corner.global_position = mesh_list[1].global_position
@@ -339,6 +389,7 @@ func _setup_random_path():
 				$fuse_box_etx_1/Interactable/straight3.global_position = mesh_list[5].global_position
 				meshes = [$fuse_box_etx_1/Interactable/corner, $fuse_box_etx_1/Interactable/corner2, $fuse_box_etx_1/Interactable/straight,
 				$fuse_box_etx_1/Interactable/straight2, $fuse_box_etx_1/Interactable/straight3, $fuse_box_etx_1/Interactable/corner3, $fuse_box_etx_1/Interactable/corner4]
+				wire_check = "11100110110"
 
 func try_inspect_fuses():
 	if not opened:
@@ -360,6 +411,7 @@ func enter_inspect_mode_fuses():
 	original_camera_transform = player_camera.global_transform
 	var player = get_node("/root/Level/Player")
 	var raycast = get_node("/root/Level/Player/head/RayCast3D")
+	can_exit = false
 	player.can_move = false
 	player.can_sprint = false
 	raycast.enabled = false
@@ -430,3 +482,100 @@ func swap_selected():
 			mesh_list_fuses[index_temp0] = swap_targets[1]
 			mesh_list_fuses[index_temp1] = swap_targets[0]
 			swap_targets.clear()
+
+func wire_combination_check():
+	var s1
+	var s2
+	var s3
+	var c1
+	var c2
+	var c3
+	var c4
+	var total
+	if $fuse_box_etx_1/Interactable/straight.rotation_degrees.y == 0.0 or $fuse_box_etx_1/Interactable/straight.rotation_degrees.y == 180.0:
+		s1 = "0"
+	elif $fuse_box_etx_1/Interactable/straight.rotation_degrees.y == 90.0 or $fuse_box_etx_1/Interactable/straight.rotation_degrees.y == 270.0:
+		s1 = "1"
+	else:
+		s1 = "x"
+		
+	if $fuse_box_etx_1/Interactable/straight2.rotation_degrees.y == 0.0 or $fuse_box_etx_1/Interactable/straight2.rotation_degrees.y == 180.0:
+		s2 = "1"
+	elif $fuse_box_etx_1/Interactable/straight2.rotation_degrees.y == 90.0 or $fuse_box_etx_1/Interactable/straight2.rotation_degrees.y == 270.0:
+		s2 = "0"
+	else:
+		s2 = "x"
+		
+	if $fuse_box_etx_1/Interactable/straight3.rotation_degrees.y == 0.0 or $fuse_box_etx_1/Interactable/straight3.rotation_degrees.y == 180.0:
+		s3 = "1"
+	elif $fuse_box_etx_1/Interactable/straight3.rotation_degrees.y == 90.0 or $fuse_box_etx_1/Interactable/straight3.rotation_degrees.y == 270.0:
+		s3 = "0"
+	else:
+		s3 = "x"
+		
+	if $fuse_box_etx_1/Interactable/corner.rotation_degrees.y == 0.0:
+		c1 = "00"
+	elif $fuse_box_etx_1/Interactable/corner.rotation_degrees.y == 90.0:
+		c1 = "01"
+	elif $fuse_box_etx_1/Interactable/corner.rotation_degrees.y == 180.0:
+		c1 = "10"
+	elif $fuse_box_etx_1/Interactable/corner.rotation_degrees.y == 270.0:
+		c1 = "11"
+	else:
+		c1 = "xx"
+		
+	if $fuse_box_etx_1/Interactable/corner2.rotation_degrees.y == 0.0:
+		c2 = "01"
+	elif $fuse_box_etx_1/Interactable/corner2.rotation_degrees.y == 90.0:
+		c2 = "10"
+	elif $fuse_box_etx_1/Interactable/corner2.rotation_degrees.y == 180.0:
+		c2 = "11"
+	elif $fuse_box_etx_1/Interactable/corner2.rotation_degrees.y == 270.0:
+		c2 = "00"
+	else:
+		c2 = "xx"
+		
+	if $fuse_box_etx_1/Interactable/corner3.rotation_degrees.y == 0.0:
+		c3 = "11"
+	elif $fuse_box_etx_1/Interactable/corner3.rotation_degrees.y == 90.0:
+		c3 = "00"
+	elif $fuse_box_etx_1/Interactable/corner3.rotation_degrees.y == 180.0:
+		c3 = "01"
+	elif $fuse_box_etx_1/Interactable/corner3.rotation_degrees.y == 270.0:
+		c3 = "10"
+	else:
+		c3 = "xx"
+		
+	if $fuse_box_etx_1/Interactable/corner4.rotation_degrees.y == 0.0:
+		c4 = "10"
+	elif $fuse_box_etx_1/Interactable/corner4.rotation_degrees.y == 90.0:
+		c4 = "11"
+	elif $fuse_box_etx_1/Interactable/corner4.rotation_degrees.y == 180.0:
+		c4 = "00"
+	elif $fuse_box_etx_1/Interactable/corner4.rotation_degrees.y == 270.0:
+		c4 = "01"
+	else:
+		c4 = "xx"
+		
+	total = s1 + s2 + s3 + c1 + c2 + c3 + c4
+	
+	if total == wire_check:
+		wire_finished = true
+
+func fuse_combination_check():
+	var fuse_check1 = [$fuses/FuseYellow,$fuses/FuseBlue,$fuses/FuseGreen,$fuses/FuseRed]
+	var fuse_check2 = [$fuses/FuseRed,$fuses/FuseBlue,$fuses/FuseYellow,$fuses/FuseGreen]
+	var fuse_check3 = [$fuses/FuseBlue,$fuses/FuseRed,$fuses/FuseYellow,$fuses/FuseGreen]
+	var fuse_check4 = [$fuses/FuseBlue,$fuses/FuseYellow,$fuses/FuseRed,$fuses/FuseGreen]
+	if set_fuse_comb == 1:
+		if mesh_list_fuses == fuse_check1:
+			fuse_finished = true
+	elif set_fuse_comb == 2:
+		if mesh_list_fuses == fuse_check2:
+			fuse_finished = true
+	elif set_fuse_comb == 3:
+		if mesh_list_fuses == fuse_check3:
+			fuse_finished = true
+	elif set_fuse_comb == 4:
+		if mesh_list_fuses == fuse_check4:
+			fuse_finished = true

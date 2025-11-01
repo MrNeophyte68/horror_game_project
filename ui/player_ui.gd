@@ -8,6 +8,7 @@ var s_timer = 0
 var can_start_stimer = true
 var can_crouch = false
 @onready var player = get_tree().root.get_node("Level/Player")
+@onready var score = $CanvasLayer/Score
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

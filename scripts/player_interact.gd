@@ -1,7 +1,10 @@
 extends RayCast3D
 
 #vault check
-var can_vault = false
+var can_vault = false #if true player is allowed to vault
+
+#cut wood check
+var can_cut: bool = false
 
 @onready var crosshair = get_parent().get_parent().get_node("player_ui/CanvasLayer/crosshair")
 var can_interact_elevator = false
@@ -15,6 +18,8 @@ var score: int = 0
 
 var fuse_check := []
 @onready var fusebox = get_tree().root.get_node("Level/map/Puzzle/fusebox")
+var reading: bool = false
+@onready var cut_progress = $CanvasLayer/CutProgress
 
 func _physics_process(delta: float) -> void:
 	if is_colliding():
@@ -66,6 +71,7 @@ func _physics_process(delta: float) -> void:
 				"window":
 					if !crouch_check.crouching:
 						can_vault = true
+
 				"buy_door":
 					if score >= 5 and hit.get_parent().get_parent().get_parent().bought == false:
 						score -= 5
@@ -81,9 +87,24 @@ func _physics_process(delta: float) -> void:
 				
 				"fuses":
 					hit.get_parent().get_parent().try_inspect_fuses()
+				
+				"note":
+					hit.get_parent().get_parent().read()
+					
+		if Input.is_action_pressed("interact"):
+			match hit.name:
+				"locked":
+					if !crouch_check.crouching:
+						can_cut = true
+		else:
+			can_cut = false
 
 		# Crosshair visibility for interactables
 		if hit.is_in_group("yellow_fuse") or hit.is_in_group("green_fuse") or hit.is_in_group("red_fuse") or hit.is_in_group("blue_fuse") or hit.is_in_group("fingers") or hit.name in ["door", "drawer", "ElevatorCall", "exit", "fusebox_door"]:
+			if !crosshair.visible:
+				crosshair.visible = true
+		
+		elif hit.name == "note" and !reading:
 			if !crosshair.visible:
 				crosshair.visible = true
 				

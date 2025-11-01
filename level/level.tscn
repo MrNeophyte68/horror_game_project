@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://6n6tw3hrvg8i"]
+[gd_scene load_steps=23 format=3 uid="uid://6n6tw3hrvg8i"]
 
 [ext_resource type="Script" uid="uid://b6mn5m38gbdip" path="res://scripts/game_intro.gd" id="1_qohg2"]
 [ext_resource type="PackedScene" uid="uid://c21w7v6ghunna" path="res://level/finger.tscn" id="2_44x8d"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://b485h3l0sfjvt" path="res://level/fuses/rigidbody_blue_fuse.tscn" id="6_l5lfc"]
 [ext_resource type="Shader" uid="uid://d2wx3kwmqlf1m" path="res://shader/chromatic.gdshader" id="7_ivpvi"]
 [ext_resource type="PackedScene" uid="uid://qxcccn7ywulv" path="res://level/fuses/rigidbody_yellow_fuse.tscn" id="7_m3nah"]
+[ext_resource type="PackedScene" uid="uid://c6u3h4ohbkawm" path="res://level/note.tscn" id="7_xii2b"]
 
 [sub_resource type="Gradient" id="Gradient_qohg2"]
 offsets = PackedFloat32Array(0, 0.363208, 1)
@@ -159,6 +160,7 @@ red_fuse_scene = ExtResource("4_xii2b")
 green_fuse_scene = ExtResource("5_rhqlf")
 blue_fuse_scene = ExtResource("6_l5lfc")
 yellow_fuse_scene = ExtResource("7_m3nah")
+note_scene = ExtResource("7_xii2b")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_vkbyq")
@@ -258,7 +260,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.4696, 1.35352, -22.2551)
 [node name="Marker3D4" type="Marker3D" parent="fuse_spawn_points"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.70651, 0.764082, 1.63063)
 
+[node name="note_spawn_points" type="Node3D" parent="."]
+
+[node name="Marker3D" type="Marker3D" parent="note_spawn_points"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.70244, 1.15129, -22.3386)
+
 [editable path="map"]
+[editable path="map/Puzzle/fusebox"]
 [editable path="Player"]
 [editable path="Player/player_ui"]
 [editable path="Player/player_ui/pause_menu"]
