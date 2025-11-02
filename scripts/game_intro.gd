@@ -21,9 +21,13 @@ var fuse_scenes = {}
 
 @export var note_scene: PackedScene
 @onready var note_spawn_points := $note_spawn_points.get_children()
+@onready var lights := $map/lights.get_children()
+@onready var lights_poweroff := $map/lights_power_off.get_children()
+var power_on: bool = false
 
 	
 func _ready():
+	
 	$cutscene_ui/AnimationPlayer.play("fade")
 	#$AnimationPlayer.play("cutscene")
 	#await get_tree().create_timer(5.0, false).timeout  # Wait for cutscene
@@ -101,3 +105,20 @@ func _spawn_fuses():
 		new_fuse.global_position = spawn_point.global_position
 		new_fuse.rotate_y(randf_range(0, TAU))  # optional
 		add_child(new_fuse)
+
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("interact2"):
+		power_on = !power_on
+
+	if power_on:
+		$WorldEnvironment.environment.tonemap_exposure = 1.0
+		for light in lights:
+			light.light_on = true
+		for lightpo in lights_poweroff:
+			lightpo.light_on = false
+	else:
+		$WorldEnvironment.environment.tonemap_exposure = 0.5
+		for light in lights:
+			light.light_on = false
+		for lightpo in lights_poweroff:
+			lightpo.light_on = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=4 uid="uid://bnsls6ci2d86x"]
+[gd_scene load_steps=66 format=4 uid="uid://bnsls6ci2d86x"]
 
 [ext_resource type="PackedScene" uid="uid://bl7bwcg6pboer" path="res://level/Items/item.tscn" id="1_6iw75"]
 [ext_resource type="Texture2D" uid="uid://dq7es84w44git" path="res://glb_models/zippo_lighter_ps1_0.png" id="2_ywnc8"]
@@ -21,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://c1fo7xm61ndvg" path="res://glb_models/zippo_lighter_ps1_17.png" id="19_82rwa"]
 [ext_resource type="Texture2D" uid="uid://c2srrclmbcle" path="res://addons/kenney_particle_pack/flame_03.png" id="20_ywnc8"]
 [ext_resource type="Script" uid="uid://5y4ku7x7jmmi" path="res://scripts/Inventory_Items/lighter_ignited.gd" id="21_62cqy"]
+[ext_resource type="NoiseTexture3D" uid="uid://pg07e2syq1p0" path="res://shader/lighter.tres" id="22_2xfti"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fwc3f"]
 resource_name = "flashligthBase"
@@ -576,13 +577,6 @@ particles_anim_loop = false
 material = SubResource("StandardMaterial3D_u1hvb")
 size = Vector2(0.1, 0.1)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_2xfti"]
-noise_type = 4
-frequency = 1.0
-
-[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_rik4h"]
-noise = SubResource("FastNoiseLite_2xfti")
-
 [sub_resource type="Animation" id="Animation_ywnc8"]
 length = 0.001
 tracks/0/type = "value"
@@ -920,9 +914,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.340248, -0.0343409, 0.0719
 visible = false
 light_color = Color(0.781572, 0.513844, 0.224712, 1)
 light_indirect_energy = 0.4
+omni_range = 8.0
 omni_attenuation = 0.5
 script = ExtResource("21_62cqy")
-noise = SubResource("NoiseTexture3D_rik4h")
+noise = ExtResource("22_2xfti")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
 root_node = NodePath("../lighter")

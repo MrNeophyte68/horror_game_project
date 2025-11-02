@@ -1,4 +1,4 @@
-[gd_scene load_steps=398 format=4 uid="uid://bthiyrqhjc2pr"]
+[gd_scene load_steps=399 format=4 uid="uid://bthiyrqhjc2pr"]
 
 [ext_resource type="PackedScene" uid="uid://brofngqyvl55r" path="res://level/elevator2.tscn" id="1_eppn4"]
 [ext_resource type="Texture2D" uid="uid://b7l7ocga2of7w" path="res://glb_models/PSX Mega Pack (source file)_tiles_floor_1.png" id="1_f1n8k"]
@@ -49,6 +49,7 @@
 [ext_resource type="PackedScene" uid="uid://du41brcdy7800" path="res://glb_models/low_poly_boombox_ps1ps2_style.glb" id="47_ohs5a"]
 [ext_resource type="Texture2D" uid="uid://bv3x3fq8ew225" path="res://glb_models/PSX Mega Pack (source file)_cardboard_box_1.png" id="48_osmqh"]
 [ext_resource type="Texture2D" uid="uid://dyt7hqc6srdf7" path="res://glb_models/PSX Mega Pack (source file)_carpet_mp_1.png" id="49_35k41"]
+[ext_resource type="PackedScene" uid="uid://rwc4hfh8jiv2" path="res://level/power_off_light.tscn" id="50_osmqh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_elkvu"]
 resource_name = "wall_3"
@@ -7549,14 +7550,6 @@ shape = SubResource("ConcavePolygonShape3D_1mhbv")
 
 [node name="lights" type="Node3D" parent="."]
 
-[node name="OmniLight3D" type="OmniLight3D" parent="lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.3167, 2.63815, 1.9981)
-light_color = Color(0.513726, 0, 0, 1)
-light_energy = 4.0
-shadow_enabled = true
-omni_range = 10.0
-omni_attenuation = 2.0
-
 [node name="lamp" parent="lights" instance=ExtResource("11_cqg4v")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.22248, 0.398555, -13.5855)
 
@@ -7573,7 +7566,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.85747, 0.398555, -25.871)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.7919, 0.398555, -9.93912)
 
 [node name="lamp8" parent="lights" instance=ExtResource("11_cqg4v")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.9456, 0.398555, 6.24321)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.2692, 0.398555, 6.24321)
 
 [node name="lamp9" parent="lights" instance=ExtResource("11_cqg4v")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.9456, 0.398555, -17.001)
@@ -7600,10 +7593,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.9456, 0.398555, -5.10369)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.7189, 0.398555, 11.9157)
 
 [node name="lamp15" parent="lights" instance=ExtResource("11_cqg4v")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.0437, 0.398555, 8.48451)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.0437, 0.398555, 5.6988)
+
+[node name="lamp28" parent="lights" instance=ExtResource("11_cqg4v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.0437, 0.398555, 13.2258)
 
 [node name="lamp16" parent="lights" instance=ExtResource("11_cqg4v")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.8156, 0.398555, 13.9767)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.2911, 0.398555, 13.9767)
+
+[node name="lamp29" parent="lights" instance=ExtResource("11_cqg4v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.6989, 0.398555, 13.9767)
 
 [node name="lamp17" parent="lights" instance=ExtResource("11_hqpg8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.0228, 1.96909, -29.958)
@@ -12596,6 +12595,7 @@ shape = SubResource("ConcavePolygonShape3D_aenp2")
 
 [node name="metal_barrel_hr_4_2" type="MeshInstance3D" parent="decorations"]
 transform = Transform3D(1, 0, 0, 0, -3.57628e-06, -1, 0, 1, -3.57628e-06, 32.3628, 0.0100012, -13.636)
+lod_bias = 20.0
 mesh = SubResource("ArrayMesh_dygww")
 skeleton = NodePath("")
 
@@ -12639,3 +12639,39 @@ transform = Transform3D(-1.02002, 0, -8.74228e-08, 0, 1, 0, 8.91729e-08, 0, -1, 
 
 [node name="fusebox" parent="Puzzle" instance=ExtResource("39_g7f3u")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 18.053, 1.58336, -4.02682)
+
+[node name="lights_not_changing" type="Node3D" parent="."]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="lights_not_changing"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.3167, 2.63815, 1.9981)
+light_color = Color(0.513726, 0, 0, 1)
+light_energy = 4.0
+shadow_enabled = true
+omni_range = 10.0
+omni_attenuation = 2.0
+
+[node name="lights_power_off" type="Node3D" parent="."]
+
+[node name="Node3D" parent="lights_power_off" instance=ExtResource("50_osmqh")]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 1.13026, 2.65827, -14.6252)
+
+[node name="Node3D8" parent="lights_power_off" instance=ExtResource("50_osmqh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.09644, 2.65827, 0.0590478)
+
+[node name="Node3D2" parent="lights_power_off" instance=ExtResource("50_osmqh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.85368, 2.65827, -23.7982)
+
+[node name="Node3D3" parent="lights_power_off" instance=ExtResource("50_osmqh")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 23.955, 2.65827, -12.0809)
+
+[node name="Node3D5" parent="lights_power_off" instance=ExtResource("50_osmqh")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 31.9149, 2.65827, -11.7021)
+
+[node name="Node3D6" parent="lights_power_off" instance=ExtResource("50_osmqh")]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 39.8169, 2.65827, 10.2938)
+
+[node name="Node3D7" parent="lights_power_off" instance=ExtResource("50_osmqh")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 16.0045, 2.65827, 13.9301)
+
+[node name="Node3D4" parent="lights_power_off" instance=ExtResource("50_osmqh")]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 31.7941, 2.65827, -25.9331)
