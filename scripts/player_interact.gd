@@ -20,6 +20,9 @@ var fuse_check := []
 @onready var fusebox = get_tree().root.get_node("Level/map/Puzzle/fusebox")
 var reading: bool = false
 @onready var cut_progress = $CanvasLayer/CutProgress
+@onready var player = get_tree().root.get_node("Level/Player")
+var placed: bool = false
+var show_inf_full_msg: bool = false
 
 func _physics_process(delta: float) -> void:
 	if is_colliding():
@@ -90,6 +93,17 @@ func _physics_process(delta: float) -> void:
 				
 				"note":
 					hit.get_parent().get_parent().read()
+				
+				"lighter":
+					for i in range(3):
+						if player.inventory.inventory[i] == null:
+							hit.get_parent().equip_lighter()
+							hit.queue_free()
+							placed = true
+							break
+					if not placed:
+						show_msg()
+							
 					
 		if Input.is_action_pressed("interact"):
 			match hit.name:
@@ -104,7 +118,7 @@ func _physics_process(delta: float) -> void:
 			can_cut = false
 
 		# Crosshair visibility for interactables
-		if hit.is_in_group("yellow_fuse") or hit.is_in_group("green_fuse") or hit.is_in_group("red_fuse") or hit.is_in_group("blue_fuse") or hit.is_in_group("fingers") or hit.name in ["door", "drawer", "ElevatorCall", "exit", "fusebox_door"]:
+		if hit.is_in_group("yellow_fuse") or hit.is_in_group("green_fuse") or hit.is_in_group("red_fuse") or hit.is_in_group("blue_fuse") or hit.is_in_group("fingers") or hit.name in ["door", "drawer", "ElevatorCall", "exit", "fusebox_door", "lighter"]:
 			if !crosshair.visible:
 				crosshair.visible = true
 		
@@ -156,3 +170,14 @@ func _physics_process(delta: float) -> void:
 			for mesh in fusebox.highlight_fuse:
 				if mesh.visible:
 					mesh.visible = false
+
+func show_msg():
+	if player.door_buy_msg.visible:
+		player.inv_full_msg.visible = false
+	if show_inf_full_msg:
+		return
+	show_inf_full_msg = true
+	player.inv_full_msg.visible = true
+	await get_tree().create_timer(2.0, false).timeout
+	player.inv_full_msg.visible = false
+	show_inf_full_msg = false

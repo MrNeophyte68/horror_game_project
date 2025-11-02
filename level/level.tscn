@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://6n6tw3hrvg8i"]
+[gd_scene load_steps=24 format=3 uid="uid://6n6tw3hrvg8i"]
 
 [ext_resource type="Script" uid="uid://b6mn5m38gbdip" path="res://scripts/game_intro.gd" id="1_qohg2"]
 [ext_resource type="PackedScene" uid="uid://c21w7v6ghunna" path="res://level/finger.tscn" id="2_44x8d"]
@@ -11,6 +11,7 @@
 [ext_resource type="Shader" uid="uid://d2wx3kwmqlf1m" path="res://shader/chromatic.gdshader" id="7_ivpvi"]
 [ext_resource type="PackedScene" uid="uid://qxcccn7ywulv" path="res://level/fuses/rigidbody_yellow_fuse.tscn" id="7_m3nah"]
 [ext_resource type="PackedScene" uid="uid://c6u3h4ohbkawm" path="res://level/note.tscn" id="7_xii2b"]
+[ext_resource type="PackedScene" uid="uid://dm7ywil3i4h4s" path="res://level/Items/pickable_lighter.tscn" id="12_rhqlf"]
 
 [sub_resource type="Gradient" id="Gradient_qohg2"]
 offsets = PackedFloat32Array(0, 0.363208, 1)
@@ -266,6 +267,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.70651, 0.764082, 1.63063)
 
 [node name="Marker3D" type="Marker3D" parent="note_spawn_points"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.70244, 1.15129, -22.3386)
+
+[node name="items" type="Node3D" parent="."]
+
+[node name="Node3D" parent="items" instance=ExtResource("12_rhqlf")]
+transform = Transform3D(-1.79107e-08, 0.409748, 0.912199, -1, -4.37114e-08, 0, 3.98735e-08, -0.912199, 0.409748, -2.66319, 1.07746, 0.786281)
 
 [editable path="map"]
 [editable path="map/Puzzle/fusebox"]

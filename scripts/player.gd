@@ -49,6 +49,8 @@ var equipped_slot: int = -1  # -1 means no item is currently equipped
 var is_equipping: bool = false  # Prevents spamming
 var item_list = ["lighter", "saw"]
 var is_cutting: bool = false
+@onready var inv_full_msg = $player_ui/CanvasLayer/inventory_full_msg
+@onready var door_buy_msg = $player_ui/CanvasLayer/buy_door_message
 
 
 
@@ -75,11 +77,8 @@ func _physics_process(delta: float) -> void:
 	
 	if raycast.can_cut and near_window and is_cutting:
 		$head/RayCast3D/CanvasLayer/CutProgress.value += delta * 40.0
-		if $head/RayCast3D/CanvasLayer/CutProgress.value == 500:
-			current_item.queue_free()
-			can_move = true
-			$head/RayCast3D/CanvasLayer/CutProgress.modulate.a = 0.0
-			is_cutting = false
+		if $head/RayCast3D/CanvasLayer/CutProgress.value >= 500:
+			_break_saw()
 			$player_ui/CanvasLayer/saw_break_msg.visible = true
 			await get_tree().create_timer(2.0, false).timeout
 			$player_ui/CanvasLayer/saw_break_msg.visible = false
@@ -303,3 +302,32 @@ func unequip_item() -> void:
 		current_item = null
 		equipped_slot = -1
 	is_equipping = false  # Unlock input
+
+func add_item_to_inventory(item_scene: PackedScene) -> bool:
+	for i in range(inventory.inventory.size()):
+		if inventory.inventory[i] == null:
+			inventory.inventory[i] = item_scene
+			return true  # success
+	print("Inventory full!")
+	return false  # no empty slot found
+
+func _break_saw():
+	# stop cutting anim if needed
+	var ap := current_item.get_node_or_null("AnimationPlayer") if current_item else null
+	if ap and ap.is_playing() and ap.current_animation == "cutting":
+		ap.stop()
+
+	# remove in-hand instance
+	if current_item:
+		current_item.queue_free()
+		current_item = null
+
+	# remove from inventory (this is the part you were missing)
+	if equipped_slot != -1 and equipped_slot < inventory.inventory.size():
+		inventory.inventory[equipped_slot] = null
+		equipped_slot = -1
+
+	# reset cutting/ui state
+	can_move = true
+	is_cutting = false
+	$head/RayCast3D/CanvasLayer/CutProgress.modulate.a = 0.0

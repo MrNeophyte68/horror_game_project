@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://tfkbwj413ywp"]
+[gd_scene load_steps=13 format=3 uid="uid://tfkbwj413ywp"]
 
 [ext_resource type="Texture2D" uid="uid://2xpj74ysuet8" path="res://Texture/Cur_Grab2.png" id="1_cfom6"]
 [ext_resource type="Script" uid="uid://bcm5bdc8fit87" path="res://ui/player_ui.gd" id="1_ehg4m"]
@@ -16,6 +16,9 @@ font = ExtResource("7_f7sc3")
 font = ExtResource("7_f7sc3")
 
 [sub_resource type="LabelSettings" id="LabelSettings_f7sc3"]
+font = ExtResource("7_f7sc3")
+
+[sub_resource type="LabelSettings" id="LabelSettings_1wie7"]
 font = ExtResource("7_f7sc3")
 
 [node name="player_ui" type="Control"]
@@ -72,6 +75,16 @@ offset_right = 355.0
 offset_bottom = 297.0
 text = "saw is broken"
 label_settings = SubResource("LabelSettings_f7sc3")
+uppercase = true
+
+[node name="inventory_full_msg" type="Label" parent="CanvasLayer"]
+visible = false
+offset_left = 214.0
+offset_top = 274.0
+offset_right = 367.0
+offset_bottom = 297.0
+text = "inventory is full"
+label_settings = SubResource("LabelSettings_1wie7")
 uppercase = true
 
 [node name="pause_menu" parent="." instance=ExtResource("3_iwa1g")]
