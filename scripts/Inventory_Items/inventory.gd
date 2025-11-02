@@ -3,9 +3,9 @@ extends Node
 class_name PlayerInventory
 
 var inventory := [
+	null,
 	preload("res://level/Items/saw.tscn"),
-	preload("res://level/Items/saw.tscn"),
-	preload("res://level/Items/saw.tscn")
+	null
 ]
 
 func get_item(slot: int):
