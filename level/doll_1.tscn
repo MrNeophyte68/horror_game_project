@@ -7568,10 +7568,11 @@ _data = {
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_m5341"]
 radius = 0.25
 
-[node name="CharacterBody3D" type="CharacterBody3D"]
+[node name="Stalker" type="CharacterBody3D"]
 script = ExtResource("1_m5341")
 
 [node name="Doll1" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
 [node name="doll1godot" parent="Doll1" instance=ExtResource("1_od4c3")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
@@ -7797,5 +7798,8 @@ speed_scale = 1.5
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.978044, 0)
 shape = SubResource("CapsuleShape3D_m5341")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_desired_distance = 0.5
 
 [editable path="Doll1/doll1godot"]

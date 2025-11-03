@@ -178,9 +178,6 @@ shadow_enabled = true
 [node name="map" parent="." instance=ExtResource("3_qohg2")]
 transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0)
 
-[node name="brick_mx_2_0" parent="map/decorations" index="21"]
-transform = Transform3D(-0.442993, -0.896525, 0, 0, 0, -1, 0.896525, -0.442993, 0, 3.50466, 0, -1.73756)
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_vkbyq")
@@ -295,8 +292,8 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 6.5781
 [node name="PowerSwitch4" parent="PowerSwitches" instance=ExtResource("13_l5lfc")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.23617, 1.63421, -3.97844)
 
-[node name="CharacterBody3D" parent="." instance=ExtResource("14_m3nah")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.98417, 0, -14.2011)
+[node name="Stalker" parent="." instance=ExtResource("14_m3nah")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.98417, 0, -14.2011)
 
 [editable path="map"]
 [editable path="map/Puzzle/fusebox"]
