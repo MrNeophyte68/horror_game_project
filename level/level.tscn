@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://6n6tw3hrvg8i"]
+[gd_scene load_steps=27 format=3 uid="uid://6n6tw3hrvg8i"]
 
 [ext_resource type="Script" uid="uid://b6mn5m38gbdip" path="res://scripts/game_intro.gd" id="1_qohg2"]
 [ext_resource type="PackedScene" uid="uid://c21w7v6ghunna" path="res://level/finger.tscn" id="2_44x8d"]
@@ -158,6 +158,9 @@ shader_parameter/vignette_intensity = 2.0
 shader_parameter/vignette_contrast = 2.2
 shader_parameter/vignette_color = Color(0, 0, 0, 1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_m3nah"]
+size = Vector3(4.76465, 3.2196, 1.83508)
+
 [node name="Level" type="Node3D"]
 script = ExtResource("1_qohg2")
 finger_scene = ExtResource("2_44x8d")
@@ -278,6 +281,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.70244, 1.15129, -22.3386)
 [node name="Node3D" parent="interactable" instance=ExtResource("12_rhqlf")]
 transform = Transform3D(-1.79107e-08, 0.409748, 0.912199, -1, -4.37114e-08, 0, 3.98735e-08, -0.912199, 0.409748, -2.66319, 1.07746, 0.786281)
 
+[node name="Area3D" type="Area3D" parent="interactable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.29974, 0.328904, -9.87413)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="interactable/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.050293, 1.1098, 2.21192)
+shape = SubResource("BoxShape3D_m3nah")
+
 [node name="PowerSwitches" type="Node3D" parent="."]
 
 [node name="PowerSwitch" parent="PowerSwitches" instance=ExtResource("13_l5lfc")]
@@ -294,6 +304,8 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.2361
 
 [node name="Stalker" parent="." instance=ExtResource("14_m3nah")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.98417, 0, -14.2011)
+
+[connection signal="body_entered" from="interactable/Area3D" to="." method="_on_area_3d_body_entered"]
 
 [editable path="map"]
 [editable path="map/Puzzle/fusebox"]

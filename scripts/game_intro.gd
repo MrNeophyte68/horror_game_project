@@ -136,3 +136,11 @@ func _process(delta: float) -> void:
 		power_on = true
 	else:
 		power_on = false
+
+
+
+
+func _on_area_3d_body_entered(body: CharacterBody3D):
+	if body.name == "Player" and $Stalker.first_time_aggressive == false and $Stalker.first_time_attack == false and $Stalker.first_time_near == false:
+		$map/lights_power_off/Node3D.animation.play("blink")
+		$Stalker.first_time_near = true
