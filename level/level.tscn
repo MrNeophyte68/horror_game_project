@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://6n6tw3hrvg8i"]
+[gd_scene load_steps=26 format=3 uid="uid://6n6tw3hrvg8i"]
 
 [ext_resource type="Script" uid="uid://b6mn5m38gbdip" path="res://scripts/game_intro.gd" id="1_qohg2"]
 [ext_resource type="PackedScene" uid="uid://c21w7v6ghunna" path="res://level/finger.tscn" id="2_44x8d"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://c6u3h4ohbkawm" path="res://level/note.tscn" id="7_xii2b"]
 [ext_resource type="PackedScene" uid="uid://dm7ywil3i4h4s" path="res://level/Items/pickable_lighter.tscn" id="12_rhqlf"]
 [ext_resource type="PackedScene" uid="uid://cvrvuskojt23m" path="res://level/power_switch.tscn" id="13_l5lfc"]
+[ext_resource type="PackedScene" uid="uid://67lx0vmub21w" path="res://level/doll_1.tscn" id="14_m3nah"]
 
 [sub_resource type="Gradient" id="Gradient_qohg2"]
 offsets = PackedFloat32Array(0, 0.363208, 1)
@@ -293,6 +294,9 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 6.5781
 
 [node name="PowerSwitch4" parent="PowerSwitches" instance=ExtResource("13_l5lfc")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.23617, 1.63421, -3.97844)
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("14_m3nah")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.98417, 0, -14.2011)
 
 [editable path="map"]
 [editable path="map/Puzzle/fusebox"]

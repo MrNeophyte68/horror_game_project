@@ -1,5 +1,14 @@
-extends Node3D
+extends CharacterBody3D
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	$AnimationPlayer.play("idle")
+enum DollState1 {FIRST_TIME}
+var current_state
+
+func ready():
+	current_state = DollState1.FIRST_TIME
+
+func _physics_process(delta: float) -> void:
+	if current_state == DollState1.FIRST_TIME:
+		pass
+	move_and_slide()
+	
+	

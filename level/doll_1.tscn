@@ -7568,13 +7568,15 @@ _data = {
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_m5341"]
 radius = 0.25
 
-[node name="Doll1" type="Node3D"]
+[node name="CharacterBody3D" type="CharacterBody3D"]
 script = ExtResource("1_m5341")
 
-[node name="doll1godot" parent="." instance=ExtResource("1_od4c3")]
+[node name="Doll1" type="Node3D" parent="."]
+
+[node name="doll1godot" parent="Doll1" instance=ExtResource("1_od4c3")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
-[node name="Skeleton3D" parent="doll1godot/Armature" index="0"]
+[node name="Skeleton3D" parent="Doll1/doll1godot/Armature" index="0"]
 bones/0/rotation = Quaternion(-0.707107, 0, 0, 0.707107)
 bones/1/position = Vector3(0.000303343, 1.62261, 44.3945)
 bones/1/rotation = Quaternion(0.692163, 4.09129e-05, -4.36747e-05, 0.721741)
@@ -7786,7 +7788,7 @@ bones/70/position = Vector3(7.74049e-06, 0.957154, 1.09389e-05)
 bones/70/rotation = Quaternion(5.3088e-08, -4.11051e-08, 1.87656e-07, 1)
 bones/70/scale = Vector3(1, 1, 1)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Doll1"]
 libraries = {
 &"": SubResource("AnimationLibrary_aoyw7")
 }
@@ -7796,4 +7798,4 @@ speed_scale = 1.5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.978044, 0)
 shape = SubResource("CapsuleShape3D_m5341")
 
-[editable path="doll1godot"]
+[editable path="Doll1/doll1godot"]

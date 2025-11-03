@@ -31,6 +31,9 @@ var switch_check:int = 0
 
 	
 func _ready():
+	for switch in power_switches:
+		if switch.name != "PowerSwitch4":
+			switch.activate = true
 	
 	$cutscene_ui/AnimationPlayer.play("fade")
 	#$AnimationPlayer.play("cutscene")
@@ -112,13 +115,13 @@ func _spawn_fuses():
 
 func _process(delta: float) -> void:
 	if power_on:
-		$WorldEnvironment.environment.tonemap_exposure = 1.5
+		$WorldEnvironment.environment.tonemap_exposure = 2.0
 		for light in lights:
 			light.light_on = true
 		for lightpo in lights_poweroff:
 			lightpo.light_on = false
 	else:
-		$WorldEnvironment.environment.tonemap_exposure = 0.5
+		$WorldEnvironment.environment.tonemap_exposure = 1.0
 		for light in lights:
 			light.light_on = false
 		for lightpo in lights_poweroff:
