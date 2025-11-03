@@ -606,13 +606,11 @@ shape = SubResource("ConcavePolygonShape3D_5leew")
 
 [node name="lamp_2_off" type="MeshInstance3D" parent="lever_etx_2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.005, 0, -0.34)
-visible = false
 mesh = SubResource("ArrayMesh_3mda2")
 skeleton = NodePath("")
 
 [node name="lamp_2_on" type="MeshInstance3D" parent="lever_etx_2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00522384, 0, -0.34)
-visible = false
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_4hmyi")
 skeleton = NodePath("")
@@ -621,6 +619,7 @@ skeleton = NodePath("")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.19507, 0)
 light_color = Color(0.881283, 0.487262, 0.118083, 1)
 light_energy = 0.9
+shadow_enabled = true
 omni_range = 3.0
 omni_attenuation = 0.9
 

@@ -123,13 +123,10 @@ func _physics_process(delta: float) -> void:
 							can_cut = false
 							$CanvasLayer/CutProgress.value = 0
 				"power_switch":
-					player.can_move = false
 					hit.get_parent().get_parent().activating(delta)
 					
 		else:
 			can_cut = false
-			if !player.is_vaulting:
-				player.can_move = true
 
 		# Crosshair visibility for interactables
 		if hit.is_in_group("yellow_fuse") or hit.is_in_group("green_fuse") or hit.is_in_group("red_fuse") or hit.is_in_group("blue_fuse") or hit.is_in_group("fingers") or hit.name in ["door", "drawer", "ElevatorCall", "exit", "fusebox_door", "lighter"]:

@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://67lx0vmub21w"]
+[gd_scene load_steps=11 format=3 uid="uid://67lx0vmub21w"]
 
+[ext_resource type="Script" uid="uid://dg3y5p8i6g5d" path="res://scripts/doll1_enemy.gd" id="1_m5341"]
 [ext_resource type="PackedScene" uid="uid://cenvi5ayr47qe" path="res://glb_models/doll1godot.glb" id="1_od4c3"]
 
 [sub_resource type="Animation" id="Animation_m5341"]
@@ -7564,9 +7565,14 @@ _data = {
 &"walk": SubResource("Animation_od4c3")
 }
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_m5341"]
+radius = 0.25
+
 [node name="Doll1" type="Node3D"]
+script = ExtResource("1_m5341")
 
 [node name="doll1godot" parent="." instance=ExtResource("1_od4c3")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
 [node name="Skeleton3D" parent="doll1godot/Armature" index="0"]
 bones/0/rotation = Quaternion(-0.707107, 0, 0, 0.707107)
@@ -7785,5 +7791,9 @@ libraries = {
 &"": SubResource("AnimationLibrary_aoyw7")
 }
 speed_scale = 1.5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.978044, 0)
+shape = SubResource("CapsuleShape3D_m5341")
 
 [editable path="doll1godot"]

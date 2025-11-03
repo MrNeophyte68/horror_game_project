@@ -112,7 +112,7 @@ func _spawn_fuses():
 
 func _process(delta: float) -> void:
 	if power_on:
-		$WorldEnvironment.environment.tonemap_exposure = 1.0
+		$WorldEnvironment.environment.tonemap_exposure = 1.5
 		for light in lights:
 			light.light_on = true
 		for lightpo in lights_poweroff:

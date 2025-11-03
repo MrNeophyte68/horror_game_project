@@ -4,6 +4,7 @@ extends Node3D
 var activate:bool = false
 var play_once:bool = true
 @onready var staticbody = $lever_etx_2/power_switch
+@onready var player = get_tree().root.get_node("Level/Player")
 
 func _ready():
 	$GPUParticles3D.emitting = false
@@ -13,6 +14,7 @@ func _physics_process(delta: float):
 		$lever_etx_2/lever_etx_2_child2.rotation_degrees.x = 0.0
 		var tween = create_tween()
 		tween.tween_property($lever_etx_2/lever_etx_2_child, "rotation_degrees:x", 0.0, 1.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		player.can_move = true
 		
 	if $lever_etx_2/lever_etx_2_child2.rotation_degrees.x == 0.0 and !activate:
 		$lever_etx_2/screen_etx_1_partial/SubViewport/CanvasLayer2/TextureProgressBar.value -= delta * 40.0
@@ -30,6 +32,7 @@ func _physics_process(delta: float):
 			var tween = create_tween()
 			tween.tween_property($lever_etx_2/lever_etx_2_child, "rotation_degrees:x", 0.0, 1.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 			play_once = false
+			player.can_move = true
 			await get_tree().create_timer(1.0).timeout
 			$GPUParticles3D.emitting = false
 		
@@ -43,9 +46,10 @@ func turn_on():
 	$lever_etx_2/lever_etx_2_child2.rotation_degrees.x = 90.0
 	var tween = create_tween()
 	tween.tween_property($lever_etx_2/lever_etx_2_child, "rotation_degrees:x", 90.0, 1.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	player.can_move = false
 
 func activating(delta):
-	$lever_etx_2/screen_etx_1_partial/SubViewport/CanvasLayer2/TextureProgressBar.value += delta * 80.0
+	$lever_etx_2/screen_etx_1_partial/SubViewport/CanvasLayer2/TextureProgressBar.value += delta * 160.0
 
 func reset():
 	$lever_etx_2/screen_etx_1_partial/SubViewport/CanvasLayer2/TextureProgressBar.value = 0

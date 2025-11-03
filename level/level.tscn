@@ -177,6 +177,9 @@ shadow_enabled = true
 [node name="map" parent="." instance=ExtResource("3_qohg2")]
 transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0)
 
+[node name="brick_mx_2_0" parent="map/decorations" index="21"]
+transform = Transform3D(-0.442993, -0.896525, 0, 0, 0, -1, 0.896525, -0.442993, 0, 3.50466, 0, -1.73756)
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_vkbyq")
@@ -253,16 +256,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.5647, 0.341055, -1.45972)
 [node name="fuse_spawn_points" type="Node3D" parent="."]
 
 [node name="Marker3D" type="Marker3D" parent="fuse_spawn_points"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.24322, 0.754352, 1.95934)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.1742, 1.33515, -17.1532)
 
 [node name="Marker3D2" type="Marker3D" parent="fuse_spawn_points"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.92809, 0.542722, 1.80585)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.8827, 0.542722, -11.9494)
 
 [node name="Marker3D3" type="Marker3D" parent="fuse_spawn_points"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.4696, 1.35352, -22.2551)
 
 [node name="Marker3D4" type="Marker3D" parent="fuse_spawn_points"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.70651, 0.764082, 1.63063)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.8752, 0.910083, -7.64312)
+
+[node name="Marker3D5" type="Marker3D" parent="fuse_spawn_points"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.5106, 1.30581, -9.21833)
 
 [node name="note_spawn_points" type="Node3D" parent="."]
 
@@ -284,6 +290,9 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 37.772
 
 [node name="PowerSwitch2" parent="PowerSwitches" instance=ExtResource("13_l5lfc")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 6.57811, 1.63421, -17.5902)
+
+[node name="PowerSwitch4" parent="PowerSwitches" instance=ExtResource("13_l5lfc")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.23617, 1.63421, -3.97844)
 
 [editable path="map"]
 [editable path="map/Puzzle/fusebox"]
