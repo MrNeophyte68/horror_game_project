@@ -25,6 +25,10 @@ var fuse_scenes = {}
 @onready var lights_poweroff := $map/lights_power_off.get_children()
 var power_on: bool = false
 
+#powerSwitches
+@onready var power_switches:= $PowerSwitches.get_children()
+var switch_check:int = 0
+
 	
 func _ready():
 	
@@ -107,9 +111,6 @@ func _spawn_fuses():
 		add_child(new_fuse)
 
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("interact2"):
-		power_on = !power_on
-
 	if power_on:
 		$WorldEnvironment.environment.tonemap_exposure = 1.0
 		for light in lights:
@@ -122,3 +123,13 @@ func _process(delta: float) -> void:
 			light.light_on = false
 		for lightpo in lights_poweroff:
 			lightpo.light_on = true
+			
+	switch_check = 0
+	for switch in power_switches:
+		if switch.activate:
+			switch_check += 1
+
+	if switch_check == power_switches.size():
+		power_on = true
+	else:
+		power_on = false

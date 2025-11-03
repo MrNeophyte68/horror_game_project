@@ -51,6 +51,7 @@ var item_list = ["lighter", "saw"]
 var is_cutting: bool = false
 @onready var inv_full_msg = $player_ui/CanvasLayer/inventory_full_msg
 @onready var door_buy_msg = $player_ui/CanvasLayer/buy_door_message
+@onready var remember_msg = $player_ui/CanvasLayer/RichTextLabel/AnimationPlayer
 
 
 
@@ -82,8 +83,6 @@ func _physics_process(delta: float) -> void:
 			$player_ui/CanvasLayer/saw_break_msg.visible = true
 			await get_tree().create_timer(2.0, false).timeout
 			$player_ui/CanvasLayer/saw_break_msg.visible = false
-			
-
 
 	if can_move:
 		if can_sprint:
@@ -141,6 +140,7 @@ func _physics_process(delta: float) -> void:
 		hand_bob(velocity.length(), delta)
 	else:
 		# Prevent movement while in air if can_move is false
+		direction = Vector3.ZERO
 		velocity.x = 0
 		velocity.z = 0
 

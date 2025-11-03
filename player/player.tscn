@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://caymdmd4oniai" path="res://scripts/player.gd" id="1_rkbax"]
 [ext_resource type="Script" uid="uid://messh7v8ei7j" path="res://scripts/player_interact.gd" id="3_g1dw6"]
 [ext_resource type="Texture2D" uid="uid://b8jqai65nrng5" path="res://Texture/black_background_1920x1080.png" id="3_g6k8r"]
-[ext_resource type="Texture2D" uid="uid://bur6uyv8iddy4" path="res://Texture/white_background_1920x1080.png" id="4_boad6"]
+[ext_resource type="Texture2D" uid="uid://cm7fo140mj6o6" path="res://Texture/blue_screen1.png" id="4_g6k8r"]
 [ext_resource type="Script" uid="uid://tvn267l6o2lg" path="res://scripts/Inventory_Items/inventory.gd" id="4_qjkh3"]
 [ext_resource type="PackedScene" uid="uid://tfkbwj413ywp" path="res://ui/player_ui.tscn" id="4_yw30f"]
 
@@ -42,13 +42,13 @@ scale = Vector2(0.08, 0.01)
 transform = Transform2D(0.08, 0, 0, 0.01, 0, 0)
 
 [node name="CutProgress" type="TextureProgressBar" parent="head/RayCast3D/CanvasLayer"]
-offset_left = 2712.5
-offset_top = 28100.0
-offset_right = 4893.5
-offset_bottom = 36100.0
+offset_left = 2600.0
+offset_top = 28000.0
+offset_right = 4912.0
+offset_bottom = 39000.0
 max_value = 500.0
 texture_under = ExtResource("3_g6k8r")
-texture_progress = ExtResource("4_boad6")
+texture_progress = ExtResource("4_g6k8r")
 
 [node name="eyes" type="Node3D" parent="head"]
 

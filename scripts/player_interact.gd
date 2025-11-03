@@ -23,6 +23,9 @@ var reading: bool = false
 @onready var player = get_tree().root.get_node("Level/Player")
 var placed: bool = false
 var show_inf_full_msg: bool = false
+var _price_feedback_busy:bool = false
+var check_bdmError_count: int = 0
+var play_remembermsg_once:bool = false
 
 func _physics_process(delta: float) -> void:
 	if is_colliding():
@@ -81,6 +84,8 @@ func _physics_process(delta: float) -> void:
 						hud.update_score(score)
 						hit.get_parent().get_parent().get_parent().bought = true
 						hit.get_parent().get_parent().get_parent().animationplayer.play("open")
+					else:
+						price_error_feedback(buy_door_message, 0.35)
 						
 				"fusebox_door":
 					hit.get_parent().get_parent().get_parent().toggle_door()
@@ -103,6 +108,9 @@ func _physics_process(delta: float) -> void:
 							break
 					if not placed:
 						show_msg()
+						
+				"power_switch":
+					hit.get_parent().get_parent().turn_on()
 							
 					
 		if Input.is_action_pressed("interact"):
@@ -114,11 +122,21 @@ func _physics_process(delta: float) -> void:
 							hit.get_parent().unlock()
 							can_cut = false
 							$CanvasLayer/CutProgress.value = 0
+				"power_switch":
+					player.can_move = false
+					hit.get_parent().get_parent().activating(delta)
+					
 		else:
 			can_cut = false
+			if !player.is_vaulting:
+				player.can_move = true
 
 		# Crosshair visibility for interactables
 		if hit.is_in_group("yellow_fuse") or hit.is_in_group("green_fuse") or hit.is_in_group("red_fuse") or hit.is_in_group("blue_fuse") or hit.is_in_group("fingers") or hit.name in ["door", "drawer", "ElevatorCall", "exit", "fusebox_door", "lighter"]:
+			if !crosshair.visible:
+				crosshair.visible = true
+		
+		elif hit.name == "power_switch" and hit.get_parent().get_parent().switch.rotation_degrees.x == 0.0:
 			if !crosshair.visible:
 				crosshair.visible = true
 		
@@ -127,8 +145,15 @@ func _physics_process(delta: float) -> void:
 				crosshair.visible = true
 				
 		elif hit.name in ["buy_door"] and hit.get_parent().get_parent().get_parent().bought == false:
-			if !buy_door_message.visible:
-				buy_door_message.visible = true
+			if check_bdmError_count <= 50 or play_remembermsg_once:
+				if !buy_door_message.visible:
+					buy_door_message.visible = true
+			else:
+				buy_door_message.visible = false
+				player.remember_msg.play("show_msg")
+				await get_tree().create_timer(8.0, false).timeout
+				player.remember_msg.stop()
+				play_remembermsg_once = true
 				
 		elif hit.name in ["fusebox"] and !fusebox.inspecting:
 			for mesh in fusebox.highlight:
@@ -171,7 +196,7 @@ func _physics_process(delta: float) -> void:
 				if mesh.visible:
 					mesh.visible = false
 
-func show_msg():
+func show_msg():#inventory full message
 	if player.door_buy_msg.visible:
 		player.inv_full_msg.visible = false
 	if show_inf_full_msg:
@@ -181,3 +206,34 @@ func show_msg():
 	await get_tree().create_timer(2.0, false).timeout
 	player.inv_full_msg.visible = false
 	show_inf_full_msg = false
+
+func price_error_feedback(lbl: Label, duration := 0.35) -> void:
+	if _price_feedback_busy:
+		return
+	_price_feedback_busy = true
+
+	# Save start state
+	var start_pos: Vector2 = lbl.position
+	var start_mod: Color = lbl.modulate
+
+	# Make sure the label is visible
+	lbl.visible = true
+
+	# Tween color flash (to red, then back)
+	var t_color := create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	t_color.tween_property(lbl, "modulate", Color(1, 0.3, 0.3), duration * 0.4)
+	t_color.tween_property(lbl, "modulate", start_mod, duration * 0.6)
+
+	# Tween a small horizontal shake
+	var s := 6.0  # shake strength (pixels)
+	var t_shake := create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	t_shake.tween_property(lbl, "position", start_pos + Vector2( s, 0), duration * 0.10)
+	t_shake.tween_property(lbl, "position", start_pos + Vector2(-s, 0), duration * 0.20)
+	t_shake.tween_property(lbl, "position", start_pos + Vector2( s * 0.5, 0), duration * 0.15)
+	t_shake.tween_property(lbl, "position", start_pos, duration * 0.10)
+
+	await t_shake.finished
+	await t_color.finished
+	_price_feedback_busy = false
+	if check_bdmError_count <= 50:
+		check_bdmError_count+=1
