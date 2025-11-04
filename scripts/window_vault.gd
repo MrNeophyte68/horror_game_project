@@ -4,6 +4,8 @@ extends Node3D
 var can_vault = false
 var locked: bool = true
 @onready var body: StaticBody3D = $window
+@onready var animation = $AnimationPlayer
+@onready var window_location = $Marker3D3
 
 func window_detect(body):
 	if body.name == "Player":

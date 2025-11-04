@@ -115,13 +115,13 @@ func _spawn_fuses():
 
 func _process(delta: float) -> void:
 	if power_on:
-		$WorldEnvironment.environment.tonemap_exposure = 2.0
+		$WorldEnvironment.environment.tonemap_exposure = 1.5
 		for light in lights:
 			light.light_on = true
 		for lightpo in lights_poweroff:
 			lightpo.light_on = false
 	else:
-		$WorldEnvironment.environment.tonemap_exposure = 1.0
+		$WorldEnvironment.environment.tonemap_exposure = 0.8
 		for light in lights:
 			light.light_on = false
 		for lightpo in lights_poweroff:
@@ -141,6 +141,6 @@ func _process(delta: float) -> void:
 
 
 func _on_area_3d_body_entered(body: CharacterBody3D):
-	if body.name == "Player" and $Stalker.first_time_aggressive == false and $Stalker.first_time_attack == false and $Stalker.first_time_near == false:
+	if body.name == "Player" and $Stalker.first_time_aggressive == false and $Stalker.first_time_attack == false and $Stalker.first_time_near == false and power_on == false:
 		$map/lights_power_off/Node3D.animation.play("blink")
 		$Stalker.first_time_near = true

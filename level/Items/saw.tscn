@@ -3,22 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://bl7bwcg6pboer" path="res://level/Items/item.tscn" id="1_uofmf"]
 [ext_resource type="Texture2D" uid="uid://det23n4o4xl76" path="res://glb_models/PSX Mega Pack (source file)_hand_saw_1.png" id="2_65m17"]
 
-[sub_resource type="Animation" id="Animation_uofmf"]
-resource_name = "equip"
-length = 0.7
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("saw/saw:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.7),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0.233, -0.4, -0.29), Vector3(0.233, -0.106, -0.29)]
-}
-
 [sub_resource type="Animation" id="Animation_65m17"]
 length = 0.001
 tracks/0/type = "value"
@@ -46,6 +30,51 @@ tracks/1/keys = {
 "values": [Vector3(0.0103323, 1.65952, -3.13504)]
 }
 
+[sub_resource type="Animation" id="Animation_pcnrj"]
+resource_name = "cutting"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("saw/saw:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.233, -0.106, -0.29), Vector3(0.233, 0.01, -0.409)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("saw/saw:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.0103323, 1.65952, -3.13504), Vector3(-0.0139626, 1.65981, -2.78031)]
+}
+
+[sub_resource type="Animation" id="Animation_uofmf"]
+resource_name = "equip"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("saw/saw:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.233, -0.4, -0.29), Vector3(0.233, -0.106, -0.29)]
+}
+
 [sub_resource type="Animation" id="Animation_xnkm8"]
 resource_name = "unequip"
 length = 0.7
@@ -60,35 +89,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(0.233, -0.106, -0.29), Vector3(0.233, -0.4, -0.29)]
-}
-
-[sub_resource type="Animation" id="Animation_pcnrj"]
-resource_name = "cutting"
-length = 0.8
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("saw/saw:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.41),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0.233, -0.106, -0.29), Vector3(0.233, -0.069, -0.515)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("saw/saw:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.41),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0.0103323, 1.65952, -3.13504), Vector3(-0.00754542, 1.6598, -2.93507)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pcnrj"]
@@ -147,7 +147,7 @@ libraries = {
 [node name="saw" type="Node3D" parent="." index="1"]
 
 [node name="saw" type="MeshInstance3D" parent="saw" index="0"]
-transform = Transform3D(0.0442711, -0.00543581, 0.498006, -0.00327467, -0.499962, -0.00516605, 0.498025, -0.00280421, -0.0443034, 0.233, -0.3, -0.29)
+transform = Transform3D(0.044269, -0.00543592, 0.498006, -0.0032761, -0.499962, -0.00516605, 0.498025, -0.00280565, -0.0443013, 0.233, -0.3, -0.29)
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_xnkm8")
 skeleton = NodePath("")

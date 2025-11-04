@@ -52,6 +52,8 @@ var is_cutting: bool = false
 @onready var inv_full_msg = $player_ui/CanvasLayer/inventory_full_msg
 @onready var door_buy_msg = $player_ui/CanvasLayer/buy_door_message
 @onready var remember_msg = $player_ui/CanvasLayer/RichTextLabel/AnimationPlayer
+var vaultCount = 0
+var spamming: bool = false
 
 
 
@@ -173,6 +175,9 @@ func _process(delta: float) -> void:
 func start_vault():
 	if is_vaulting:
 		return
+	vaultCount += 1
+	if $anti_spam_vault.is_stopped():
+		$anti_spam_vault.start()
 	is_vaulting = true
 	ui.stamina.value -= 100.0
 	ui.can_regen = false
@@ -331,3 +336,15 @@ func _break_saw():
 	can_move = true
 	is_cutting = false
 	$head/RayCast3D/CanvasLayer/CutProgress.modulate.a = 0.0
+
+
+func _on_anti_spam_vault_timeout() -> void:
+	if vaultCount >= 3:
+		#print("stop spamming")
+		spamming = true
+		vaultCount = 0
+	else:
+		#print("you are not spamming")
+		spamming = false
+		vaultCount = 0
+		

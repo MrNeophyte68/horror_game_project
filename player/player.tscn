@@ -92,5 +92,11 @@ layer = 4
 [node name="Inventory" type="Node" parent="."]
 script = ExtResource("4_qjkh3")
 
+[node name="anti_spam_vault" type="Timer" parent="."]
+wait_time = 30.0
+one_shot = true
+
+[connection signal="timeout" from="anti_spam_vault" to="." method="_on_anti_spam_vault_timeout"]
+
 [editable path="player_ui"]
 [editable path="player_ui/pause_menu"]

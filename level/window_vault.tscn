@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://dg0gwkwf0gekm"]
+[gd_scene load_steps=18 format=4 uid="uid://dg0gwkwf0gekm"]
 
 [ext_resource type="Script" uid="uid://bb40jy07sy3s5" path="res://scripts/window_vault.gd" id="1_hnxmr"]
 [ext_resource type="Texture2D" uid="uid://bwcrqbrkosqnb" path="res://glb_models/PSX Mega Pack (source file)_wall_3.png" id="1_mbpvw"]
@@ -100,6 +100,307 @@ data = PackedVector3Array(2, 0.06, -3, 2.03, 0.03, 0, 2, 0.06, 0, 2, 0.06, -3, 2
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_sy6ye"]
 
+[sub_resource type="Animation" id="Animation_sy6ye"]
+resource_name = "blocked"
+length = 5.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("wooden_plank_3:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.78, 3.63, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1.5708, -0.495272, 0), Vector3(1.01159, -0.102168, -0.0745604), Vector3(0.422384, -0.0956933, -0.278185), Vector3(0, 0, -0.20944)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("wooden_plank_3:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.24, 5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.495119, 0, 0.672114), Vector3(-0.27283, 0.738289, 0.587841), Vector3(0.00106186, 1.311, 0.104)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("wooden_plank_5:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.78, 3.18, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.676195, 0, 0.400973), Vector3(0.43562, 1.14847, 0.876276), Vector3(0.246403, 1.86997, 0.894067), Vector3(0.000420943, 1.94881, 0.106841)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("wooden_plank_5:rotation")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.97, 3.67, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1.5708, 0.182614, 0), Vector3(0.945834, 0.561781, 0.399579), Vector3(0.309274, 0.209846, 0.162831), Vector3(0, 0, 0.146643)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("wooden_plank_6:rotation")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 2.36, 5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1.5708, 0.200085, 0), Vector3(0.463578, 0.152078, 0.0942868), Vector3(0, 0, -0.0473682)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("wooden_plank_6:position")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 2.68, 5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.564412, 0, -0.500744), Vector3(0.252239, 1.09422, -0.368394), Vector3(0.000828475, 1.40721, -0.0693764)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("wooden_plank_4:rotation")
+tracks/6/interp = 2
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 2.82, 5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1.5708, 0.417518, 0), Vector3(0.426808, 0.281169, 0.0752011), Vector3(0, 0, -0.283354)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("wooden_plank_4:position")
+tracks/7/interp = 2
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 1.66, 3.2, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.354133, 0, -0.855246), Vector3(-0.263427, 0.888545, -0.818081), Vector3(-0.119926, 2.00937, -0.445167), Vector3(-0.00185433, 2.04695, -0.0648332)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("wooden_plank_3:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 5.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("wooden_plank_4:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 5.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("wooden_plank_5:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 5.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("wooden_plank_6:visible")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 5.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_nj606"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("wooden_plank_3:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.5708, 0.283424, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("wooden_plank_3:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.495119, 0, 0.672114)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("wooden_plank_5:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.676195, 0, 0.400973)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("wooden_plank_5:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.5708, 0.182614, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("wooden_plank_6:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.5708, 0.200085, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("wooden_plank_6:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.564412, 0, -0.500744)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("wooden_plank_4:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.5708, 0.417518, 0)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("wooden_plank_4:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.354133, 0, -0.855246)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("wooden_plank_3:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("wooden_plank_4:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("wooden_plank_5:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("wooden_plank_6:visible")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_guerf"]
+_data = {
+&"RESET": SubResource("Animation_nj606"),
+&"blocked": SubResource("Animation_sy6ye")
+}
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oyvoe"]
 resource_name = "planks_hr_1"
 cull_mode = 2
@@ -168,6 +469,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.22709, 0)
 shape = SubResource("BoxShape3D_sy6ye")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_guerf")
+}
+speed_scale = 2.0
 
 [node name="wooden_plank_2" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.35962, 0.289021, 0, -0.289021, 1.35962, 0, 0, 0, 1.39, 0, 1.31149, 0.10378)
@@ -188,6 +493,39 @@ skeleton = NodePath("")
 transform = Transform3D(0.98685, -0.161638, 0, 0.161638, 0.98685, 0, 0, 0, 1, -0.0156955, 0.073835, -0.12051)
 mesh = SubResource("ArrayMesh_nj606")
 skeleton = NodePath("")
+
+[node name="wooden_plank_3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.33454, 0.388706, -1.69909e-08, 0, -6.07588e-08, -1.39, -0.388706, 1.33454, -5.83348e-08, -0.495119, 0, 0.672114)
+visible = false
+mesh = SubResource("ArrayMesh_nj606")
+skeleton = NodePath("")
+
+[node name="wooden_plank_4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.2706, 0.563635, -2.46373e-08, 0, -6.07588e-08, -1.39, -0.563635, 1.2706, -5.55395e-08, -0.354133, 0, -0.855246)
+visible = false
+mesh = SubResource("ArrayMesh_nj606")
+skeleton = NodePath("")
+
+[node name="wooden_plank_5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.36689, 0.252425, -1.10338e-08, 0, -6.07588e-08, -1.39, -0.252425, 1.36689, -5.97485e-08, 0.676195, 0, 0.400973)
+visible = false
+mesh = SubResource("ArrayMesh_nj606")
+skeleton = NodePath("")
+
+[node name="wooden_plank_6" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.36227, 0.276266, -1.2076e-08, 0, -6.07588e-08, -1.39, -0.276266, 1.36227, -5.95467e-08, 0.564412, 0, -0.500744)
+visible = false
+mesh = SubResource("ArrayMesh_nj606")
+skeleton = NodePath("")
+
+[node name="Marker3D" type="Marker3D" parent="." groups=["windowBlockPosition"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -2.423)
+
+[node name="Marker3D2" type="Marker3D" parent="." groups=["windowBlockPosition"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 2.137)
+
+[node name="Marker3D3" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.199495, 0.0954535)
 
 [connection signal="body_entered" from="Area3D" to="." method="window_detect"]
 [connection signal="body_exited" from="Area3D" to="." method="window_detect_exit"]
