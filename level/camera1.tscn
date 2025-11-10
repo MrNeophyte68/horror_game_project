@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dnh3sfv3flis8"]
-
-[ext_resource type="PackedScene" uid="uid://coa4op267qcwn" path="res://glb_models/camera.glb" id="1_c7htk"]
-
-[node name="camera2" instance=ExtResource("1_c7htk")]
-
-[node name="camera" parent="." index="0"]
-cast_shadow = 0

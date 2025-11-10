@@ -187,7 +187,7 @@ libraries = {
 }
 
 [node name="cutscene_camera" type="Camera3D" parent="."]
-transform = Transform3D(0.770475, -0.12610385, -0.6248719, 0.46753967, 0.7781168, 0.41945198, 0.43332925, -0.6153302, 0.6584779, -3.83145, 0.760775, 3.64125)
+transform = Transform3D(0.7704749, -0.12610385, -0.62487185, 0.46753964, 0.7781168, 0.41945192, 0.4333292, -0.6153302, 0.65847784, -3.83145, 0.760775, 3.64125)
 
 [node name="cutscene_ui" parent="." instance=ExtResource("3_vkbyq")]
 
@@ -305,10 +305,27 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.2361
 [node name="Stalker" parent="." instance=ExtResource("14_m3nah")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.98417, 0, -14.2011)
 
+[node name="Game_Duration" type="Timer" parent="."]
+wait_time = 1200.0
+one_shot = true
+autostart = true
+ignore_time_scale = true
+
+[node name="shadowCam" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.551131, 1.6129777, -2.9875278)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.64, 2.369, -9.085)
+light_energy = 0.505
+omni_range = 2.311
+omni_attenuation = 1.485
+
 [connection signal="body_entered" from="interactable/Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="timeout" from="Game_Duration" to="." method="_on_game_duration_timeout"]
 
 [editable path="map"]
 [editable path="map/Puzzle/fusebox"]
+[editable path="cutscene_ui"]
 [editable path="Player"]
 [editable path="Player/player_ui"]
 [editable path="Player/player_ui/pause_menu"]

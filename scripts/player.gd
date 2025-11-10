@@ -32,6 +32,12 @@ var head_bob_current_intensity = 0.0
 const head_bob_crouch_intensity = 0.05
 const head_bob_crouch_speed = 7.0
 
+#main level
+@onready var level = get_tree().root.get_node("Level")
+
+#fusebox
+@onready var fusebox = get_tree().root.get_node("Level/map/Puzzle/fusebox")
+
 #stamina bar
 @onready var ui = get_tree().root.get_node("Level/Player/player_ui")
 
@@ -55,9 +61,12 @@ var is_cutting: bool = false
 var vaultCount = 0
 var spamming: bool = false
 
+var staring: bool = false
+
 
 
 func _ready() -> void:
+	$player_ui/CanvasLayer/ColorRect.modulate.a = 0.0
 	$head/RayCast3D/CanvasLayer/CutProgress.modulate.a = 0.0
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	hand_pos = hand.position
@@ -77,6 +86,36 @@ func _physics_process(delta: float) -> void:
 	
 	if $player_ui/CanvasLayer/buy_door_message.visible:
 		$player_ui/CanvasLayer/saw_break_msg.visible = false
+	
+	if Input.is_action_just_pressed("interact2"):
+		var tween = create_tween()
+		tween.tween_property($head/eyes/hand/Clock, "position:y", -0.079, 1.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	elif Input.is_action_just_released("interact2"):
+		var tween = create_tween()
+		tween.tween_property($head/eyes/hand/Clock, "position:y", -0.5, 1.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	
+	if Input.is_action_just_pressed("stare"):
+		var tween = create_tween()
+		tween.tween_property($player_ui/CanvasLayer/ColorRect, "modulate:a", 1.0, 1.0) # duration 0.5 seconds
+		await get_tree().create_timer(1.0, false).timeout
+		var tween1 = create_tween()
+		tween1.tween_property($player_ui/CanvasLayer/ColorRect, "modulate:a", 0.0, 1.0)
+		if Input.is_action_pressed("stare"):
+			staring = true
+			level.shadowCam.current = true
+	elif Input.is_action_just_released("stare"):
+		if staring:
+			var tween = create_tween()
+			tween.tween_property($player_ui/CanvasLayer/ColorRect, "modulate:a", 1.0, 1.0) # duration 0.5 seconds
+			tween.tween_property($player_ui/CanvasLayer/ColorRect, "modulate:a", 0.0, 1.0)
+			await get_tree().create_timer(1.0, false).timeout
+			level.shadowCam.current = false
+			level.cutsceneCam.current = false
+			staring = false
+		else:
+			var tween = create_tween()
+			tween.tween_property($player_ui/CanvasLayer/ColorRect, "modulate:a", 0.0, 1.0)
+			staring = false
 	
 	if raycast.can_cut and near_window and is_cutting:
 		$head/RayCast3D/CanvasLayer/CutProgress.value += delta * 40.0

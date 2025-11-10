@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bc8gum0yfovaq"]
+[gd_scene load_steps=10 format=3 uid="uid://bc8gum0yfovaq"]
 
 [ext_resource type="Script" uid="uid://caymdmd4oniai" path="res://scripts/player.gd" id="1_rkbax"]
 [ext_resource type="Script" uid="uid://messh7v8ei7j" path="res://scripts/player_interact.gd" id="3_g1dw6"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cm7fo140mj6o6" path="res://Texture/blue_screen1.png" id="4_g6k8r"]
 [ext_resource type="Script" uid="uid://tvn267l6o2lg" path="res://scripts/Inventory_Items/inventory.gd" id="4_qjkh3"]
 [ext_resource type="PackedScene" uid="uid://tfkbwj413ywp" path="res://ui/player_ui.tscn" id="4_yw30f"]
+[ext_resource type="PackedScene" uid="uid://toet28won7k8" path="res://level/clock.tscn" id="5_boad6"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sh265"]
 radius = 0.3
@@ -56,6 +57,9 @@ texture_progress = ExtResource("4_g6k8r")
 
 [node name="hand" type="Node3D" parent="head/eyes"]
 
+[node name="Clock" parent="head/eyes/hand" instance=ExtResource("5_boad6")]
+transform = Transform3D(0.2744879, 0, 0.12106361, 0, 0.3, 0, -0.12106361, 0, 0.2744879, -0.14, -0.3, -0.18)
+
 [node name="player_ui" parent="." instance=ExtResource("4_yw30f")]
 
 [node name="CanvasLayer" parent="player_ui" index="0"]
@@ -85,6 +89,11 @@ offset_left = 224.0
 offset_top = 278.0
 offset_right = 354.0
 offset_bottom = 301.0
+
+[node name="ColorRect" type="ColorRect" parent="player_ui/CanvasLayer" index="7"]
+offset_right = 583.0
+offset_bottom = 329.0
+color = Color(0, 0, 0, 1)
 
 [node name="pause_menu" parent="player_ui" index="1"]
 layer = 4

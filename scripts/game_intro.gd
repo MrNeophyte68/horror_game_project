@@ -29,8 +29,13 @@ var power_on: bool = false
 @onready var power_switches:= $PowerSwitches.get_children()
 var switch_check:int = 0
 
+@onready var game_timer: Timer = $Game_Duration
+const TOTAL_SECONDS: float = 1200
+@onready var shadowCam = $shadowCam
+@onready var cutsceneCam = $cutscene_camera
 	
 func _ready():
+	shadowCam.current = false
 	for switch in power_switches:
 		if switch.name != "PowerSwitch4":
 			switch.activate = true
@@ -113,7 +118,7 @@ func _spawn_fuses():
 		new_fuse.rotate_y(randf_range(0, TAU))  # optional
 		add_child(new_fuse)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if power_on:
 		$WorldEnvironment.environment.tonemap_exposure = 1.5
 		for light in lights:
@@ -136,11 +141,14 @@ func _process(delta: float) -> void:
 		power_on = true
 	else:
 		power_on = false
-
-
-
+	
+	
 
 func _on_area_3d_body_entered(body: CharacterBody3D):
 	if body.name == "Player" and $Stalker.first_time_aggressive == false and $Stalker.first_time_attack == false and $Stalker.first_time_near == false and power_on == false:
 		$map/lights_power_off/Node3D.animation.play("blink")
 		$Stalker.first_time_near = true
+
+func _on_game_duration_timeout() -> void:
+	$cutscene_ui/AnimationPlayer.play("RESET")
+	$cutscene_ui/CanvasLayer/Label.visible = true
