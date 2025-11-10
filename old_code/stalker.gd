@@ -46,7 +46,7 @@ func update_target_location() -> void:
 	nav_agent.target_position = destination_position
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if state == States.ROAMING and destination and speed > 0.0:
 		var look_dir := lerp_angle(
 			deg_to_rad(global_rotation_degrees.y),

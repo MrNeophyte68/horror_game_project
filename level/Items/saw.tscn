@@ -44,7 +44,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(0.233, -0.106, -0.29), Vector3(0.233, 0.01, -0.409)]
+"values": [Vector3(0.233, -0.106, -0.29), Vector3(0.233, 0.01, -0.539)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -147,7 +147,7 @@ libraries = {
 [node name="saw" type="Node3D" parent="." index="1"]
 
 [node name="saw" type="MeshInstance3D" parent="saw" index="0"]
-transform = Transform3D(0.044269, -0.00543592, 0.498006, -0.0032761, -0.499962, -0.00516605, 0.498025, -0.00280565, -0.0443013, 0.233, -0.3, -0.29)
+transform = Transform3D(0.044269, -0.00543592, 0.498006, -0.0032761, -0.499962, -0.00516605, 0.498025, -0.00280565, -0.0443012, 0.233, -0.3, -0.29)
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_xnkm8")
 skeleton = NodePath("")

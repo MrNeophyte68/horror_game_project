@@ -22,9 +22,9 @@ colors = PackedColorArray(0, 0, 0, 1, 0.260402, 0.260402, 0.260402, 1, 0.603248,
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_vkbyq"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ktfr2"]
-seamless = true
-color_ramp = SubResource("Gradient_qohg2")
 noise = SubResource("FastNoiseLite_vkbyq")
+color_ramp = SubResource("Gradient_qohg2")
+seamless = true
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5gx2l"]
 sky_top_color = Color(0.0292021, 0.0439498, 0.0845648, 1)
@@ -187,7 +187,7 @@ libraries = {
 }
 
 [node name="cutscene_camera" type="Camera3D" parent="."]
-transform = Transform3D(0.770475, -0.126104, -0.624872, 0.46754, 0.778117, 0.419452, 0.433329, -0.61533, 0.658478, -3.83145, 0.760775, 3.64125)
+transform = Transform3D(0.770475, -0.12610385, -0.6248719, 0.46753967, 0.7781168, 0.41945198, 0.43332925, -0.6153302, 0.6584779, -3.83145, 0.760775, 3.64125)
 
 [node name="cutscene_ui" parent="." instance=ExtResource("3_vkbyq")]
 

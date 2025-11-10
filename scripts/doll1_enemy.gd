@@ -26,10 +26,16 @@ func _physics_process(delta: float):
 
 	if current_state == DollState1.FIRST_TIME:
 		if level.power_on or first_time_near:
+			nav_agent.target_position = player.global_position
+			var next_point: Vector3 = nav_agent.get_next_path_position()
+			var dir: Vector3 = (next_point - global_position)
+			dir = dir.normalized()
+			velocity.x = dir.x * 0.0
+			velocity.z = dir.z * 0.0
+			animation.play("RESET")
 			current_state = DollState1.WAIT
 			$Doll1.visible = false
 			$CollisionShape3D.disabled = true
-			set_physics_process(false)
 			return
 			
 		if !first_time_attack and !first_time_aggressive:
@@ -79,12 +85,10 @@ func _physics_process(delta: float):
 				else:
 					if velocity.y > 0.0:
 						velocity.y = 0.0
-
-
 	move_and_slide()
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if first_switch.switch.rotation_degrees.x != 0.0 and !first_time_aggressive and current_state == DollState1.FIRST_TIME:
 		first_time_attack = true
 	else:
@@ -100,7 +104,8 @@ func _on_firsttime_attack_timeout() -> void:
 	first_time_aggressive = true
 
 func chase_player(delta):
-	animation.play("run")
+	if animation.current_animation != "death":
+		animation.play("run")
 	nav_agent.target_position = player.global_position
 
 	if nav_agent.is_navigation_finished():
@@ -182,3 +187,12 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		await get_tree().create_timer(1.0, false).timeout
 		player.spamming = false
 		play_block_window = false
+
+
+func _on_area_3d_body_entered(body: CharacterBody3D) -> void:
+	if body.name == "Player" and current_state != DollState1.WAIT:
+		player.can_move = false
+		player.ui.stamina.visible = false
+		player.ui.score.visible = false
+		$deathcam.current = true
+		animation.play("death")
