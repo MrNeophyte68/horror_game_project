@@ -152,3 +152,14 @@ func _on_area_3d_body_entered(body: CharacterBody3D):
 func _on_game_duration_timeout() -> void:
 	$cutscene_ui/AnimationPlayer.play("RESET")
 	$cutscene_ui/CanvasLayer/Label.visible = true
+
+func turn_off_random_lights():
+	var number = randi_range(2, 4)
+	var count = 0
+	var random_power_switches = power_switches.duplicate()
+	random_power_switches.shuffle()
+	for switch in random_power_switches:
+		if switch.activate and count != number:
+			switch.activate = false
+			switch.reset()
+			count += 1

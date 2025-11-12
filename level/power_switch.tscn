@@ -595,7 +595,7 @@ mesh = SubResource("ArrayMesh_k4h35")
 skeleton = NodePath("")
 
 [node name="lever_etx_2_child" type="MeshInstance3D" parent="lever_etx_2"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.0539999, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0539999, 0)
 mesh = SubResource("ArrayMesh_bvt70")
 skeleton = NodePath("")
 

@@ -213,6 +213,9 @@ light_energy = 0.8
 light_indirect_energy = 3.02
 light_bake_mode = 1
 shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_shadow = 20.0
 omni_range = 15.0
 
 [node name="off" type="MeshInstance3D" parent="."]

@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-enum DollState1 {FIRST_TIME, WAIT}
+enum DollState1 {FIRST_TIME, WAIT, ROAM, CHASE, SPAWN}
 var current_state: DollState1 = DollState1.FIRST_TIME
 var first_time_attack: bool = false
 var first_time_aggressive: bool = false
@@ -18,6 +18,8 @@ var first_time_near: bool = false
 var playerVaultCount = 0
 var window_location
 var play_block_window = false
+@onready var wait_time = $wait_time
+var cover_eyes = false
 
 func _ready() -> void:
 	first_time_timer.start()
@@ -33,9 +35,10 @@ func _physics_process(delta: float):
 			velocity.x = dir.x * 0.0
 			velocity.z = dir.z * 0.0
 			animation.play("RESET")
+			$SpotLight3D.visible = true
+			global_position = Vector3(-8.72, -0.044, -9.716)
 			current_state = DollState1.WAIT
-			$Doll1.visible = false
-			$CollisionShape3D.disabled = true
+			animation.play("cover_eyes")
 			return
 			
 		if !first_time_attack and !first_time_aggressive:
@@ -85,6 +88,37 @@ func _physics_process(delta: float):
 				else:
 					if velocity.y > 0.0:
 						velocity.y = 0.0
+
+	elif current_state == DollState1.WAIT:
+		if wait_time.is_stopped():
+			wait_time.start()
+		rotation_degrees.y = -180.0
+		if wait_time.time_left < 90.0 and wait_time.time_left > 60.0:
+			if !player.staring:
+				await get_tree().create_timer(1.0, false).timeout
+				global_position = Vector3(-8.72, -0.044, -8)
+		elif wait_time.time_left < 90.0 and wait_time.time_left > 30.0:
+			if !player.staring:
+				await get_tree().create_timer(1.0, false).timeout
+				global_position = Vector3(-8.72, -0.044, -7)
+		elif wait_time.time_left < 30.0:
+			if !player.staring:
+				await get_tree().create_timer(1.0, false).timeout
+				global_position = Vector3(-8.72, -0.044, -6)
+		if player.staring:
+			if $abyss_time_before_attack.is_stopped():
+				$abyss_time_before_attack.start()
+			if $abyss_time_before_attack.time_left < 5.0 and $abyss_time_before_attack.time_left > 4.9:
+				animation.play_backwards("cover_eyes")
+				cover_eyes = true
+		else:
+			$abyss_time_before_attack.stop()
+			if cover_eyes:
+				cover_eyes = false
+				await get_tree().create_timer(1.0, false).timeout
+				animation.play("cover_eyes")
+
+
 	move_and_slide()
 
 
@@ -196,3 +230,18 @@ func _on_area_3d_body_entered(body: CharacterBody3D) -> void:
 		player.ui.score.visible = false
 		$deathcam.current = true
 		animation.play("death")
+		player.dead = true
+
+
+func _on_abyss_time_before_attack_timeout() -> void:
+	player.can_move = false
+	player.ui.stamina.visible = false
+	player.ui.score.visible = false
+	$deathcam.current = true
+	animation.play("death")
+	player.dead = true
+
+
+func _on_wait_time_timeout() -> void:
+	current_state = DollState1.SPAWN
+	level.turn_off_random_lights()

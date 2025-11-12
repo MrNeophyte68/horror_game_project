@@ -62,6 +62,9 @@ var vaultCount = 0
 var spamming: bool = false
 
 var staring: bool = false
+var can_stare: bool = false
+var unstare_once: bool = true
+var dead: bool = false
 
 
 
@@ -94,28 +97,51 @@ func _physics_process(delta: float) -> void:
 		var tween = create_tween()
 		tween.tween_property($head/eyes/hand/Clock, "position:y", -0.5, 1.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	
-	if Input.is_action_just_pressed("stare"):
-		var tween = create_tween()
-		tween.tween_property($player_ui/CanvasLayer/ColorRect, "modulate:a", 1.0, 1.0) # duration 0.5 seconds
-		await get_tree().create_timer(1.0, false).timeout
-		var tween1 = create_tween()
-		tween1.tween_property($player_ui/CanvasLayer/ColorRect, "modulate:a", 0.0, 1.0)
-		if Input.is_action_pressed("stare"):
-			staring = true
-			level.shadowCam.current = true
-	elif Input.is_action_just_released("stare"):
-		if staring:
+	if Input.is_action_just_pressed("stare") and unstare_once:
+		staring = !staring
+
+	if staring and !dead:
+		if level.shadowCam.current == false:
+			can_move = false
+			unstare_once = false
 			var tween = create_tween()
-			tween.tween_property($player_ui/CanvasLayer/ColorRect, "modulate:a", 1.0, 1.0) # duration 0.5 seconds
-			tween.tween_property($player_ui/CanvasLayer/ColorRect, "modulate:a", 0.0, 1.0)
+			tween.tween_property($player_ui/CanvasLayer/ColorRect, "modulate:a", 1.0, 1.0)
+			tween.set_parallel()
+			tween.tween_property(ui.stamina, "modulate:a", 0.0, 1.0)
+			tween.tween_property(ui.score, "modulate:a", 0.0, 1.0)
+			tween.tween_property($player_ui/CanvasLayer/cursor, "modulate:a", 0.0, 1.0)
 			await get_tree().create_timer(1.0, false).timeout
+			if !dead:
+				var tween1 = create_tween()
+				tween1.tween_property($player_ui/CanvasLayer/ColorRect, "modulate:a", 0.0, 1.0)
+				level.shadowCam.current = true
+			can_stare = true
+			unstare_once = true
+			
+	elif !staring and !dead:
+		if $player_ui/CanvasLayer/ColorRect.modulate.a == 0.0 and can_stare:
+			unstare_once = false
+			var tween = create_tween()
+			tween.tween_property($player_ui/CanvasLayer/ColorRect, "modulate:a", 1.0, 1.0)
+			await get_tree().create_timer(1.0, false).timeout
+			var tween1 = create_tween()
+			tween1.tween_property($player_ui/CanvasLayer/ColorRect, "modulate:a", 0.0, 1.0)
+			tween1.set_parallel()
+			tween1.tween_property($player_ui/CanvasLayer/cursor, "modulate:a", 0.1, 1.0)
+			tween1.tween_property(ui.stamina, "modulate:a", 0.2, 1.0)
+			tween1.tween_property(ui.score, "modulate:a", 1.0, 1.0)
 			level.shadowCam.current = false
 			level.cutsceneCam.current = false
-			staring = false
-		else:
-			var tween = create_tween()
-			tween.tween_property($player_ui/CanvasLayer/ColorRect, "modulate:a", 0.0, 1.0)
-			staring = false
+			can_stare = false
+			unstare_once = true
+			can_move = true
+			
+	if dead:
+		$player_ui/CanvasLayer/ColorRect.visible = false
+		$head/RayCast3D/CanvasLayer/CutProgress.visible = false
+		$player_ui/CanvasLayer/cursor.visible = false
+		if current_item:
+			current_item.visible = false
 	
 	if raycast.can_cut and near_window and is_cutting:
 		$head/RayCast3D/CanvasLayer/CutProgress.value += delta * 40.0
