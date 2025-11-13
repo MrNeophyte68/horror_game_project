@@ -314,6 +314,68 @@ ignore_time_scale = true
 [node name="shadowCam" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.627573, 1.6129777, -2.9875278)
 
+[node name="doll_floor1_spawn_points" type="Node3D" parent="."]
+visible = false
+
+[node name="Marker3D" type="Marker3D" parent="doll_floor1_spawn_points"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.885672, 0, -11.399621)
+
+[node name="Marker3D2" type="Marker3D" parent="doll_floor1_spawn_points"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.039425, 0, -28.501478)
+
+[node name="Marker3D3" type="Marker3D" parent="doll_floor1_spawn_points"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.75818, 0, 15.325812)
+
+[node name="Marker3D4" type="Marker3D" parent="doll_floor1_spawn_points"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.346111, 0, 2.16051)
+
+[node name="doll_floor1_roaming_locations" type="Node3D" parent="."]
+
+[node name="Marker3D" type="Marker3D" parent="doll_floor1_roaming_locations" groups=["roaming1_locations"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.537575, 0, 12.037337)
+
+[node name="Marker3D2" type="Marker3D" parent="doll_floor1_roaming_locations" groups=["roaming1_locations"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.605953, 0, -20.247046)
+
+[node name="Marker3D3" type="Marker3D" parent="doll_floor1_roaming_locations" groups=["roaming1_locations"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.985924, 0, -24.789396)
+
+[node name="Marker3D4" type="Marker3D" parent="doll_floor1_roaming_locations" groups=["roaming1_locations"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.034664, 0, -29.104565)
+
+[node name="Marker3D5" type="Marker3D" parent="doll_floor1_roaming_locations" groups=["roaming1_locations"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.303307, 0, -18.955687)
+
+[node name="Marker3D6" type="Marker3D" parent="doll_floor1_roaming_locations" groups=["roaming1_locations"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.465374, 0, 15.412483)
+
+[node name="Marker3D7" type="Marker3D" parent="doll_floor1_roaming_locations" groups=["roaming1_locations"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7882966, 0, 1.5414894)
+
+[node name="Marker3D8" type="Marker3D" parent="doll_floor1_roaming_locations" groups=["roaming1_locations"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.010537, 0, 1.9925227)
+
+[node name="Marker3D9" type="Marker3D" parent="doll_floor1_roaming_locations" groups=["roaming1_locations"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.557062, 0, -8.029608)
+
+[node name="Marker3D10" type="Marker3D" parent="doll_floor1_roaming_locations" groups=["roaming1_locations"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.997269, 0, -7.0822587)
+
+[node name="Marker3D11" type="Marker3D" parent="doll_floor1_roaming_locations" groups=["roaming1_locations"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.997269, 0, -33.432182)
+
+[node name="Marker3D12" type="Marker3D" parent="doll_floor1_roaming_locations" groups=["roaming1_locations"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.516205, 0, -33.432182)
+
+[node name="Marker3D13" type="Marker3D" parent="doll_floor1_roaming_locations" groups=["roaming1_locations"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.769703, 0, -19.128437)
+
+[node name="Marker3D14" type="Marker3D" parent="doll_floor1_roaming_locations" groups=["roaming1_locations"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.769703, 0, -14.782566)
+
+[node name="Marker3D15" type="Marker3D" parent="doll_floor1_roaming_locations" groups=["roaming1_locations"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.769703, 0, -10.255362)
+
 [connection signal="body_entered" from="interactable/Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="timeout" from="Game_Duration" to="." method="_on_game_duration_timeout"]
 

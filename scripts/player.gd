@@ -65,6 +65,7 @@ var staring: bool = false
 var can_stare: bool = false
 var unstare_once: bool = true
 var dead: bool = false
+var no_longer_staring: bool = true
 
 
 
@@ -95,7 +96,7 @@ func _physics_process(delta: float) -> void:
 		tween.tween_property($head/eyes/hand/Clock, "position:y", -0.079, 1.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	elif Input.is_action_just_released("interact2"):
 		var tween = create_tween()
-		tween.tween_property($head/eyes/hand/Clock, "position:y", -0.5, 1.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		tween.tween_property($head/eyes/hand/Clock, "position:y", -0.7, 1.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	
 	if Input.is_action_just_pressed("stare") and unstare_once:
 		staring = !staring
@@ -103,6 +104,7 @@ func _physics_process(delta: float) -> void:
 	if staring and !dead:
 		if level.shadowCam.current == false:
 			can_move = false
+			no_longer_staring = false
 			unstare_once = false
 			var tween = create_tween()
 			tween.tween_property($player_ui/CanvasLayer/ColorRect, "modulate:a", 1.0, 1.0)
@@ -110,6 +112,7 @@ func _physics_process(delta: float) -> void:
 			tween.tween_property(ui.stamina, "modulate:a", 0.0, 1.0)
 			tween.tween_property(ui.score, "modulate:a", 0.0, 1.0)
 			tween.tween_property($player_ui/CanvasLayer/cursor, "modulate:a", 0.0, 1.0)
+			tween.tween_property($player_ui/CanvasLayer/crosshair/crosshairex, "modulate:a", 0.0, 0.7)
 			await get_tree().create_timer(1.0, false).timeout
 			if !dead:
 				var tween1 = create_tween()
@@ -130,11 +133,13 @@ func _physics_process(delta: float) -> void:
 			tween1.tween_property($player_ui/CanvasLayer/cursor, "modulate:a", 0.1, 1.0)
 			tween1.tween_property(ui.stamina, "modulate:a", 0.2, 1.0)
 			tween1.tween_property(ui.score, "modulate:a", 1.0, 1.0)
+			tween1.tween_property($player_ui/CanvasLayer/crosshair/crosshairex, "modulate:a", 1.0, 1.0)
 			level.shadowCam.current = false
 			level.cutsceneCam.current = false
 			can_stare = false
 			unstare_once = true
 			can_move = true
+			no_longer_staring = true
 			
 	if dead:
 		$player_ui/CanvasLayer/ColorRect.visible = false

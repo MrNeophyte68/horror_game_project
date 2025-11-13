@@ -33,6 +33,9 @@ var switch_check:int = 0
 const TOTAL_SECONDS: float = 1200
 @onready var shadowCam = $shadowCam
 @onready var cutsceneCam = $cutscene_camera
+
+#doll roaming
+@onready var roaming_floor1_locations = $doll_floor1_roaming_locations.get_children()
 	
 func _ready():
 	shadowCam.current = false
@@ -154,12 +157,32 @@ func _on_game_duration_timeout() -> void:
 	$cutscene_ui/CanvasLayer/Label.visible = true
 
 func turn_off_random_lights():
-	var number = randi_range(2, 4)
-	var count = 0
-	var random_power_switches = power_switches.duplicate()
-	random_power_switches.shuffle()
-	for switch in random_power_switches:
-		if switch.activate and count != number:
-			switch.activate = false
-			switch.reset()
-			count += 1
+	if power_on:
+		var number = randi_range(2, 4)
+		var count = 0
+		var random_power_switches = power_switches
+		random_power_switches.shuffle()
+		for switch in random_power_switches:
+			if switch.activate and count != number:
+				switch.activate = false
+				switch.reset()
+				count += 1
+
+func spawn_monster_far_from_player() -> void:
+	var marker := _get_furthest_marker_by_distance($Player.global_position)
+	if marker == null:
+		push_warning("No Marker3D found to spawn the monster.")
+		return
+
+	$Stalker.global_transform = marker.global_transform
+
+func _get_furthest_marker_by_distance(player_pos: Vector3) -> Marker3D:
+	var best: Marker3D = null
+	var best_d2 := -INF
+	for child in $doll_floor1_spawn_points.get_children():
+		if child is Marker3D:
+			var d2 := player_pos.distance_squared_to(child.global_position)
+			if d2 > best_d2:
+				best_d2 = d2
+				best = child
+	return best

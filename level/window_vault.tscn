@@ -495,34 +495,34 @@ mesh = SubResource("ArrayMesh_nj606")
 skeleton = NodePath("")
 
 [node name="wooden_plank_3" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.33454, 0.388705, -1.40711e-06, 0, -5.03177e-06, -1.39, -0.388705, 1.33454, -4.83104e-06, -0.495119, 0, 0.672114)
+transform = Transform3D(1.33454, 0.38870496, -1.4071121e-06, 0, -5.0317717e-06, -1.39, -0.38870496, 1.33454, -4.831036e-06, -0.495119, 0, 0.672114)
 visible = false
 mesh = SubResource("ArrayMesh_nj606")
 skeleton = NodePath("")
 
 [node name="wooden_plank_4" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.2706, 0.563636, -2.04035e-06, 0, -5.0318e-06, -1.39, -0.563636, 1.2706, -4.59955e-06, -0.354133, 0, -0.855246)
+transform = Transform3D(1.2705997, 0.5636366, -2.0403536e-06, 0, -5.031799e-06, -1.39, -0.5636366, 1.2705997, -4.5995466e-06, -0.354133, 0, -0.855246)
 visible = false
 mesh = SubResource("ArrayMesh_nj606")
 skeleton = NodePath("")
 
 [node name="wooden_plank_5" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.36689, 0.252425, -9.13776e-07, 0, -5.03179e-06, -1.39, -0.252425, 1.36689, -4.94812e-06, 0.676195, 0, 0.400973)
+transform = Transform3D(1.3668898, 0.25242543, -9.1377603e-07, 0, -5.031795e-06, -1.39, -0.25242543, 1.3668898, -4.9481196e-06, 0.676195, 0, 0.400973)
 visible = false
 mesh = SubResource("ArrayMesh_nj606")
 skeleton = NodePath("")
 
 [node name="wooden_plank_6" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.36227, 0.276266, -1.00008e-06, 0, -5.03179e-06, -1.39, -0.276266, 1.36227, -4.9314e-06, 0.564412, 0, -0.500744)
+transform = Transform3D(1.3622699, 0.27626634, -1.0000808e-06, 0, -5.0317894e-06, -1.39, -0.27626634, 1.3622699, -4.9314003e-06, 0.564412, 0, -0.500744)
 visible = false
 mesh = SubResource("ArrayMesh_nj606")
 skeleton = NodePath("")
 
 [node name="Marker3D" type="Marker3D" parent="." groups=["windowBlockPosition"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -2.423)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -2.423)
 
 [node name="Marker3D2" type="Marker3D" parent="." groups=["windowBlockPosition"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 2.137)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 2.137)
 
 [node name="Marker3D3" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.199495, 0.0954535)
